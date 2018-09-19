@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
   MatCardModule,
@@ -22,7 +22,7 @@ import {
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
-import {ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -74,4 +74,4 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   declarations: []
 })
-export class AppMaterialModule {}
+export class AppMaterialModule { }

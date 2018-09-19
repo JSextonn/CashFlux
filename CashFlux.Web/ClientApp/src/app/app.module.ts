@@ -5,7 +5,6 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavmenuComponent } from './navmenu/navmenu.component';
 import { AppMaterialModule } from './app-material.module';
-import { DataTestComponent } from './data-test/data-test.component';
 import { StoreModule } from '@ngrx/store';
 import { profileReducer } from './reducers/profile.reducer';
 import { fluxReducer } from './reducers/flux.reducer';
@@ -17,8 +16,7 @@ import { selectedProfileReducer } from './reducers/selected-profile.reducer';
   declarations: [
     AppComponent,
     HomeComponent,
-    NavmenuComponent,
-    DataTestComponent
+    NavmenuComponent
   ],
   imports: [
     AppMaterialModule,
