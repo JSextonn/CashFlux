@@ -9,7 +9,17 @@ import { FluxSource } from '../models/source.model';
 
 export interface State extends EntityState<CashFlux> { }
 
-export const adapter: EntityAdapter<CashFlux> = createEntityAdapter<CashFlux>();
+export const adapter: EntityAdapter<CashFlux> = createEntityAdapter<CashFlux>({
+    sortComparer: (fluxOne, fluxTwo) => {
+        if (fluxOne.timeCreated.getTime() > fluxTwo.timeCreated.getTime()) {
+            return 1;
+        } else if (fluxOne.timeCreated.getTime() < fluxTwo.timeCreated.getTime()) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+});
 
 export const initialState: State = adapter.getInitialState();
 

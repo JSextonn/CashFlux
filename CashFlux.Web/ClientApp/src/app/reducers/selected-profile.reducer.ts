@@ -1,4 +1,5 @@
 import * as SelectedProfileActions from '../actions/selected-profile.actions';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 const initialState = '';
 
@@ -8,7 +9,7 @@ export function selectedProfileReducer(state = initialState, action: SelectedPro
             return action.payload;
         }
 
-        case SelectedProfileActions.SELECT_NONE: {
+        case SelectedProfileActions.CLEAR: {
             return '';
         }
 
@@ -17,3 +18,11 @@ export function selectedProfileReducer(state = initialState, action: SelectedPro
         }
     }
 }
+
+export const selectSelctedProfileState = createFeatureSelector<string>('selectedProfile');
+
+// Default selectors
+export const selectSelectedProfile = createSelector(
+    selectSelctedProfileState,
+    (state) => state
+);

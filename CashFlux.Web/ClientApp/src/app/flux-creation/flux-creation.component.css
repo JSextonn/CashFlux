@@ -1,0 +1,22 @@
+.amount-field {
+  width: 150px;
+  margin-right: 10px;
+}
+
+.date-field {
+  width: 150px;
+  margin-left: 10px;
+}
+
+table.mat-table {
+  width: 100%;
+}
+
+.table-container {
+  height: 210px;
+  overflow: auto;
+}
+
+.filter-field {
+  width: 100%;
+}

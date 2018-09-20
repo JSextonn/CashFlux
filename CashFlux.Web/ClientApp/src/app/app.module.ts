@@ -11,12 +11,22 @@ import { fluxReducer } from './reducers/flux.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { sourceReducer } from './reducers/source.reducer';
 import { selectedProfileReducer } from './reducers/selected-profile.reducer';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FluxTableComponent } from './flux-table/flux-table.component';
+import { FluxCreationComponent } from './flux-creation/flux-creation.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavmenuComponent
+    NavmenuComponent,
+    DashboardComponent,
+    FluxTableComponent,
+    FluxCreationComponent,
+    LoginComponent,
+    DashboardToolbarComponent
   ],
   imports: [
     AppMaterialModule,
@@ -33,7 +43,9 @@ import { selectedProfileReducer } from './reducers/selected-profile.reducer';
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FluxCreationComponent]
 })
 export class AppModule {
+
 }
