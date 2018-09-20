@@ -45,10 +45,16 @@ export class DashboardToolbarComponent implements OnInit {
         this.selectedProfile = data;
       });
 
+    // Sources state
     this.sourcesSubscription = this._store.select(selectAllSources)
       .subscribe(data => {
         this.sources = data;
       });
+
+    // Select first profile if it exists
+    if (!this.selectedProfile && this.profiles.length > 0) {
+      this.selectedProfile = this.profiles[0].id;
+    }
   }
 
   openFluxCreationDialog(): void {
