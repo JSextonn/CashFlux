@@ -271,7 +271,6 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       rollingTotals.push(rollingTotals[i - 1] + groups[i].fluxSumDifference);
     }
 
-    console.log(rollingTotals);
     return rollingTotals;
   }
 }
