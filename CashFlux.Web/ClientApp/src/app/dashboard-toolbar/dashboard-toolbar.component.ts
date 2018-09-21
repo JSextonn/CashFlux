@@ -53,7 +53,9 @@ export class DashboardToolbarComponent implements OnInit {
 
     // Select first profile if it exists
     if (!this.selectedProfile && this.profiles.length > 0) {
-      this.selectedProfile = this.profiles[0].id;
+      const profileId = this.profiles[0].id;
+      this.selectedProfile = profileId;
+      this._store.dispatch(new SelectProfile(profileId));
     }
   }
 
