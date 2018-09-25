@@ -5,12 +5,14 @@ import { FluxProfile } from '../models/profile.model';
 import { Subscription } from 'rxjs';
 import { selectAllProfiles } from '../reducers/profile.reducer';
 import { FluxCreationComponent } from '../flux-creation/flux-creation.component';
-import { MatDialog, MatSelectChange, MatOption } from '@angular/material';
+import { MatDialog, MatOption } from '@angular/material';
 import { selectAllSources } from '../reducers/source.reducer';
 import { selectSelectedProfile } from '../reducers/selected-profile.reducer';
-import * as FluxActions from '../actions/flux.actions';
 import { SelectProfile } from '../actions/selected-profile.actions';
+import { SourceCreationComponent } from '../source-creation/source-creation.component';
 import { FluxSource } from '../models/source.model';
+import { AddFlux } from '../actions/flux.actions';
+import { AddSource } from '../actions/source.actions';
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -71,7 +73,23 @@ export class DashboardToolbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this._store.dispatch(new FluxActions.AddFlux(result));
+        this._store.dispatch(new AddFlux(result));
+      }
+    });
+  }
+
+  openSourceCreationDialog(): void {
+    const dialogRef = this.dialog.open(SourceCreationComponent, {
+      height: '325px',
+      autoFocus: true,
+      data: {
+        sources: this.sources
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: FluxSource) => {
+      if (result !== undefined) {
+        this._store.dispatch(new AddSource(result));
       }
     });
   }

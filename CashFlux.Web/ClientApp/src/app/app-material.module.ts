@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserAnimationsModule,
     CommonModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -51,6 +53,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     BrowserAnimationsModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,

@@ -1,0 +1,16 @@
+.mat-dialog-content {
+  width: 350px;
+}
+
+.name-field {
+  margin-right: 15px;
+}
+
+.mat-form-field {
+  width: 250px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

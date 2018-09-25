@@ -83,6 +83,8 @@ export const selectFluxTableModels = createSelector(
     (fluxes, sources) => {
         const models: FluxTableModel[] = [];
 
+        // Every selected flux will be paired with its sources properties
+        // in a denormalized fashion.
         fluxes.forEach(flux => {
             const source: FluxSource = sources[flux.sourceId];
             models.push({

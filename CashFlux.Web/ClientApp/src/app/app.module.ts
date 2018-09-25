@@ -16,6 +16,7 @@ import { FluxTableComponent } from './flux-table/flux-table.component';
 import { FluxCreationComponent } from './flux-creation/flux-creation.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar.component';
+import { SourceCreationComponent } from './source-creation/source-creation.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar
     FluxTableComponent,
     FluxCreationComponent,
     LoginComponent,
-    DashboardToolbarComponent
+    DashboardToolbarComponent,
+    SourceCreationComponent
   ],
   imports: [
     AppMaterialModule,
@@ -44,7 +46,10 @@ import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [FluxCreationComponent]
+  entryComponents: [
+    FluxCreationComponent,
+    SourceCreationComponent
+  ]
 })
 export class AppModule {
 
