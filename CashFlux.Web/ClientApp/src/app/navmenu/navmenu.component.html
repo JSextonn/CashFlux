@@ -4,26 +4,26 @@
     [opened]="!(beyondBreakpoint | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Home</a>
-      <a mat-list-item href="dashboard">Dashboard</a>
-      <a mat-list-item href="#">API</a>
+      <a mat-list-item [routerLink]='["/"]'>Home</a>
+      <a mat-list-item [routerLink]='["/dashboard"]'>Dashboard</a>
+      <a mat-list-item [routerLink]='["/"]'>API</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mat-elevation-z6">
-      <a mat-button href="#">Practice</a>
+      <a mat-button [routerLink]='["/"]'>Practice</a>
       <div *ngIf="!(beyondBreakpoint | async)">
-        <a mat-button href="#">Home</a>
-        <a mat-button href="dashboard">Dashboard</a>
-        <a mat-button href="#">API</a>
+        <a mat-button [routerLink]='["/"]'>Home</a>
+        <a mat-button [routerLink]='["/dashboard"]'>Dashboard</a>
+        <a mat-button [routerLink]='["/"]'>API</a>
       </div>
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="beyondBreakpoint | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="filler"></span>
       <mat-icon *ngIf="loggedIn" aria-label="Side nav toggle icon">account_box</mat-icon>
-      <a mat-button href="login" *ngIf="!loggedIn">Login</a>
-      <a mat-button href="#" *ngIf="!loggedIn">Register</a>
+      <a mat-button [routerLink]='["/login"]' *ngIf="!loggedIn">Login</a>
+      <a mat-button [routerLink]='["/"]' *ngIf="!loggedIn">Register</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
