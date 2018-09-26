@@ -34,7 +34,7 @@ export class SourceCreationComponent implements OnInit {
   }
 
   create(): void {
-    if (!this.nameForm.valid && this.categoryForm.valid) {
+    if (!this.nameForm.valid || !this.categoryForm.valid) {
       return;
     }
 
