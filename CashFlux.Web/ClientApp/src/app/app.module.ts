@@ -17,6 +17,7 @@ import { FluxCreationComponent } from './flux-creation/flux-creation.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar.component';
 import { SourceCreationComponent } from './source-creation/source-creation.component';
+import { SourceManagementComponent } from './source-management/source-management.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SourceCreationComponent } from './source-creation/source-creation.compo
     FluxCreationComponent,
     LoginComponent,
     DashboardToolbarComponent,
-    SourceCreationComponent
+    SourceCreationComponent,
+    SourceManagementComponent
   ],
   imports: [
     AppMaterialModule,
