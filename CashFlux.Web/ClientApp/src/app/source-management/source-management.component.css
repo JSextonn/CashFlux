@@ -1,0 +1,28 @@
+.component-container {}
+
+.table-dashboard {
+  background-color: lightgrey;
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+}
+
+.table-dashboard>.mat-form-field {
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 300px;
+}
+
+.table-dashboard>button.mat-raised-button {
+  float: right;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+table.mat-table {
+  width: 100%;
+}
+
+.table-container {
+  overflow: auto;
+}

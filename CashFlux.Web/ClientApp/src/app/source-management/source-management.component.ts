@@ -4,30 +4,30 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import * as FluxActions from '../actions/flux.actions';
-import { FluxTableModel } from '../models/flux-table.model';
-import { selectFluxTableModels } from '../reducers/flux.reducer';
+import * as SourceActions from '../actions/source.actions';
+import { FluxSource } from '../models/source.model';
+import { selectAllSources } from '../reducers/source.reducer';
 
 @Component({
-  selector: 'app-flux-table',
-  templateUrl: './flux-table.component.html',
-  styleUrls: ['./flux-table.component.css']
+  selector: 'app-source-management',
+  templateUrl: './source-management.component.html',
+  styleUrls: ['./source-management.component.css']
 })
-export class FluxTableComponent implements OnInit, OnDestroy {
+export class SourceManagementComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   // Table resources
-  readonly displayedColumns = ['select', 'amount', 'source', 'category', 'timeCreated'];
-  dataSource = new MatTableDataSource<FluxTableModel>();
-  selection = new SelectionModel<FluxTableModel>(true, []);
-  fluxesSubscription: Subscription;
+  readonly displayedColumns = ['select', 'name', 'category', 'timeCreated'];
+  dataSource = new MatTableDataSource<FluxSource>();
+  selection = new SelectionModel<FluxSource>(true, []);
+  sourcesSubscription: Subscription;
 
   constructor(private _store: Store<AppState>, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // Fluxes state
     // Selects fluxes within selected profile and returns them as FluxTableModel.
-    this.fluxesSubscription = this._store.select(selectFluxTableModels)
+    this.sourcesSubscription = this._store.select(selectAllSources)
       .subscribe(data => {
         this.dataSource.data = data;
       });
@@ -36,7 +36,7 @@ export class FluxTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.fluxesSubscription.unsubscribe();
+    this.sourcesSubscription.unsubscribe();
   }
 
   applyFilter(filterValue: string): void {
@@ -68,10 +68,10 @@ export class FluxTableComponent implements OnInit, OnDestroy {
    * Clears selection model.
    */
   removeSelectedRows(): void {
-    const fluxesToDelete = this.selection.selected.map(flux => flux.id);
-    this._store.dispatch(new FluxActions.RemoveFluxes(fluxesToDelete));
+    const sourcesToDelete = this.selection.selected.map(source => source.id);
+    this._store.dispatch(new SourceActions.RemoveSources(sourcesToDelete));
 
     // Reset selection model
-    this.selection = new SelectionModel<FluxTableModel>(true, []);
+    this.selection = new SelectionModel<FluxSource>(true, []);
   }
 }
