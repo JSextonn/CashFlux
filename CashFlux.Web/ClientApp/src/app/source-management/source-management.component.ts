@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import * as SourceActions from '../actions/source.actions';
 import { FluxSource } from '../models/source.model';
 import { selectAllSources } from '../reducers/source.reducer';
+import { WarningComponent } from '../warning/warning.component';
 
 @Component({
   selector: 'app-source-management',
@@ -73,5 +74,21 @@ export class SourceManagementComponent implements OnInit, OnDestroy {
 
     // Reset selection model
     this.selection = new SelectionModel<FluxSource>(true, []);
+  }
+
+  openWarningDialog(): void {
+    const dialogRef = this.dialog.open(WarningComponent, {
+      height: '200px',
+      autoFocus: true,
+      data: {
+        message: 'Are you sure you want to do this?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.removeSelectedRows();
+      }
+    });
   }
 }

@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar.component';
 import { SourceCreationComponent } from './source-creation/source-creation.component';
 import { SourceManagementComponent } from './source-management/source-management.component';
+import { WarningComponent } from './warning/warning.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SourceManagementComponent } from './source-management/source-management
     LoginComponent,
     DashboardToolbarComponent,
     SourceCreationComponent,
-    SourceManagementComponent
+    SourceManagementComponent,
+    WarningComponent
   ],
   imports: [
     AppMaterialModule,
@@ -50,7 +52,8 @@ import { SourceManagementComponent } from './source-management/source-management
   bootstrap: [AppComponent],
   entryComponents: [
     FluxCreationComponent,
-    SourceCreationComponent
+    SourceCreationComponent,
+    WarningComponent
   ]
 })
 export class AppModule {

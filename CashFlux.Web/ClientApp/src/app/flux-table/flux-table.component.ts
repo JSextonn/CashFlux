@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import * as FluxActions from '../actions/flux.actions';
 import { FluxTableModel } from '../models/flux-table.model';
 import { selectFluxTableModels } from '../reducers/flux.reducer';
+import { WarningComponent } from '../warning/warning.component';
 
 @Component({
   selector: 'app-flux-table',
@@ -73,5 +74,21 @@ export class FluxTableComponent implements OnInit, OnDestroy {
 
     // Reset selection model
     this.selection = new SelectionModel<FluxTableModel>(true, []);
+  }
+
+  openWarningDialog(): void {
+    const dialogRef = this.dialog.open(WarningComponent, {
+      height: '200px',
+      autoFocus: true,
+      data: {
+        message: 'Are you sure you want to do this?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.removeSelectedRows();
+      }
+    });
   }
 }
