@@ -1,4 +1,16 @@
-.component-container {}
+.component-container {
+  overflow: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.table-container {
+  overflow: auto;
+  height: 400px;
+}
 
 .table-dashboard {
   background-color: lightgrey;
@@ -17,12 +29,4 @@
   float: right;
   margin-top: 15px;
   margin-right: 15px;
-}
-
-table.mat-table {
-  width: 100%;
-}
-
-.table-container {
-  overflow: auto;
 }
