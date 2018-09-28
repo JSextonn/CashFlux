@@ -1,14 +1,12 @@
-import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSort } from '@angular/material';
-import { FormControl, Validators } from '@angular/forms';
-import { FluxSource } from '../models/source.model';
-import { CashFlux } from '../models/flux.model';
-import { SelectionModel } from '@angular/cdk/collections';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
+import {FluxSource} from '../models/source.model';
+import {CashFlux} from '../models/flux.model';
+import {SelectionModel} from '@angular/cdk/collections';
 
 const AMOUNT_PATTERN = '(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$';
 
-// TODO: If no sources are given, display informative error message
-// instead of flux creation tools.
 @Component({
   selector: 'app-flux-creation',
   templateUrl: './flux-creation.component.html',
@@ -26,31 +24,29 @@ export class FluxCreationComponent implements OnInit {
   dataSource = new MatTableDataSource<FluxSource>();
   selection = new SelectionModel<FluxSource>(false, []);
 
-  selectedProfile: string;
-
   constructor(
     public dialogRef: MatDialogRef<FluxCreationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   ngOnInit() {
     this.initializeControls();
 
+    // Prepare table
     this.dataSource.data = this.data.sources;
     this.dataSource.sort = this.sort;
-
-    this.selectedProfile = this.data.profile;
   }
 
-  initializeControls() {
+  initializeControls(): void {
     this.amount = new FormControl('', [Validators.required, Validators.pattern(AMOUNT_PATTERN)]);
     this.date = new FormControl(new Date(), [Validators.required]);
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  create() {
+  create(): void {
     if (!this.amount.valid || !this.date.valid || this.selection.selected.length === 0) {
       this.amount.markAsTouched();
       this.date.markAsTouched();
@@ -60,13 +56,13 @@ export class FluxCreationComponent implements OnInit {
     const flux: CashFlux = {
       amount: Number(this.amount.value),
       sourceId: this.selection.selected[0].id,
-      profileId: this.selectedProfile,
+      profileId: this.data.selectedProfile,
       timeCreated: this.date.value
     };
     this.dialogRef.close(flux);
   }
 
-  cancel() {
+  cancel(): void {
     this.dialogRef.close();
   }
 }

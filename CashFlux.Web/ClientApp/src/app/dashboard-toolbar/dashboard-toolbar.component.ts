@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AppState } from '../app.state';
-import { Store } from '@ngrx/store';
-import { FluxProfile } from '../models/profile.model';
-import { Subscription } from 'rxjs';
-import { selectAllProfiles } from '../reducers/profile.reducer';
-import { FluxCreationComponent } from '../flux-creation/flux-creation.component';
-import { MatDialog, MatOption } from '@angular/material';
-import { selectAllSources } from '../reducers/source.reducer';
-import { selectSelectedProfile } from '../reducers/selected-profile.reducer';
-import { SelectProfile } from '../actions/selected-profile.actions';
-import { SourceCreationComponent } from '../source-creation/source-creation.component';
-import { FluxSource } from '../models/source.model';
-import { AddFlux } from '../actions/flux.actions';
-import { AddSource } from '../actions/source.actions';
+import {Component, OnInit} from '@angular/core';
+import {AppState} from '../app.state';
+import {Store} from '@ngrx/store';
+import {FluxProfile} from '../models/profile.model';
+import {Subscription} from 'rxjs';
+import {selectAllProfiles} from '../reducers/profile.reducer';
+import {FluxCreationComponent} from '../flux-creation/flux-creation.component';
+import {MatDialog, MatOption} from '@angular/material';
+import {selectAllSources} from '../reducers/source.reducer';
+import {selectSelectedProfile} from '../reducers/selected-profile.reducer';
+import {SelectProfile} from '../actions/selected-profile.actions';
+import {SourceCreationComponent} from '../source-creation/source-creation.component';
+import {FluxSource} from '../models/source.model';
+import {AddFlux} from '../actions/flux.actions';
+import {AddSource} from '../actions/source.actions';
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -32,9 +32,10 @@ export class DashboardToolbarComponent implements OnInit {
   selectedProfile = '';
   selectedProfileSubscription: Subscription;
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog) { }
+  constructor(private _store: Store<AppState>, public dialog: MatDialog) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Profile state
     this.profilesSubscription = this._store.select(selectAllProfiles)
       .subscribe(data => {
@@ -62,8 +63,17 @@ export class DashboardToolbarComponent implements OnInit {
   }
 
   openFluxCreationDialog(): void {
+    let height;
+    // Different content is displayed when no sources are passed.
+    // Dialog must be adjusted.
+    if (this.sources.length === 0) {
+      height = '225px';
+    } else {
+      height = '500px';
+    }
+
     const dialogRef = this.dialog.open(FluxCreationComponent, {
-      height: '500px',
+      height: height,
       autoFocus: true,
       data: {
         sources: this.sources,

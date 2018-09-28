@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AppState } from './app.state';
-import { Store } from '@ngrx/store';
-import { AddProfiles } from './actions/profile.actions';
-import { AddSources } from './actions/source.actions';
-import { AddFluxes } from './actions/flux.actions';
-import { Subscription } from 'rxjs';
-import { selectSourceIds } from './reducers/source.reducer';
-import { selectProfileIds } from './reducers/profile.reducer';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AppState} from './app.state';
+import {Store} from '@ngrx/store';
+import {AddProfiles} from './actions/profile.actions';
+import {AddFluxes} from './actions/flux.actions';
+import {Subscription} from 'rxjs';
+import {selectSourceIds} from './reducers/source.reducer';
+import {selectProfileIds} from './reducers/profile.reducer';
+import {AddSources} from "./actions/source.actions";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private sourceIdsSubscription: Subscription;
   private sourceIds: string[] = [];
 
-  constructor(private _store: Store<AppState>) { }
+  constructor(private _store: Store<AppState>) {
+  }
 
   ngOnInit(): void {
     this.setupSubscriptions();
@@ -36,9 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
       timeCreated: new Date()
     }]));
 
-    // Add dummy sources
+    //     Add dummy sources
     this._store.dispatch(new AddSources([{
-      name: 'Walmart',
+      name: 'Wal-mart',
       category: 'Food',
       timeCreated: new Date()
     }, {
