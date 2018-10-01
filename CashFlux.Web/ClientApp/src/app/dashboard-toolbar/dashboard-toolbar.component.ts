@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {AppState} from '../app.state';
-import {Store} from '@ngrx/store';
-import {FluxProfile} from '../models/profile.model';
-import {Subscription} from 'rxjs';
-import {selectAllProfiles} from '../reducers/profile.reducer';
-import {FluxCreationComponent} from '../flux-creation/flux-creation.component';
-import {MatDialog, MatOption} from '@angular/material';
-import {selectAllSources} from '../reducers/source.reducer';
-import {selectSelectedProfile} from '../reducers/selected-profile.reducer';
-import {SelectProfile} from '../actions/selected-profile.actions';
-import {SourceCreationComponent} from '../source-creation/source-creation.component';
-import {FluxSource} from '../models/source.model';
-import {AddFlux} from '../actions/flux.actions';
-import {AddSource} from '../actions/source.actions';
+import { Component, OnInit } from '@angular/core';
+import { AppState } from '../app.state';
+import { Store } from '@ngrx/store';
+import { FluxProfile } from '../models/profile.model';
+import { Subscription } from 'rxjs';
+import { selectAllProfiles } from '../reducers/profile.reducer';
+import { FluxCreationComponent } from '../flux-creation/flux-creation.component';
+import { MatDialog, MatOption } from '@angular/material';
+import { selectAllSources } from '../reducers/source.reducer';
+import { selectSelectedProfile } from '../reducers/selected-profile.reducer';
+import { SelectProfile } from '../actions/selected-profile.actions';
+import { SourceCreationComponent } from '../source-creation/source-creation.component';
+import { FluxSource } from '../models/source.model';
+import { AddFlux } from '../actions/flux.actions';
+import { AddSource } from '../actions/source.actions';
+import { ProfileCreationComponent } from '../profile-creation/profile-creation.component';
+import { AddProfile } from '../actions/profile.actions';
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -84,6 +86,18 @@ export class DashboardToolbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this._store.dispatch(new AddFlux(result));
+      }
+    });
+  }
+
+  openProfileCreationDialog(): void {
+    const dialogRef = this.dialog.open(ProfileCreationComponent, {
+      autoFocus: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result: FluxProfile) => {
+      if (result !== undefined) {
+        this._store.dispatch(new AddProfile(result));
       }
     });
   }

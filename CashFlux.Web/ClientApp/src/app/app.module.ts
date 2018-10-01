@@ -19,15 +19,19 @@ import { DashboardToolbarComponent } from './dashboard-toolbar/dashboard-toolbar
 import { SourceCreationComponent } from './source-creation/source-creation.component';
 import { SourceManagementComponent } from './source-management/source-management.component';
 import { WarningComponent } from './warning/warning.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    RegisterComponent,
     NavmenuComponent,
     DashboardComponent,
     FluxTableComponent,
     FluxCreationComponent,
+    ProfileCreationComponent,
     LoginComponent,
     DashboardToolbarComponent,
     SourceCreationComponent,
@@ -53,6 +57,7 @@ import { WarningComponent } from './warning/warning.component';
   entryComponents: [
     FluxCreationComponent,
     SourceCreationComponent,
+    ProfileCreationComponent,
     WarningComponent
   ]
 })

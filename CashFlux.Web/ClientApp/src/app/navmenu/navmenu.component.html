@@ -23,7 +23,7 @@
       <span class="filler"></span>
       <mat-icon *ngIf="loggedIn" aria-label="Side nav toggle icon">account_box</mat-icon>
       <a mat-button [routerLink]='["/login"]' *ngIf="!loggedIn">Login</a>
-      <a mat-button [routerLink]='["/"]' *ngIf="!loggedIn">Register</a>
+      <a mat-button [routerLink]='["/register"]' *ngIf="!loggedIn">Register</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
