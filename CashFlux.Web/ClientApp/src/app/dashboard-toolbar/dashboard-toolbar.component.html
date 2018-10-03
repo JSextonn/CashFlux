@@ -4,7 +4,7 @@
   </button>
 
   <mat-menu #menu="matMenu">
-    <ng-template *matMenuContent>
+    <ng-template matMenuContent>
       <button mat-menu-item (click)="openFluxCreationDialog()" [disabled]="!selectedProfile">
         <mat-icon>trending_up</mat-icon>
         <span>Flux</span>
