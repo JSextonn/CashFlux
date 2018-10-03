@@ -15,6 +15,7 @@ import { AddFlux } from '../actions/flux.actions';
 import { AddSource } from '../actions/source.actions';
 import { ProfileCreationComponent } from '../profile-creation/profile-creation.component';
 import { AddProfile } from '../actions/profile.actions';
+import { ProfileEditComponent } from '../profile-edit/profile-edit.component';
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -91,12 +92,25 @@ export class DashboardToolbarComponent implements OnInit {
   }
 
   openProfileCreationDialog(): void {
-    const dialogRef = this.dialog.open(ProfileCreationComponent, {
+    const profileDialogRef = this.dialog.open(ProfileCreationComponent, {
       autoFocus: true,
     });
 
-    dialogRef.afterClosed().subscribe((result: FluxProfile) => {
+    profileDialogRef.afterClosed().subscribe((result: FluxProfile) => {
       if (result !== undefined) {
+        this._store.dispatch(new AddProfile(result));
+      }
+    });
+  }
+
+  openProfileEditDialog(): void {
+    const editDialogRef = this.dialog.open(ProfileEditComponent, {
+      autoFocus: true,
+    });
+
+    editDialogRef.afterClosed().subscribe((result: FluxProfile) => {
+      if (result !== undefined) {
+        /*Need Dispatch Action, updateProfile*/
         this._store.dispatch(new AddProfile(result));
       }
     });

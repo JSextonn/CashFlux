@@ -21,6 +21,7 @@ import { SourceManagementComponent } from './source-management/source-management
 import { WarningComponent } from './warning/warning.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
     FluxTableComponent,
     FluxCreationComponent,
     ProfileCreationComponent,
+    ProfileEditComponent,
     LoginComponent,
     DashboardToolbarComponent,
     SourceCreationComponent,
