@@ -20,6 +20,12 @@ export function profileReducer(state = initialState, action: ProfileActions.Acti
       action.payload.map(profile => profile.id = nextId(state.ids as string[]));
       return adapter.addMany(action.payload, state);
     }
+    case ProfileActions.UPDATE: {
+      return adapter.updateOne(action.payload, state);
+    }
+    case ProfileActions.UPSERT: {
+      return adapter.upsertOne(action.payload, state);
+    }
     case ProfileActions.REMOVE: {
       return adapter.removeOne(action.payload, state);
     }
