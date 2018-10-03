@@ -4,7 +4,7 @@
   </button>
 
   <mat-menu #menu="matMenu">
-    <ng-template matMenuContent>
+    <ng-template *matMenuContent>
       <button mat-menu-item (click)="openFluxCreationDialog()" [disabled]="!selectedProfile">
         <mat-icon>trending_up</mat-icon>
         <span>Flux</span>
@@ -24,7 +24,7 @@
   <mat-form-field>
     <mat-select placeholder="Profile" [(value)]="selectedProfile" (selectionChange)="updateSelectedProfile($event)">
       <mat-option *ngFor="let profile of profiles" [value]="profile.id">
-        {{profile.id}}
+        {{profile.name}}
         <button mat-button (click)="openProfileEditDialog()">edit</button>
       </mat-option>
     </mat-select>

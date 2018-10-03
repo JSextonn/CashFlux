@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { FluxProfile } from '../models/profile.model';
+import { ProfileCreationComponent } from "../profile-creation/profile-creation.component";
 
 @Component({
   selector: 'app-profile-edit',
@@ -19,7 +20,7 @@ export class ProfileEditComponent implements OnInit {
 
   createProfile() {
     const newProfile: FluxProfile = {
-      id: this.name.value,
+      name: this.name.value,
       timeCreated: new Date()
     };
 

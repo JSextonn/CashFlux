@@ -30,10 +30,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Add dummy profiles
     this._store.dispatch(new AddProfiles([{
-      id: 'Test One',
+      name: 'Test One',
       timeCreated: new Date()
     }, {
-      id: 'Test Two',
+      name: 'Test Two',
       timeCreated: new Date()
     }]));
 

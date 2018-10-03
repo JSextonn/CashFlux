@@ -20,7 +20,7 @@ export class ProfileCreationComponent implements OnInit {
 
   createProfile() {
     const newProfile: FluxProfile = {
-      id: this.name.value,
+      name: this.name.value,
       timeCreated: new Date()
     };
 

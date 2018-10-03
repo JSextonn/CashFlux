@@ -35,8 +35,7 @@ export class DashboardToolbarComponent implements OnInit {
   selectedProfile = '';
   selectedProfileSubscription: Subscription;
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog) {
-  }
+  constructor(private _store: Store<AppState>, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // Profile state
@@ -106,11 +105,12 @@ export class DashboardToolbarComponent implements OnInit {
   openProfileEditDialog(): void {
     const editDialogRef = this.dialog.open(ProfileEditComponent, {
       autoFocus: true,
+      // TODO: Pass in profile that should be updated.
     });
 
     editDialogRef.afterClosed().subscribe((result: FluxProfile) => {
       if (result !== undefined) {
-        /*Need Dispatch Action, updateProfile*/
+        // TODO: Dispatch profile update action (needs to be implemented)
         this._store.dispatch(new AddProfile(result));
       }
     });
