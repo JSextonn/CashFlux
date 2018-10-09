@@ -14,8 +14,8 @@ import { FluxSource } from '../models/source.model';
 import { AddFlux } from '../actions/flux.actions';
 import { AddSource } from '../actions/source.actions';
 import { ProfileCreationComponent } from '../profile-creation/profile-creation.component';
-import { AddProfile } from '../actions/profile.actions';
-import { ProfileEditComponent } from '../profile-edit/profile-edit.component';
+import { AddProfile, UpdateProfile } from '../actions/profile.actions';
+import { Update } from "@ngrx/entity";
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -93,6 +93,9 @@ export class DashboardToolbarComponent implements OnInit {
   openProfileCreationDialog(): void {
     const profileDialogRef = this.dialog.open(ProfileCreationComponent, {
       autoFocus: true,
+      data: {
+        profiles: this.profiles
+      }
     });
 
     profileDialogRef.afterClosed().subscribe((result: FluxProfile) => {
@@ -102,16 +105,18 @@ export class DashboardToolbarComponent implements OnInit {
     });
   }
 
-  openProfileEditDialog(): void {
-    const editDialogRef = this.dialog.open(ProfileEditComponent, {
+  openProfileEditDialog(profile: FluxProfile): void {
+    const editDialogRef = this.dialog.open(ProfileCreationComponent, {
       autoFocus: true,
-      // TODO: Pass in profile that should be updated.
+      data: {
+        profiles: this.profiles,
+        profile: profile
+      }
     });
 
-    editDialogRef.afterClosed().subscribe((result: FluxProfile) => {
+    editDialogRef.afterClosed().subscribe((result: Update<FluxProfile>) => {
       if (result !== undefined) {
-        // TODO: Dispatch profile update action (needs to be implemented)
-        this._store.dispatch(new AddProfile(result));
+        this._store.dispatch(new UpdateProfile(result));
       }
     });
   }

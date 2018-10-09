@@ -12,3 +12,8 @@
   padding: 0 5px 0 5px;
   width: 250px;
 }
+
+.edit-button {
+  margin-top: 5px;
+  float: right;
+}

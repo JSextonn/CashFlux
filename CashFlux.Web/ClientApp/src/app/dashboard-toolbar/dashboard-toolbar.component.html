@@ -25,7 +25,9 @@
     <mat-select placeholder="Profile" [(value)]="selectedProfile" (selectionChange)="updateSelectedProfile($event)">
       <mat-option *ngFor="let profile of profiles" [value]="profile.id">
         {{profile.name}}
-        <button mat-button (click)="openProfileEditDialog()">edit</button>
+        <button mat-button class="edit-button" (click)="openProfileEditDialog(profile)">
+          <mat-icon>edit</mat-icon>
+        </button>
       </mat-option>
     </mat-select>
   </mat-form-field>
