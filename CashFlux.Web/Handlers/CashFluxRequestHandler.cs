@@ -5,7 +5,7 @@ using AutoMapper;
 using CashFlux.Data;
 using MediatR;
 
-namespace CashFlux.Web.Mediator.Handlers
+namespace CashFlux.Web.Handlers
 {
 	public abstract class CashFluxRequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
 		where TRequest : IRequest<TResponse>

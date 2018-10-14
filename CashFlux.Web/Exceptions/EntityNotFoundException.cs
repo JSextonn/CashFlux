@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace CashFlux.Web.Models
+namespace CashFlux.Web.Exceptions
 {
 	public class EntityNotFoundException : Exception
 	{

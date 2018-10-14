@@ -2,10 +2,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CashFlux.Data;
-using CashFlux.Web.Mediator.Requests;
+using CashFlux.Web.Requests;
 using Microsoft.EntityFrameworkCore;
 
-namespace CashFlux.Web.Mediator.Handlers
+namespace CashFlux.Web.Handlers
 {
 	public class UserCountRequestHandler : CashFluxRequestHandler<UserCountRequest, int>
 	{

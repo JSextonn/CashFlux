@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace CashFlux.Web.Mediator.Requests
+namespace CashFlux.Web.Requests
 {
 	public class UserCountRequest : IRequest<int> { }
 }

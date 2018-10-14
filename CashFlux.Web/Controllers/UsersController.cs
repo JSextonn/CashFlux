@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
-using CashFlux.Web.Mediator.Requests;
 using CashFlux.Web.Models.User;
+using CashFlux.Web.Requests;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlux.Web.Controllers

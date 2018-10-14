@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
-using CashFlux.Web.Mediator.Requests;
-using CashFlux.Web.Models;
+using CashFlux.Web.Exceptions;
 using CashFlux.Web.Models.User;
+using CashFlux.Web.Requests;
 using Microsoft.EntityFrameworkCore;
 
-namespace CashFlux.Web.Mediator.Handlers
+namespace CashFlux.Web.Handlers
 {
 	public class UserGetRequestHandler : CashFluxRequestHandler<UserGetRequest, UserGetRequestModel>
 	{

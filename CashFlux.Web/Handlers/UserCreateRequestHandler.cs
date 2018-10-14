@@ -4,22 +4,20 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
-using CashFlux.Web.Mediator.Requests;
-using CashFlux.Web.Models;
+using CashFlux.Web.Exceptions;
 using CashFlux.Web.Models.User;
+using CashFlux.Web.Requests;
 using Microsoft.AspNetCore.Identity;
 
-namespace CashFlux.Web.Mediator.Handlers
+namespace CashFlux.Web.Handlers
 {
-	public class UserCreateRequestHandler : CashFluxRequestHandler<UserCreateRequest, UserGetRequestModel>
+	public class UserCreateRequestHandler : CashFluxUserRequestHandler<UserCreateRequest, UserGetRequestModel>
 	{
-		public UserCreateRequestHandler(UserManager<CashFluxUser> userManager, CashFluxDbContext context,
-			IMapper mapper) : base(context, mapper)
-		{
-			UserManager = userManager;
-		}
-
-		public UserManager<CashFluxUser> UserManager { get; }
+		public UserCreateRequestHandler(
+			UserManager<CashFluxUser> userManager,
+			SignInManager<CashFluxUser> signInManager,
+			CashFluxDbContext context,
+			IMapper mapper) : base(userManager, signInManager, context, mapper) { }
 
 		public override async Task<UserGetRequestModel> Handle(UserCreateRequest request,
 			CancellationToken cancellationToken)

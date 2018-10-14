@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using CashFlux.Web.Exceptions;
 using CashFlux.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +54,10 @@ namespace CashFlux.Web.Controllers
 					}).ToArray()
 				};
 				return BadRequest(error);
+			}
+			catch (FailedLoginException ex)
+			{
+				return BadRequest(ex.Message);
 			}
 			catch (EntityNotFoundException ex)
 			{
