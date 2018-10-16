@@ -3,6 +3,10 @@ using System.Reflection;
 
 namespace CashFlux.Web.Exceptions
 {
+	/// <inheritdoc />
+	/// <summary>
+	/// This exception is thrown when an entity could not be found in a collection.
+	/// </summary>
 	public class EntityNotFoundException : Exception
 	{
 		public EntityNotFoundException(MemberInfo entityType, int id)
