@@ -11,10 +11,10 @@ namespace CashFlux.Web.Controllers
 	{
 		public UsersController(IMediator mediator) : base(mediator) { }
 
-		[HttpGet("count")]
+		[HttpGet("stats")]
 		public async Task<IActionResult> Get()
 		{
-			return await HandleRequestAsync(new UserCountRequest());
+			return await HandleRequestAsync(new UserStatsRequest());
 		}
 
 		[HttpGet("{id}")]

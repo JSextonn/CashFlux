@@ -10,6 +10,7 @@ using CashFlux.Data.Models;
 using CashFlux.Web.Exceptions;
 using CashFlux.Web.Requests;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -31,10 +32,14 @@ namespace CashFlux.Web.Handlers
 
 		public override async Task<string> Handle(LoginRequest request, CancellationToken cancellationToken)
 		{
-			var result = await SignInManager.PasswordSignInAsync(
-				request.Model.Username,
+			// Obtain the user object by unique username
+			var user = await Context.Users
+				.SingleOrDefaultAsync(u => u.UserName == request.Model.Username, cancellationToken);
+			// Validate given password
+			var result = await SignInManager.CheckPasswordSignInAsync(
+				user,
 				request.Model.Password,
-				false, false
+				false
 			);
 
 			if (!result.Succeeded)
