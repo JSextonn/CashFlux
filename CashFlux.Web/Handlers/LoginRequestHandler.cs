@@ -44,7 +44,7 @@ namespace CashFlux.Web.Handlers
 
 			if (!result.Succeeded)
 			{
-				throw new FailedLoginException("Authentication attempt failed");
+				throw new FailedLoginException(request.Model.Username, request.Model.Password);
 			}
 
 			// Build collection of claims
