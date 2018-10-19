@@ -19,7 +19,7 @@ namespace CashFlux.Data.Models
 		[ForeignKey(nameof(User))]
 		public string UserFk { get; set; }
 
-		public CashFluxUser User { get; set; }
+		public virtual CashFluxUser User { get; set; }
 
 		public DateTime TimeCreated
 		{

@@ -15,12 +15,12 @@ namespace CashFlux.Data.Models
 		[ForeignKey(nameof(Source))]
 		public string SourceFk { get; set; }
 
-		public FluxSource Source { get; set; }
+		public virtual FluxSource Source { get; set; }
 
 		[ForeignKey(nameof(Profile))]
 		public string ProfileFk { get; set; }
 
-		public FluxProfile Profile { get; set; }
+		public virtual FluxProfile Profile { get; set; }
 
 		public DateTime TimeCreated
 		{

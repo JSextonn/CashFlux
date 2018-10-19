@@ -14,9 +14,9 @@ namespace CashFlux.Data.Models
 		public string LastName { get; set; }
 
 		public string FullName => $"{FirstName} {LastName}";
-		public IEnumerable<FluxProfile> Profiles { get; set; }
-		public IEnumerable<Flux> Fluxes { get; set; }
-		public IEnumerable<FluxSource> Sources { get; set; }
+		public virtual IEnumerable<FluxProfile> Profiles { get; set; }
+		public virtual IEnumerable<Flux> Fluxes { get; set; }
+		public virtual IEnumerable<FluxSource> Sources { get; set; }
 
 		public DateTime TimeCreated
 		{
