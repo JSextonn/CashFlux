@@ -2,14 +2,13 @@ using System.Threading.Tasks;
 using CashFlux.Web.Models.User;
 using CashFlux.Web.Requests;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlux.Web.Controllers
 {
-	public class UsersController : CashFluxControllerBase
+	public class UserController : CashFluxControllerBase
 	{
-		public UsersController(IMediator mediator) : base(mediator) { }
+		public UserController(IMediator mediator) : base(mediator) { }
 
 		[HttpGet("stats")]
 		public async Task<IActionResult> Get()

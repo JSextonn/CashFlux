@@ -8,6 +8,7 @@ using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
 using CashFlux.Web.Exceptions;
+using CashFlux.Web.Models.Auth;
 using CashFlux.Web.Requests;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CashFlux.Web.Handlers
 {
-	public class LoginRequestHandler : CashFluxUserRequestHandler<LoginRequest, string>
+	public class LoginRequestHandler : CashFluxUserRequestHandler<LoginRequest, LoginResult>
 	{
 		public LoginRequestHandler(
 			IConfiguration configuration,
@@ -30,7 +31,7 @@ namespace CashFlux.Web.Handlers
 
 		public IConfiguration Configuration { get; }
 
-		public override async Task<string> Handle(LoginRequest request, CancellationToken cancellationToken)
+		public override async Task<LoginResult> Handle(LoginRequest request, CancellationToken cancellationToken)
 		{
 			// Obtain the user object by unique username
 			var user = await Context.Users
@@ -44,7 +45,7 @@ namespace CashFlux.Web.Handlers
 
 			if (!result.Succeeded)
 			{
-				throw new FailedLoginException(request.Model.Username, request.Model.Password);
+				throw new FailedLoginException();
 			}
 
 			// Build collection of claims
@@ -69,8 +70,11 @@ namespace CashFlux.Web.Handlers
 				signingCredentials: credentials
 			);
 
-			// Return Jwt string
-			return new JwtSecurityTokenHandler().WriteToken(token);
+			// Return successful login attempt with token
+			return new LoginResult
+			{
+				Token = new JwtSecurityTokenHandler().WriteToken(token)
+			};
 		}
 	}
 }

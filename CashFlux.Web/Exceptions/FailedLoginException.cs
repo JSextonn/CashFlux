@@ -10,8 +10,5 @@ namespace CashFlux.Web.Exceptions
 	{
 		public FailedLoginException()
 			: base("Authentication attempt failed") { }
-
-		public FailedLoginException(string username, string password)
-			: base($"Failed to authenticate as {username} with password: '{password}'") { }
 	}
 }
