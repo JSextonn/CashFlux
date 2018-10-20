@@ -17,6 +17,7 @@ namespace CashFlux.Data.Models
 		[MaxLength(25)]
 		public string Category { get; set; }
 
+		[DataType(DataType.Date)]
 		public DateTime TimeCreated
 		{
 			get => _timeCreated ?? DateTime.Now;

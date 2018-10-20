@@ -9,7 +9,8 @@ namespace CashFlux.Data.Models
 		[Key]
 		public string Id { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		[DataType(DataType.Currency)]
+		[Column(TypeName = "money")]
 		public decimal Amount { get; set; }
 
 		[ForeignKey(nameof(Source))]
@@ -22,6 +23,7 @@ namespace CashFlux.Data.Models
 
 		public virtual FluxProfile Profile { get; set; }
 
+		[DataType(DataType.Date)]
 		public DateTime TimeCreated
 		{
 			get => _timeCreated ?? DateTime.Now;

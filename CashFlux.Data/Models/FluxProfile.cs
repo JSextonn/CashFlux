@@ -14,13 +14,14 @@ namespace CashFlux.Data.Models
 		[MaxLength(30)]
 		public string Name { get; set; }
 
-		public virtual IEnumerable<Flux> Fluxes { get; set; }
+		public virtual ICollection<Flux> Fluxes { get; set; }
 
 		[ForeignKey(nameof(User))]
 		public string UserFk { get; set; }
 
 		public virtual CashFluxUser User { get; set; }
 
+		[DataType(DataType.Date)]
 		public DateTime TimeCreated
 		{
 			get => _timeCreated ?? DateTime.Now;

@@ -14,10 +14,11 @@ namespace CashFlux.Data.Models
 		public string LastName { get; set; }
 
 		public string FullName => $"{FirstName} {LastName}";
-		public virtual IEnumerable<FluxProfile> Profiles { get; set; }
-		public virtual IEnumerable<Flux> Fluxes { get; set; }
-		public virtual IEnumerable<FluxSource> Sources { get; set; }
+		public virtual ICollection<FluxProfile> Profiles { get; set; }
+		public virtual ICollection<Flux> Fluxes { get; set; }
+		public virtual ICollection<FluxSource> Sources { get; set; }
 
+		[DataType(DataType.Date)]
 		public DateTime TimeCreated
 		{
 			get => _timeCreated ?? DateTime.Now;
