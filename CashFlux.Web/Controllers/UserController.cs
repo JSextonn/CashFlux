@@ -25,10 +25,13 @@ namespace CashFlux.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] UserPostRequestModel model)
 		{
-			return await HandleRequestAsync(new UserCreateRequest
-			{
-				Model = model
-			});
+			return await HandleRequestAsync(new UserCreateRequest {Model = model});
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(string id)
+		{
+			return await HandleRequestAsync(new UserDeleteRequest {Id = id});
 		}
 	}
 }
