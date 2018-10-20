@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
-using CashFlux.Data.Models;
+using CashFlux.Web.Models.Flux;
+using CashFlux.Web.Models.Profile;
+using CashFlux.Web.Models.Source;
 
 namespace CashFlux.Web.Models.User
 {
@@ -11,9 +13,9 @@ namespace CashFlux.Web.Models.User
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public string FullName => $"{FirstName} {LastName}";
-		public IEnumerable<Flux> Fluxes { get; set; }
-		public IEnumerable<FluxProfile> Profiles { get; set; }
-		public IEnumerable<FluxSource> Sources { get; set; }
+		public IEnumerable<FluxGetRequestModel> Fluxes { get; set; }
+		public IEnumerable<ProfileGetRequestModel> Profiles { get; set; }
+		public IEnumerable<SourceGetRequestModel> Sources { get; set; }
 		public DateTime TimeCreated { get; set; }
 	}
 }
