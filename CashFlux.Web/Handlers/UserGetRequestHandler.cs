@@ -6,19 +6,19 @@ using CashFlux.Data.Models;
 using CashFlux.Web.Exceptions;
 using CashFlux.Web.Models.User;
 using CashFlux.Web.Requests;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CashFlux.Web.Handlers
 {
-	public class UserGetRequestHandler : CashFluxRequestHandler<UserGetRequest, UserGetRequestModel>
+	public class UserGetRequestHandler : CashFluxUserRequestHandler<UserGetRequest, UserGetRequestModel>
 	{
-		public UserGetRequestHandler(CashFluxDbContext context, IMapper mapper) : base(context, mapper) { }
+		public UserGetRequestHandler(UserManager<CashFluxUser> userManager, SignInManager<CashFluxUser> signInManager,
+			CashFluxDbContext context, IMapper mapper) : base(userManager, signInManager, context, mapper) { }
 
 		public override async Task<UserGetRequestModel> Handle(UserGetRequest request,
 			CancellationToken cancellationToken)
 		{
-			var user = await Context.Users
-				.SingleOrDefaultAsync(u => u.Id == request.Id, cancellationToken);
+			var user = await GetUserByIdAsync(request.Id, cancellationToken);
 
 			if (user == null)
 			{

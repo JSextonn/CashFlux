@@ -11,7 +11,6 @@ using CashFlux.Web.Exceptions;
 using CashFlux.Web.Models.Auth;
 using CashFlux.Web.Requests;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -34,8 +33,13 @@ namespace CashFlux.Web.Handlers
 		public override async Task<LoginResult> Handle(LoginRequest request, CancellationToken cancellationToken)
 		{
 			// Obtain the user object by unique username
-			var user = await Context.Users
-				.SingleOrDefaultAsync(u => u.UserName == request.Model.Username, cancellationToken);
+			var user = await GetUserByUsernameAsync(request.Model.Username, cancellationToken);
+
+			if (user == null)
+			{
+				throw new EntityNotFoundException(typeof(CashFluxUser), request.Model.Username);
+			}
+
 			// Validate given password
 			var result = await SignInManager.CheckPasswordSignInAsync(
 				user,
