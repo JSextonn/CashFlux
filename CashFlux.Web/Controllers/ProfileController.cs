@@ -22,7 +22,7 @@ namespace CashFlux.Web.Controllers
 			return await HandleRequestAsync(new ProfileGetByUserIdRequest {Id = id});
 		}
 
-		[HttpGet("byusername/{name}")]
+		[HttpGet("byusername/{username}")]
 		public async Task<IActionResult> GetByUsername(string username)
 		{
 			return await HandleRequestAsync(new ProfileGetByUsernameRequest{Username = username});
