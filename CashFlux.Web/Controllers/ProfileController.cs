@@ -1,6 +1,4 @@
-using System.Net;
 using System.Threading.Tasks;
-using AutoMapper;
 using CashFlux.Web.Models.Profile;
 using CashFlux.Web.Requests;
 using MediatR;
@@ -22,6 +20,12 @@ namespace CashFlux.Web.Controllers
 		public async Task<IActionResult> GetByUserId(string id)
 		{
 			return await HandleRequestAsync(new ProfileGetByUserIdRequest {Id = id});
+		}
+
+		[HttpGet("byusername/{name}")]
+		public async Task<IActionResult> GetByUsername(string username)
+		{
+			return await HandleRequestAsync(new ProfileGetByUsernameRequest{Username = username});
 		}
 		
 		[HttpPost]
