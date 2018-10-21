@@ -37,7 +37,7 @@ namespace CashFlux.Web.Handlers
 		private async Task<CashFluxUser> GetUserAsync(Expression<Func<CashFluxUser, bool>> predicate,
 			CancellationToken cancellationToken)
 		{
-			return await Context.Users
+			return await UserManager.Users
 				.Include(user => user.Profiles)
 				.Include(user => user.Fluxes)
 				.Include(user => user.Sources)
