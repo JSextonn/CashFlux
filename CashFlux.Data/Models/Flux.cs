@@ -9,15 +9,18 @@ namespace CashFlux.Data.Models
 		[Key]
 		public string Id { get; set; }
 
+		[Required]
 		[DataType(DataType.Currency)]
 		[Column(TypeName = "money")]
 		public decimal Amount { get; set; }
 
+		[Required]
 		[ForeignKey(nameof(Source))]
 		public string SourceFk { get; set; }
 
 		public virtual FluxSource Source { get; set; }
 
+		[Required]
 		[ForeignKey(nameof(Profile))]
 		public string ProfileFk { get; set; }
 

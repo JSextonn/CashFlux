@@ -16,6 +16,7 @@ namespace CashFlux.Data.Models
 
 		public virtual ICollection<Flux> Fluxes { get; set; }
 
+		[Required]
 		[ForeignKey(nameof(User))]
 		public string UserFk { get; set; }
 
