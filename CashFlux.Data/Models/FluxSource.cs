@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +18,8 @@ namespace CashFlux.Data.Models
 		[Required]
 		[MaxLength(25)]
 		public string Category { get; set; }
+		
+		public virtual ICollection<UserSources> UserSources { get; set; }
 
 		[DataType(DataType.Date)]
 		public DateTime TimeCreated
