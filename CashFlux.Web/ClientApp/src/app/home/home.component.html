@@ -1,9 +1,10 @@
+<section class="mat-typography">
 <!--title area including a background img-->
 <div class='title-bg'>
   <div class='margin-content'>
     <div class='title-text main-margin'>
       <h1 id='title'>Cash Flux</h1>
-      <h2 > An intuitive and easy to use system for all your money management needs!</h2>
+      <h2 class='mat-display-1'> An intuitive and easy to use system for all your money management needs!</h2>
     </div>
   </div>
 </div>
@@ -11,7 +12,7 @@
 <!--What is CashFlux?-->
 <div class='info-container content-block'>
     <div class="margin-content text-center">
-        <h3 class="display-4">What is Cash Flux?</h3>
+        <h3 class="mat-display-2">What is Cash Flux?</h3>
         <p>
             Cash Flux is a financial planning and management web application. Cash Flux can store data about your income/outcome, in an easy to read table, much like a bank statement. 
             With that data you can visualize spending habits and trends through an assortment of graphs allowing you to more easily plan budgets and save more efficiently.
@@ -22,74 +23,76 @@
 <!--card area container-->
 <div class='cards-container content-block'>
   <div class='margin-content'>
-  <div class='container-fluid'>
-    <div class="row">
-      <div class="col">
-        <mat-card>
-          <img mat-card-image src="../../assets/image_placeholder.png" alt="">
-          <mat-card-content>
-            <p>Keep track of Spending/Accounting</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col">
-        <mat-card>
-          <img mat-card-image src="../../assets/image_placeholder.png" alt="">
-          <mat-card-content>
-            <p>Visualize information with automatically generated graphs.</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col">
-        <mat-card>
-          <img mat-card-image src="../../assets/image_placeholder.png" alt="">
-          <mat-card-content>
-            <p>Create 'Fluxes' for constantly recurring accounting items.</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col">
-        <mat-card>
-          <img mat-card-image src="../../assets/image_placeholder.png" alt="">
-          <mat-card-content>
-            <p>Use the auto-generated infographic to learn more about spending habits and trends!</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
+    <mat-grid-list cols='4' rowHeight='530' gutterSize='20px'>
+        <mat-grid-tile>
+            <mat-card>
+                <img mat-card-image src="../../assets/image_placeholder.png" alt="">
+                <mat-card-content>
+                    <p>Easily keep track of spending and income with an easy to use accounting system</p>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card>
+              <img mat-card-image src="../../assets/image_placeholder.png" alt="">
+              <mat-card-content>
+                <p>Visualize information with automatically generated graphs.</p>
+              </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card>
+                <img mat-card-image src="../../assets/image_placeholder.png" alt="">
+                <mat-card-content>
+                  <p>Create 'Fluxes' for constantly recurring accounting items.</p>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card>
+                <img mat-card-image src="../../assets/image_placeholder.png" alt="">
+                <mat-card-content>
+                  <p>Use the auto-generated infographic to learn more about spending habits and trends!</p>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
   </div>
 </div>
 
 <!--Page break parralax -->
 <div class='page-break'>
   <div class="margin-content text-center">
-    <h3>Create an account today!</h3>
-    <button mat-raised-button  color='primary'>REGISTER</button>
+    <h2><strong>Register an account today!</strong></h2>
+    <button mat-raised-button [routerLink]='["/register"]' color='primary'>REGISTER</button>
   </div>
 </div>
 
 <!--Home page API information-->
 <div class='api-container content-block'>
-    <div class="container">
-        <div class="row">
-          <div class="col-sm-4">
+  <div class='margin-content'>
+    <mat-grid-list cols="12" rowHeight='1:1'>
+        <mat-grid-tile colspan='4' rowspan='2'>
             <p>ICON IMAGE HERE</p>
-          </div>
-          <div class="col-sm-8">
-            <h2 class='display-4'>The Cash Flux API</h2><br>
+        </mat-grid-tile>
+        <mat-grid-tile colspan='8' rowspan='1'>
+            <h3 class="mat-display-2">The Cash Flux API</h3><br>
+        </mat-grid-tile>
+        <mat-grid-tile colspan='8' rowspan='1'>
             <p>
-              <strong>About:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-        </div>
-    </div>    
+                <strong>About:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+        </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 </div>
 
 <!-- Footer -->
 <footer class="footer-container text-center">
     <p>Site created by Justin Sexton & Abdallah Abu-Rezeq</p> 
 </footer>
+
+</section>

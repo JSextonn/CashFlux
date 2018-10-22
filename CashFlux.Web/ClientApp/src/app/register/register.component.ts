@@ -7,18 +7,20 @@ import { AbstractControl, Validators, FormControl, FormGroup, ValidatorFn } from
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  // Create FormGroup with FormControls as children
-  registerForm = new FormGroup({
-    'email': new FormControl('', [Validators.email, Validators.required]),
-    'password': new FormControl('', Validators.required),
-    'confirmPassword': new FormControl('', Validators.required),
-    'firstName': new FormControl('', Validators.required),
-    'lastName': new FormControl('', Validators.required)
-  });
+  registerForm : FormGroup;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    // Create FormGroup with FormControls as children
+    this.registerForm = new FormGroup({
+      'email': new FormControl('', [Validators.email, Validators.required]),
+      'password': new FormControl('', Validators.required),
+      'confirmPassword': new FormControl('', Validators.required),
+      'firstName': new FormControl('', Validators.required),
+      'lastName': new FormControl('', Validators.required),
+    });
+  }
 
   // passwordMatchValidator(form: FormGroup): ValidatorFn {
   //   return (control: AbstractControl): { [key: string]: any } | null => {

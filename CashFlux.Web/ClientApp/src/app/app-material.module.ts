@@ -21,7 +21,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 

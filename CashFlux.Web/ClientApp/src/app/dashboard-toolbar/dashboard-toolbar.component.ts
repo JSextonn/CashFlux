@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { FluxProfile } from '../models/profile.model';
 import { Subscription } from 'rxjs';
 import { selectAllProfiles } from '../reducers/profile.reducer';
 import { FluxCreationComponent } from '../flux-creation/flux-creation.component';
-import { MatDialog, MatOption } from '@angular/material';
+import { MatDialog, MatOption, MatIconRegistry } from '@angular/material';
 import { selectAllSources } from '../reducers/source.reducer';
 import { selectSelectedProfile } from '../reducers/selected-profile.reducer';
 import { SelectProfile } from '../actions/selected-profile.actions';
@@ -35,7 +36,10 @@ export class DashboardToolbarComponent implements OnInit {
   selectedProfile = '';
   selectedProfileSubscription: Subscription;
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog) { }
+  constructor(private _store: Store<AppState>, public dialog: MatDialog, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    //Add pencil icon for edit profile button
+    iconRegistry.addSvgIcon('edit', sanitizer.bypassSecurityTrustResourceUrl('../../assets/edit-icon.svg'));
+  }
 
   ngOnInit(): void {
     // Profile state
