@@ -2,7 +2,7 @@ using MediatR;
 
 namespace CashFlux.Web.Features.UserSource
 {
-	public class UserSourceCreateRequest : IRequest<UserSourceGetModel>
+	public class UserSourcePostRequest : IRequest<UserSourceGetModel>
 	{
 		public UserSourcePostModel Model { get; set; }
 	}

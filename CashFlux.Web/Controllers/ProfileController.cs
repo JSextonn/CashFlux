@@ -30,7 +30,7 @@ namespace CashFlux.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] ProfilePostRequestModel model)
 		{
-			return await HandleRequestAsync(new ProfileCreateRequest {Model = model});
+			return await HandleRequestAsync(new ProfilePostRequest {Model = model});
 		}
 
 		[HttpDelete("{id}")]

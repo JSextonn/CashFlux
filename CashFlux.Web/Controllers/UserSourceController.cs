@@ -17,7 +17,7 @@ namespace CashFlux.Web.Controllers
 
 		public async Task<IActionResult> Post([FromBody] UserSourcePostModel model)
 		{
-			return await HandleRequestAsync(new UserSourceCreateRequest {Model = model});
+			return await HandleRequestAsync(new UserSourcePostRequest {Model = model});
 		}
 
 		public async Task<IActionResult> Delete([FromBody] UserSourceDeleteModel model)

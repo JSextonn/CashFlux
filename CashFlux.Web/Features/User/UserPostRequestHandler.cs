@@ -10,15 +10,15 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CashFlux.Web.Features.User
 {
-	public class UserCreateRequestHandler : CashFluxUserRequestHandler<UserCreateRequest, UserGetRequestModel>
+	public class UserPostRequestHandler : CashFluxUserRequestHandler<UserPostRequest, UserGetRequestModel>
 	{
-		public UserCreateRequestHandler(
+		public UserPostRequestHandler(
 			UserManager<CashFluxUser> userManager,
 			SignInManager<CashFluxUser> signInManager,
 			CashFluxDbContext context,
 			IMapper mapper) : base(userManager, signInManager, context, mapper) { }
 
-		public override async Task<UserGetRequestModel> Handle(UserCreateRequest request,
+		public override async Task<UserGetRequestModel> Handle(UserPostRequest request,
 			CancellationToken cancellationToken)
 		{
 			var newEntity = Mapper.Map<CashFluxUser>(request.Model);

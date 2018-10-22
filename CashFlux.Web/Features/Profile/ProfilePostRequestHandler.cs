@@ -7,11 +7,11 @@ using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.Profile
 {
-	public class ProfileCreateRequestHandler : CashFluxRequestHandler<ProfileCreateRequest, ProfileGetRequestModel>
+	public class ProfilePostRequestHandler : CashFluxRequestHandler<ProfilePostRequest, ProfileGetRequestModel>
 	{
-		public ProfileCreateRequestHandler(CashFluxDbContext context, IMapper mapper) : base(context, mapper) { }
+		public ProfilePostRequestHandler(CashFluxDbContext context, IMapper mapper) : base(context, mapper) { }
 
-		public override async Task<ProfileGetRequestModel> Handle(ProfileCreateRequest request,
+		public override async Task<ProfileGetRequestModel> Handle(ProfilePostRequest request,
 			CancellationToken cancellationToken)
 		{
 			var newEntity = Mapper.Map<FluxProfile>(request.Model);
