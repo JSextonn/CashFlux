@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
+using CashFlux.Web.Features.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CashFlux.Web.Features.Shared
+namespace CashFlux.Web.Features.User
 {
 	public abstract class CashFluxUserRequestHandler<TRequest, TResponse> : CashFluxRequestHandler<TRequest, TResponse>
 		where TRequest : IRequest<TResponse>

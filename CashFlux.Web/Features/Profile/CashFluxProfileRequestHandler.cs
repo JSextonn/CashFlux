@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
+using CashFlux.Web.Features.Shared;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CashFlux.Web.Features.Shared
+namespace CashFlux.Web.Features.Profile
 {
 	public abstract class CashFluxProfileRequestHandler<TRequest, TResponse>
 		: CashFluxRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
