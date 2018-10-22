@@ -15,9 +15,7 @@ namespace CashFlux.Data.Models
 
 		public string FullName => $"{FirstName} {LastName}";
 		public virtual ICollection<FluxProfile> Profiles { get; set; }
-		public virtual ICollection<UserSources
-		
-		> Sources { get; set; }
+		public virtual ICollection<UserSources> Sources { get; set; }
 
 		[DataType(DataType.Date)]
 		public DateTime TimeCreated
