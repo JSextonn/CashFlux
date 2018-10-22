@@ -7,11 +7,12 @@ using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.Source
 {
-	public class SourceCreateRequestHandler : CashFluxRequestHandler<SourceCreateRequest, SourceGetRequestModel>
+	public class SourcePostRequestHandler : CashFluxRequestHandler<SourcePostRequest, SourceGetRequestModel>
 	{
-		public SourceCreateRequestHandler(CashFluxDbContext context, IMapper mapper) : base(context, mapper) { }
+		public SourcePostRequestHandler(CashFluxDbContext context, IMapper mapper)
+			: base(context, mapper) { }
 
-		public override async Task<SourceGetRequestModel> Handle(SourceCreateRequest request,
+		public override async Task<SourceGetRequestModel> Handle(SourcePostRequest request,
 			CancellationToken cancellationToken)
 		{
 			var newEntity = Mapper.Map<FluxSource>(request.Model);
