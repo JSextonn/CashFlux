@@ -24,13 +24,19 @@ namespace CashFlux.Web.Controllers
 		[HttpGet("byusername/{username}")]
 		public async Task<IActionResult> GetByUsername(string username)
 		{
-			return await HandleRequestAsync(new ProfileGetByUsernameRequest{Username = username});
+			return await HandleRequestAsync(new ProfileGetByUsernameRequest {Username = username});
 		}
-		
+
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] ProfilePostRequestModel model)
 		{
 			return await HandleRequestAsync(new ProfileCreateRequest {Model = model});
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(string id)
+		{
+			return await HandleRequestAsync(new ProfileDeleteRequest {Id = id});
 		}
 	}
 }
