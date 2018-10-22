@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-using CashFlux.Web.Exceptions;
-using CashFlux.Web.Models;
+using CashFlux.Web.Errors.Exceptions;
+using CashFlux.Web.Errors.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

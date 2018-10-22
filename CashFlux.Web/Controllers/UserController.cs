@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
-using CashFlux.Web.Models.User;
-using CashFlux.Web.Requests;
+using CashFlux.Web.Features.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
