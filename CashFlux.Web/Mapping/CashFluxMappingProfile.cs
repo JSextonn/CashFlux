@@ -21,11 +21,11 @@ namespace CashFlux.Web.Mapping
 
 			// Flux mapping models
 			CreateMap<Flux, FluxGetRequestModel>();
-			// TODO: Create map for FluxPostRequest to Flux
+			CreateMap<FluxPostRequestModel, Flux>();
 
 			// Source mapping models
 			CreateMap<FluxSource, SourceGetRequestModel>();
-			// TODO: Create map for SourcePostRequest to FluxSource
+			CreateMap<SourcePostRequestModel, FluxSource>();
 		}
 	}
 }

@@ -33,7 +33,7 @@ namespace CashFlux.Web.Features.User
 			{
 				UserId = objectToRemove.Id,
 				DeletedProfiles = objectToRemove.Profiles.Select(profile => profile.Id),
-				DeletedFluxes = objectToRemove.Fluxes.Select(flux => flux.Id)
+				DeletedFluxes = objectToRemove.Profiles.SelectMany(profile => profile.Fluxes.Select(flux => flux.Id))
 			};
 		}
 	}

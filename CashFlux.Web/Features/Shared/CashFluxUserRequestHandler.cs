@@ -39,7 +39,6 @@ namespace CashFlux.Web.Features.Shared
 		{
 			return await UserManager.Users
 				.Include(user => user.Profiles)
-				.Include(user => user.Fluxes)
 				.Include(user => user.Sources)
 				.SingleOrDefaultAsync(predicate, cancellationToken);
 		}
