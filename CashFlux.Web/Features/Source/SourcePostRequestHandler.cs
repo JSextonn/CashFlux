@@ -7,18 +7,20 @@ using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.Source
 {
-	public class SourcePostRequestHandler : CashFluxRequestHandler<SourcePostRequest, SourceGetRequestModel>
+	public class SourcePostRequestHandler
+		: CashFluxPostRequestHandler<FluxSource,
+			SourcePostRequest,
+			SourcePostRequestModel,
+			SourceGetRequestModel>
 	{
 		public SourcePostRequestHandler(CashFluxDbContext context, IMapper mapper)
 			: base(context, mapper) { }
 
-		public override async Task<SourceGetRequestModel> Handle(SourcePostRequest request,
+		public override async Task<SourceGetRequestModel> Handle(
+			SourcePostRequest request,
 			CancellationToken cancellationToken)
 		{
-			var newEntity = Mapper.Map<FluxSource>(request.Model);
-			await Context.AddAsync(newEntity, cancellationToken);
-			await Context.SaveChangesAsync(cancellationToken);
-			return Mapper.Map<SourceGetRequestModel>(newEntity);
+			return await PostAsync(request.Model, cancellationToken);
 		}
 	}
 }

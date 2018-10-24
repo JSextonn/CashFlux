@@ -1,9 +1,7 @@
-using MediatR;
+using CashFlux.Data.Models;
+using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.Profile
 {
-	public class ProfilePostRequest : IRequest<ProfileGetRequestModel>
-	{
-		public ProfilePostRequestModel Model { get; set; }
-	}
+	public class ProfilePostRequest : EntityPostRequest<FluxProfile, ProfilePostRequestModel, ProfileGetRequestModel> { }
 }

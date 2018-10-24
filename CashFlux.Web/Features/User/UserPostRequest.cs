@@ -1,9 +1,7 @@
-using MediatR;
+using CashFlux.Data.Models;
+using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.User
 {
-	public class UserPostRequest : IRequest<UserGetRequestModel>
-	{
-		public UserPostRequestModel Model { get; set; }
-	}
+	public class UserPostRequest : EntityPostRequest<CashFluxUser, UserPostRequestModel, UserGetRequestModel> { }
 }

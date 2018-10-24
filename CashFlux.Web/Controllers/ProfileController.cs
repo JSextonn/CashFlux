@@ -18,15 +18,22 @@ namespace CashFlux.Web.Controllers
 		[HttpGet("byuserid/{id}")]
 		public async Task<IActionResult> GetByUserId(string id)
 		{
-			return await HandleRequestAsync(new ProfileGetByUserIdRequest {Id = id});
+			return await HandleRequestAsync(new ProfileGetMultipleByUserIdRequest
+			{
+				Model = new ProfileGetMultipleByUserIdRequestModel { UserId = id}
+			});
 		}
 
 		[HttpGet("byusername/{username}")]
 		public async Task<IActionResult> GetByUsername(string username)
 		{
-			return await HandleRequestAsync(new ProfileGetByUsernameRequest {Username = username});
+			return await HandleRequestAsync(new ProfileGetMultipleByUsernameRequest
+			{
+				Model = new ProfileGetMultipleByUsernameRequestModel {Username = username}
+			});
 		}
 
+		// BUG: Throws error when nonexistent UserId is passed.
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] ProfilePostRequestModel model)
 		{

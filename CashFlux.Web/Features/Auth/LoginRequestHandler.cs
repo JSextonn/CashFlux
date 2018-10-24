@@ -8,6 +8,7 @@ using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
 using CashFlux.Web.Errors.Exceptions;
+using CashFlux.Web.Features.Shared;
 using CashFlux.Web.Features.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -15,14 +16,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CashFlux.Web.Features.Auth
 {
-	public class LoginRequestHandler : CashFluxUserRequestHandler<LoginRequest, LoginResult>
+	public class LoginRequestHandler
+		: CashFluxUserRequestHandler<LoginRequest, LoginResult>
 	{
-		public LoginRequestHandler(
-			IConfiguration configuration,
+		public LoginRequestHandler(IConfiguration configuration,
 			UserManager<CashFluxUser> userManager,
 			SignInManager<CashFluxUser> signInManager,
-			CashFluxDbContext context,
-			IMapper mapper) : base(userManager, signInManager, context, mapper)
+			IMapper mapper) : base(userManager, signInManager, mapper)
 		{
 			Configuration = configuration;
 		}
@@ -32,12 +32,8 @@ namespace CashFlux.Web.Features.Auth
 		public override async Task<LoginResult> Handle(LoginRequest request, CancellationToken cancellationToken)
 		{
 			// Obtain the user object by unique username
+			// Throws entity not found exception if no user exists with given username
 			var user = await GetUserByUsernameAsync(request.Model.Username, cancellationToken);
-
-			if (user == null)
-			{
-				throw new EntityNotFoundException(typeof(CashFluxUser), request.Model.Username);
-			}
 
 			// Validate given password
 			var result = await SignInManager.CheckPasswordSignInAsync(

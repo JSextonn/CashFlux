@@ -1,9 +1,6 @@
-using MediatR;
+using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.UserSource
 {
-	public class UserSourcePostRequest : IRequest<UserSourceGetModel>
-	{
-		public UserSourcePostModel Model { get; set; }
-	}
+	public class UserSourcePostRequest : NonEntityPostRequest<UserSourcePostModel, UserSourceGetModel> { }
 }

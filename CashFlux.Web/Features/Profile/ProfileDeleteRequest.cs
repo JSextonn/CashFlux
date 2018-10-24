@@ -1,9 +1,6 @@
-using MediatR;
+using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.Profile
 {
-	public class ProfileDeleteRequest : IRequest<ProfileDeleteResult>
-	{
-		public string Id { get; set; }
-	}
+	public class ProfileDeleteRequest : DeleteRequest<ProfileDeleteResult> { }
 }

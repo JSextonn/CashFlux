@@ -3,5 +3,5 @@ using MediatR;
 
 namespace CashFlux.Web.Features.Source
 {
-	public class SourceGetRequest : GetRequest, IRequest<SourceGetRequestModel> { }
+	public class SourceGetRequest : GetRequest<SourceGetRequestModel> { }
 }
