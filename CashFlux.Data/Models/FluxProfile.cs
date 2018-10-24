@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CashFlux.Data.Models
 {
-	public class FluxProfile
+	public class FluxProfile : ICashFluxEntity
 	{
 		[Key]
 		public string Id { get; set; }

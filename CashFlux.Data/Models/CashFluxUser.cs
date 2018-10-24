@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CashFlux.Data.Models
 {
-	public class CashFluxUser : IdentityUser
+	public class CashFluxUser : IdentityUser, ICashFluxEntity
 	{
 		[MaxLength(20)]
 		public string FirstName { get; set; }

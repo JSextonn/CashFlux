@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CashFlux.Data.Models
 {
-	public class Flux
+	public class Flux : ICashFluxEntity
 	{
 		[Key]
 		public string Id { get; set; }
