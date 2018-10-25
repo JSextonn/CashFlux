@@ -4,6 +4,7 @@ using CashFlux.Web.Features.Flux;
 using CashFlux.Web.Features.Profile;
 using CashFlux.Web.Features.Source;
 using CashFlux.Web.Features.User;
+using CashFlux.Web.Features.UserSource;
 
 namespace CashFlux.Web.Mapping
 {
@@ -26,6 +27,10 @@ namespace CashFlux.Web.Mapping
 			// Source mapping models
 			CreateMap<FluxSource, SourceGetRequestModel>();
 			CreateMap<SourcePostRequestModel, FluxSource>();
+			
+			// Source mapping models
+			CreateMap<UserSources, UserSourceGetRequestModel>();
+			CreateMap<UserSourcePostRequestModel, UserSources>();
 		}
 	}
 }
