@@ -18,7 +18,7 @@ namespace CashFlux.Data.Models
 
 		[Required]
 		[ForeignKey(nameof(User))]
-		public string UserFk { get; set; }
+		public string UserId { get; set; }
 
 		public virtual CashFluxUser User { get; set; }
 

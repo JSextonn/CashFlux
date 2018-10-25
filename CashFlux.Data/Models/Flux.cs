@@ -16,13 +16,13 @@ namespace CashFlux.Data.Models
 
 		[Required]
 		[ForeignKey(nameof(Source))]
-		public string SourceFk { get; set; }
+		public string SourceId { get; set; }
 
 		public virtual FluxSource Source { get; set; }
 
 		[Required]
 		[ForeignKey(nameof(Profile))]
-		public string ProfileFk { get; set; }
+		public string ProfileId { get; set; }
 
 		public virtual FluxProfile Profile { get; set; }
 
