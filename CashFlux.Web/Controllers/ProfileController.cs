@@ -33,7 +33,6 @@ namespace CashFlux.Web.Controllers
 			});
 		}
 
-		// BUG: Throws error when nonexistent UserId is passed.
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] ProfilePostRequestModel model)
 		{
