@@ -1,7 +1,6 @@
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using CashFlux.Web.Errors.Exceptions;
+using CashFlux.Web.Errors.Extensions;
 using CashFlux.Web.Errors.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,18 +23,7 @@ namespace CashFlux.Web.Controllers
 		{
 			if (request == null)
 			{
-				var error = new ErrorResponse
-				{
-					Message = "A bad request was received.",
-					ErrorDetails = new[]
-					{
-						new ErrorDetail
-						{
-							Message = "The body of the request contained no usable content."
-						}
-					}
-				};
-				return BadRequest(error);
+				return BadRequest(ErrorResponse.DefaultErrorResponse());
 			}
 
 			try
@@ -45,24 +33,11 @@ namespace CashFlux.Web.Controllers
 			}
 			catch (UserCreationException ex)
 			{
-				var error = new ErrorResponse
-				{
-					Message = ex.Message,
-					ErrorDetails = ex.Errors.Select(e => new ErrorDetail
-					{
-						Message = e.Description,
-						Target = e.Code
-					}).ToArray()
-				};
-				return BadRequest(error);
-			}
-			catch (FailedLoginException ex)
-			{
-				return BadRequest(ex.Message);
+				return BadRequest(ex.ToErrorResponse());
 			}
 			catch (EntityNotFoundException ex)
 			{
-				return NotFound(ex.Message);
+				return NotFound(ex.ToErrorResponse());
 			}
 		}
 	}
