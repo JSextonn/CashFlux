@@ -9,10 +9,14 @@ namespace CashFlux.Web.Errors.Exceptions
 	/// </summary>
 	public class EntityNotFoundException : Exception
 	{
-		public EntityNotFoundException(MemberInfo entityType, int id)
-			: base($"An {entityType.Name} with ID {id} was not found.") { }
+		public EntityNotFoundException(MemberInfo memberInfo, string id)
+			: base($"An {memberInfo.Name} with ID {id} was not found.")
+		{
+			TypeName = memberInfo.Name;
+			Id = id;
+		}
 
-		public EntityNotFoundException(MemberInfo entityType, string id)
-			: base($"An {entityType.Name} with ID {id} was not found.") { }
+		public string TypeName { get; }
+		public string Id { get; }
 	}
 }
