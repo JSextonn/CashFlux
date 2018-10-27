@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace CashFlux.Web.Features.UserSource
 {
-	public class UserSourcePostModelValidator : AbstractValidator<UserSourcePostModel>
+	public class UserSourcePostModelValidator : AbstractValidator<UserSourcePostRequestModel>
 	{
 		public UserSourcePostModelValidator()
 		{

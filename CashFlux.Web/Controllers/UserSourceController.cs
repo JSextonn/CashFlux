@@ -9,17 +9,22 @@ namespace CashFlux.Web.Controllers
 	{
 		public UserSourceController(IMediator mediator) : base(mediator) { }
 
-		[HttpGet("{userId}")]
-		public async Task<IActionResult> Get(string userId)
+		[HttpGet("byuserid/{id}")]
+		public async Task<IActionResult> GetByUserId(string id)
 		{
-			return await HandleRequestAsync(new UserSourceGetRequest {Id = userId});
+			return await HandleRequestAsync(new UserSourceGetMultipleByUserIdRequest
+			{
+				Model = new UserSourceGetMultipleByUserIdRequestModel {UserId = id}
+			});
 		}
-
-		public async Task<IActionResult> Post([FromBody] UserSourcePostModel model)
+		
+		[HttpPost]
+		public async Task<IActionResult> Post([FromBody] UserSourcePostRequestModel model)
 		{
 			return await HandleRequestAsync(new UserSourcePostRequest {Model = model});
 		}
 
+		[HttpDelete]
 		public async Task<IActionResult> Delete([FromBody] UserSourceDeleteModel model)
 		{
 			return await HandleRequestAsync(new UserSourceDeleteRequest {Model = model});

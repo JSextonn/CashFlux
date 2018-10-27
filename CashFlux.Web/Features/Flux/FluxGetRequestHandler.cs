@@ -15,7 +15,9 @@ namespace CashFlux.Web.Features.Flux
 		public override async Task<FluxGetRequestModel> Handle(FluxGetRequest request,
 			CancellationToken cancellationToken)
 		{
-			return await GetAsync(request.Id, cancellationToken);
+			return await GetAsync(request.Id,
+				cancellationToken,
+				flux => flux.Source);
 		}
 	}
 }

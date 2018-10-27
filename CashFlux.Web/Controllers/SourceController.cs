@@ -20,5 +20,11 @@ namespace CashFlux.Web.Controllers
 		{
 			return await HandleRequestAsync(new SourcePostRequest {Model = model});
 		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(string id)
+		{
+			return await HandleRequestAsync(new SourceDeleteRequest {Id = id});
+		}
 	}
 }

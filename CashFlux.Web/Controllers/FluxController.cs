@@ -14,5 +14,17 @@ namespace CashFlux.Web.Controllers
 		{
 			return await HandleRequestAsync(new FluxGetRequest {Id = id});
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> Post([FromBody] FluxPostRequestModel model)
+		{
+			return await HandleRequestAsync(new FluxPostRequest {Model = model});
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(string id)
+		{
+			return await HandleRequestAsync(new FluxDeleteRequest{Id = id});
+		}
 	}
 }

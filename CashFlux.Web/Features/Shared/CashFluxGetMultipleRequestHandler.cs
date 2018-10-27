@@ -19,7 +19,7 @@ namespace CashFlux.Web.Features.Shared
 		protected CashFluxGetMultipleRequestHandler(CashFluxDbContext context, IMapper mapper)
 			: base(context, mapper) { }
 
-		protected async Task<List<TGetModel>> GetEntitiesAsync(
+		protected virtual async Task<List<TGetModel>> GetEntitiesAsync(
 			Expression<Func<TEntity, bool>> predicate,
 			CancellationToken cancellationToken,
 			params Expression<Func<TEntity, object>>[] includes)

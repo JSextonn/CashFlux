@@ -4,7 +4,7 @@ namespace CashFlux.Web.Features.Profile
 {
 	public class ProfileDeleteResult
 	{
-		public string ProfileId { get; set; }
+		public string DeletedProfile { get; set; }
 		public IEnumerable<string> DeletedFluxIds { get; set; }
 	}
 }

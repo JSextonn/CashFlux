@@ -13,8 +13,8 @@ namespace CashFlux.Web.Features.Profile
 			: base(context)
 		{
 			RuleFor(model => model.Name).NotEmpty().MaximumLength(30);
-			RuleFor(model => model.UserFk).NotEmpty().MustAsync(HaveValidUserId)
-				.WithMessage(model => $"User Fk '{model.UserFk}' does not exist.");
+			RuleFor(model => model.UserId).NotEmpty().MustAsync(HaveValidUserId)
+				.WithMessage(model => $"User Fk '{model.UserId}' does not exist.");
 		}
 
 		protected async Task<bool> HaveValidUserId(string userId,

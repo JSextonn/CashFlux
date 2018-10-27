@@ -25,7 +25,7 @@ namespace CashFlux.Web.Features.User
 
 			return new UserDeleteResult
 			{
-				UserId = userToDelete.Id,
+				DeletedUser = userToDelete.Id,
 				DeletedProfiles = userToDelete.Profiles.Select(profile => profile.Id),
 				DeletedFluxes = userToDelete.Profiles
 					.SelectMany(profile => profile.Fluxes.Select(flux => flux.Id))

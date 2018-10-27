@@ -68,6 +68,8 @@ namespace CashFlux.Web.Features.User
 		{
 			return UserManager.Users
 				.Include(user => user.Profiles)
+				.ThenInclude(profile => profile.Fluxes)
+				.ThenInclude(flux => flux.Source)
 				.Include(user => user.Sources);
 		}
 	}

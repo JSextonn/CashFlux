@@ -25,7 +25,7 @@ namespace CashFlux.Web.Features.Profile
 		{
 			return new ProfileDeleteResult
 			{
-				ProfileId = entity.Id,
+				DeletedProfile = entity.Id,
 				DeletedFluxIds = entity.Fluxes.Select(flux => flux.Id)
 			};
 		}
