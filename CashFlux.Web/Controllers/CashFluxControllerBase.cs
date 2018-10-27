@@ -1,6 +1,7 @@
+using System;
 using System.Threading.Tasks;
+using CashFlux.Web.Errors;
 using CashFlux.Web.Errors.Exceptions;
-using CashFlux.Web.Errors.Extensions;
 using CashFlux.Web.Errors.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,9 +32,11 @@ namespace CashFlux.Web.Controllers
 				var response = await Mediator.Send(request);
 				return Ok(response);
 			}
-			catch (UserCreationException ex)
+			catch (Exception ex) when (
+				ex is FailedAuthenticationException || 
+				ex is UserCreationException)
 			{
-				return BadRequest(ex.ToErrorResponse());
+				return BadRequest(((IErrorResponseConvertible) ex).ToErrorResponse());
 			}
 			catch (EntityNotFoundException ex)
 			{

@@ -45,7 +45,7 @@ namespace CashFlux.Web.Features.Auth
 			if (!result.Succeeded)
 			{
 				// Defaults to failed login result
-				return new LoginResult();
+				throw new FailedAuthenticationException(new LoginResult());
 			}
 
 			// Build collection of claims
