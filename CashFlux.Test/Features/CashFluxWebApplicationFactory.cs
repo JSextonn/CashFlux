@@ -1,3 +1,4 @@
+using System;
 using CashFlux.Data;
 using CashFlux.Web;
 using Microsoft.AspNetCore.Hosting;
@@ -13,9 +14,7 @@ namespace CashFlux.Test.Features
 		{
 			// Override SqlServer and add in memory database for testing purposes.
 			builder.ConfigureServices(services => services.AddDbContext<CashFluxDbContext>(options =>
-				options.UseInMemoryDatabase("CashFluxTestDatabase")));
-
-			base.ConfigureWebHost(builder);
+				options.UseInMemoryDatabase(Guid.NewGuid().ToString())));
 		}
 	}
 }
