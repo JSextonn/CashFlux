@@ -3,16 +3,16 @@
 <div class='title-bg'>
   <div class='margin-content'>
     <div class='title-text main-margin'>
-      <h1 id='title'>Cash Flux</h1>
-      <h2 class='mat-display-1'> An intuitive and easy to use system for all your money management needs!</h2>
+      <span id='title'>Cash Flux</span><br>
+      <span class='mat-display-1'> An intuitive and easy to use system for all your money management needs!</span>
     </div>
   </div>
 </div>
 
 <!--What is CashFlux?-->
 <div class='info-container content-block'>
-    <div class="margin-content text-center">
-        <h3 class="mat-display-2">What is Cash Flux?</h3>
+    <div class="margin-content">
+        <h1 class="mat-h1">What is Cash Flux?</h1>
         <p>
             Cash Flux is a financial planning and management web application. Cash Flux can store data about your income/outcome, in an easy to read table, much like a bank statement. 
             With that data you can visualize spending habits and trends through an assortment of graphs allowing you to more easily plan budgets and save more efficiently.
@@ -62,7 +62,7 @@
 
 <!--Page break parralax -->
 <div class='page-break'>
-  <div class="margin-content text-center">
+  <div class="margin-content">
     <h2><strong>Register an account today!</strong></h2>
     <button mat-raised-button [routerLink]='["/register"]' color='primary'>REGISTER</button>
   </div>
@@ -71,27 +71,23 @@
 <!--Home page API information-->
 <div class='api-container content-block'>
   <div class='margin-content'>
-    <mat-grid-list cols="12" rowHeight='1:1'>
-        <mat-grid-tile colspan='4' rowspan='2'>
-            <p>ICON IMAGE HERE</p>
-        </mat-grid-tile>
-        <mat-grid-tile colspan='8' rowspan='1'>
-            <h3 class="mat-display-2">The Cash Flux API</h3><br>
-        </mat-grid-tile>
-        <mat-grid-tile colspan='8' rowspan='1'>
-            <p>
-                <strong>About:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-        </mat-grid-tile>
-    </mat-grid-list>
+    <div class = "cloud-img">
+            <img src="../../assets/api-cloud-2.png" alt="api cloud icon">
+    </div>
+    <div class = "api-text">
+        <h1 class="mat-h1">The Cash Flux API</h1><br>
+        <p>
+            <strong>About:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+    </div>
   </div>
 </div>
 
 <!-- Footer -->
-<footer class="footer-container text-center">
+<footer class="footer-container">
     <p>Site created by Justin Sexton & Abdallah Abu-Rezeq</p> 
 </footer>
 
