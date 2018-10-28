@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashFlux.Web", "CashFlux.Web\CashFlux.Web.csproj", "{4430D594-719A-49D7-99D7-0FE404C53F1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashFlux.Data", "CashFlux.Data\CashFlux.Data.csproj", "{4C40356F-7720-4BB5-A123-E8273B7EAC58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashFlux.Test", "CashFlux.Test\CashFlux.Test.csproj", "{22CAEF7E-C17E-430C-BAE3-9DBE5648340C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{4430D594-719A-49D7-99D7-0FE404C53F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4430D594-719A-49D7-99D7-0FE404C53F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4430D594-719A-49D7-99D7-0FE404C53F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C40356F-7720-4BB5-A123-E8273B7EAC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C40356F-7720-4BB5-A123-E8273B7EAC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C40356F-7720-4BB5-A123-E8273B7EAC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C40356F-7720-4BB5-A123-E8273B7EAC58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22CAEF7E-C17E-430C-BAE3-9DBE5648340C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22CAEF7E-C17E-430C-BAE3-9DBE5648340C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22CAEF7E-C17E-430C-BAE3-9DBE5648340C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22CAEF7E-C17E-430C-BAE3-9DBE5648340C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
