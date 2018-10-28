@@ -1,24 +1,34 @@
 .register-bg{
-    background-image: url("../../assets/temp.jpg");
-    height: 94%;
-    background-position: center;
+    width: 100%;
+    height: 94%; /*should not be a permanant solution, likely need to fiddle with navmenu layout, nav tool-bar height is 55px */
+    background-image: url("../../assets/login-register-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 
-.login-container {
-    box-sizing: border-box;
-    width: 400px;
-    height: 650px;
+.page-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 40px 20px;
-    border-radius: 25px;
+mat-card{
+    max-width: 400px;
+    width: 30vw;
+    min-width: 200px;
+}
 
-    background: rgb(0, 0, 0, .4);
+.form-inputs-container > *{
+    margin:20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+}
+
+button{
+    margin-top: 25px;
 }
 
 form{
@@ -30,15 +40,8 @@ form > h3 {
     text-align: center;
     font-weight: 100;
     font-size: 30px;
-    color: white;
 }
 
 form > mat-form-field {
     margin-bottom: 10px;
-    color: white;
-}
-
-form > .mat-raised-button {
-    margin-top: 25px;
-    border-radius: 40px;
 }
