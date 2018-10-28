@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CashFlux.Web.Features.Flux;
 using MediatR;
@@ -25,6 +26,12 @@ namespace CashFlux.Web.Controllers
 		public async Task<IActionResult> Delete(string id)
 		{
 			return await HandleRequestAsync(new FluxDeleteRequest{Id = id});
+		}
+		
+		[HttpDelete]
+		public async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<string> ids)
+		{
+			return await HandleRequestAsync(new FluxDeleteMultipleRequest{Ids = ids});
 		}
 	}
 }
