@@ -1,0 +1,18 @@
+<div class="background">
+  <div class="login-container">
+    <h3 class='mat-typography'>Login</h3>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" type="text" [formControl]="email">
+      <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="email.hasError('email')">Email not correctly formated</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" type="password" [formControl]="password">
+      <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="handleLogin()" color="primary">Continue</button>
+  </div>
+</div>

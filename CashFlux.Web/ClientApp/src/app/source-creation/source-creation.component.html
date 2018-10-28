@@ -1,0 +1,23 @@
+<h2>Create Flux Source</h2>
+
+<mat-dialog-content>
+
+  <!-- Source Name -->
+  <mat-form-field class="name-field">
+    <input matInput placeholder="Source Name" [formControl]="nameForm">
+    <mat-error *ngIf="nameForm.hasError('required')">Name is required</mat-error>
+  </mat-form-field>
+
+  <!-- Source Category -->
+  <mat-form-field>
+    <input matInput placeholder="Source Category" [formControl]="categoryForm">
+    <mat-error *ngIf="categoryForm.hasError('required')">Category is required</mat-error>
+    <mat-error *ngIf="categoryForm.hasError('notUnique')">Category is not unique to source</mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="create()">Create</button>
+  <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

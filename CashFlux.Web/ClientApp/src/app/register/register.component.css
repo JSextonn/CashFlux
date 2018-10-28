@@ -1,0 +1,44 @@
+.register-bg{
+    background-image: url("../../assets/temp.jpg");
+    height: 94%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-container {
+    box-sizing: border-box;
+    width: 400px;
+    height: 650px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px 20px;
+    border-radius: 25px;
+
+    background: rgb(0, 0, 0, .4);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form > h3 {
+    text-align: center;
+    font-weight: 100;
+    font-size: 30px;
+    color: white;
+}
+
+form > mat-form-field {
+    margin-bottom: 10px;
+    color: white;
+}
+
+form > .mat-raised-button {
+    margin-top: 25px;
+    border-radius: 40px;
+}

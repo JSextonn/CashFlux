@@ -1,0 +1,36 @@
+<div class="register-bg">
+  <div class="login-container">
+    <form [formGroup]="registerForm">
+      <h3 class='mat-typography'>Register</h3>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-error *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="registerForm.get('email').hasError('email')">Not a valid Email</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" formControlName="password" required>
+        <mat-error *ngIf="registerForm.get('password').hasError('required')">Password required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Confirm Password" type="password" formControlName="confirmPassword" required>
+        <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required')">Confirm Password required</mat-error>
+        <!--<mat-error *ngIf="registerForm.hasError('mismatch')">Passwords do not match</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName" required>
+        <mat-error *ngIf="registerForm.get('firstName').hasError('required')">First Name required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
+        <mat-error *ngIf="registerForm.get('lastName').hasError('required')">Last Name required</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Create Account</button>
+    </form>
+  </div>
+</div>

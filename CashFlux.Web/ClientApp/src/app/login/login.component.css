@@ -1,0 +1,64 @@
+/* html {
+  content: url("../../assets/images/test.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} */
+.background {
+  background-image: url("../../assets/temp.jpg");
+  /* Temporary Fix */
+  height: 94%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 375px;
+  height: 425px;
+  box-sizing: border-box;
+  background: rgb(0, 0, 0, .4);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+}
+
+.login-container>h3 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 30px;
+  -webkit-text-fill-color: white;
+}
+
+.login-container>.mat-form-field {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+.login-container>.mat-raised-button {
+  margin-top: 25px;
+  border-radius: 25px;
+}
+
+.button-group {
+  /* margin: 0 auto;
+    display: block; */
+  margin-top: 25px;
+  color: white;
+  display: inline-block;
+}
+
+.forgot-password-button {
+  float: left;
+}
+
+.continue-button {
+  float: right;
+}

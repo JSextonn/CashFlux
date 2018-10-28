@@ -1,0 +1,23 @@
+.chart-container {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.mat-form-field {
+  width: 200px;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.mat-raised-button {
+  margin-top: 15px;
+  margin-left: 15px;
+}

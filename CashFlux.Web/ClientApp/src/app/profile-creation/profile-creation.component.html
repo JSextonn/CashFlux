@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{editMode ? 'Update Profile' : 'Create New Profile'}}</h2>
+
+<mat-dialog-content>
+  <!-- Profile Name -->
+  <mat-form-field>
+    <input matInput placeholder="Profile Name" [formControl]='nameFormControl' required>
+    <mat-error *ngIf="nameFormControl.hasError('required')">Profile Name is required</mat-error>
+    <mat-error *ngIf="nameFormControl.hasError('notUnique')">Profile name already exists</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary"
+          [disabled]='!nameFormControl.valid'
+          (click)='createProfile()'> {{ editMode ? 'Update' : 'Create'}}
+  </button>
+  <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>
