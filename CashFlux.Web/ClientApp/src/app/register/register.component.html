@@ -4,36 +4,51 @@
       <mat-card>
         <div class='form-inputs-container'>
           <form [formGroup]="registerForm">
-              <h3 class='mat-typography'>Register</h3>
-              
-              <mat-form-field>
-                <input matInput placeholder="Email" formControlName="email" required>
-                <mat-error *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
-                <mat-error *ngIf="registerForm.get('email').hasError('email')">Not a valid Email</mat-error>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <input matInput placeholder="Password" type="password" formControlName="password" required>
-                <mat-error *ngIf="registerForm.get('password').hasError('required')">Password required</mat-error>
-              </mat-form-field>
-                
-              <mat-form-field>
-                <input matInput placeholder="Confirm Password" type="password" formControlName="confirmPassword" required>
-                <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required')">Confirm Password required</mat-error>
-                <mat-error *ngIf="registerForm.hasError('mismatch')">Passwords do not match</mat-error>
-              </mat-form-field>
-               
-              <mat-form-field>
-                <input matInput placeholder="First Name" formControlName="firstName" required>
-                <mat-error *ngIf="registerForm.get('firstName').hasError('required')">First Name required</mat-error>
-              </mat-form-field>
-              
-              <mat-form-field>
-                <input matInput placeholder="Last Name" formControlName="lastName" required>
-                <mat-error *ngIf="registerForm.get('lastName').hasError('required')">Last Name required</mat-error>
-              </mat-form-field>
-               
-              <button mat-stroked-button type="submit" [disabled]="!registerForm.valid" color="primary">Create Account</button><br>
+            <h3 class='mat-typography'>Register</h3>
+
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="email.hasError('email')">Not a valid Email</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Password" type="password" formControlName="password">
+              <mat-error *ngIf="password.hasError('required')">Password required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Confirm Password" type="password" formControlName="confirm">
+              <mat-error *ngIf="confirm.hasError('required')">Confirm Password is required
+              </mat-error>
+              <mat-error *ngIf="confirm.hasError('mismatch')">Does not match password
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="First Name" formControlName="first">
+              <mat-error *ngIf="first.hasError('minLength')">First name must be at least 3
+                characters
+              </mat-error>
+              <mat-error *ngIf="first.hasError('maxLength')">First name cant be longer than
+                25 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Last Name" formControlName="last">
+              <mat-error *ngIf="last.hasError('minLength')">Last name must be at least 3
+                characters
+              </mat-error>
+              <mat-error *ngIf="last.hasError('maxLength')">Last name cant be longer
+                than
+                25 characters
+              </mat-error>
+            </mat-form-field>
+
+            <button mat-stroked-button type="submit" [disabled]="!registerForm.valid" color="primary">Create Account
+            </button>
+            <br>
           </form>
         </div>
       </mat-card>
