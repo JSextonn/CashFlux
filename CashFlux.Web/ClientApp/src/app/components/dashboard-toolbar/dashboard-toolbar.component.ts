@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
-import { FluxProfile } from '../models/profile.model';
 import { Subscription } from 'rxjs';
-import { selectAllProfiles } from '../reducers/profile.reducer';
 import { FluxCreationComponent } from '../flux-creation/flux-creation.component';
 import { MatDialog, MatOption, MatIconRegistry } from '@angular/material';
-import { selectAllSources } from '../reducers/source.reducer';
-import { selectSelectedProfile } from '../reducers/selected-profile.reducer';
-import { SelectProfile } from '../actions/selected-profile.actions';
 import { SourceCreationComponent } from '../source-creation/source-creation.component';
-import { FluxSource } from '../models/source.model';
-import { AddFlux } from '../actions/flux.actions';
-import { AddSource } from '../actions/source.actions';
 import { ProfileCreationComponent } from '../profile-creation/profile-creation.component';
-import { AddProfile, UpdateProfile } from '../actions/profile.actions';
 import { Update } from "@ngrx/entity";
+import { SelectProfile } from "../../redux/actions/selected-profile.actions";
+import { AddProfile, UpdateProfile } from "../../redux/actions/profile.actions";
+import { selectAllSources } from "../../redux/reducers/source.reducer";
+import { AddFlux } from "../../redux/actions/flux.actions";
+import { AddSource } from "../../redux/actions/source.actions";
+import { FluxSource } from "../../redux/models/source.model";
+import { AppState } from "../../app.state";
+import { selectSelectedProfile } from "../../redux/reducers/selected-profile.reducer";
+import { FluxProfile } from "../../redux/models/profile.model";
+import { selectAllProfiles } from "../../redux/reducers/profile.reducer";
 
 @Component({
   selector: 'app-dashboard-toolbar',

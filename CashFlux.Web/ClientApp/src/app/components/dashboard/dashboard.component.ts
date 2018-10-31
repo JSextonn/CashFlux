@@ -1,10 +1,10 @@
 import { Component, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.state';
 import { Subscription } from 'rxjs';
-import { selectFluxTableModels } from '../reducers/flux.reducer';
-import { FluxTableModel } from '../models/flux-table.model';
+import { AppState } from "../../app.state";
+import { FluxTableModel } from "../../redux/models/flux-table.model";
+import { selectFluxTableModels } from "../../redux/reducers/flux.reducer";
 
 @Component({
   selector: 'app-dashboard',

@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import * as SourceActions from '../actions/source.actions';
-import { FluxSource } from '../models/source.model';
-import { selectAllSources } from '../reducers/source.reducer';
+import * as SourceActions from '../../redux/actions/source.actions';
 import { WarningComponent } from '../warning/warning.component';
+import { FluxSource } from "../../redux/models/source.model";
+import { selectAllSources } from "../../redux/reducers/source.reducer";
+import { AppState } from "../../app.state";
 
 @Component({
   selector: 'app-source-management',

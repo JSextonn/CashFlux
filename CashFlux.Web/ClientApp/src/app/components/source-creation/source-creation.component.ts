@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FluxSource } from '../models/source.model';
+import { FluxSource } from "../../redux/models/source.model";
 
 @Component({
   selector: 'app-source-creation',

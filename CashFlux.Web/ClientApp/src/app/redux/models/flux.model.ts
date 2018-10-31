@@ -1,4 +1,4 @@
-import { Storable } from './storable';
+import { Storable } from "./storable";
 
 export interface CashFlux extends Storable {
     amount: number;

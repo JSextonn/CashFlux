@@ -3,7 +3,7 @@ import { CashFlux } from '../models/flux.model';
 import * as FluxActions from '../actions/flux.actions';
 import * as fromSource from './source.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { nextId } from '../util/id-tools';
+import { nextId } from '../../util/id-tools';
 import { FluxTableModel } from '../models/flux-table.model';
 import { FluxSource } from '../models/source.model';
 

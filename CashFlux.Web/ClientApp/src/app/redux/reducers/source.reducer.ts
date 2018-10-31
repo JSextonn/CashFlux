@@ -1,7 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as SourceActions from '../actions/source.actions';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { nextId } from '../util/id-tools';
+import { nextId } from '../../util/id-tools';
 import { FluxSource } from '../models/source.model';
 
 export interface State extends EntityState<FluxSource> { }

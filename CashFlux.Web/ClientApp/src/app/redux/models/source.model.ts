@@ -1,4 +1,4 @@
-import { Storable } from './storable';
+import { Storable } from "./storable";
 
 export interface FluxSource extends Storable {
     name: string;

@@ -8,10 +8,8 @@
 .login-bg{
   width: 100%;
   height: 94%; /*should not be a permanant solution, likely need to fiddle with navmenu layout, nav tool-bar height is 55px */
-  background-image: url("../../assets/login-register-bg.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background: url("../../../assets/login-register-bg.jpg") no-repeat center;
 }
 
 .page-body{

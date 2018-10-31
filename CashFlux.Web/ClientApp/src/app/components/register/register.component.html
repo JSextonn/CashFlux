@@ -7,18 +7,18 @@
             <h3 class='mat-typography'>Register</h3>
 
             <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email">
+              <input matInput placeholder="Email" formControlName="email" required>
               <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
               <mat-error *ngIf="email.hasError('email')">Not a valid Email</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Password" type="password" formControlName="password">
+              <input matInput placeholder="Password" type="password" formControlName="password" required>
               <mat-error *ngIf="password.hasError('required')">Password required</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Confirm Password" type="password" formControlName="confirm">
+              <input matInput placeholder="Confirm Password" type="password" formControlName="confirm" required>
               <mat-error *ngIf="confirm.hasError('required')">Confirm Password is required
               </mat-error>
               <mat-error *ngIf="confirm.hasError('mismatch')">Does not match password

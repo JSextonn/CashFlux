@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from './app.state';
 import { Store } from '@ngrx/store';
-import { AddProfiles } from './actions/profile.actions';
-import { AddFluxes } from './actions/flux.actions';
 import { Subscription } from 'rxjs';
-import { selectSourceIds } from './reducers/source.reducer';
-import { selectProfileIds } from './reducers/profile.reducer';
-import { AddSources } from './actions/source.actions';
+import { AddProfiles } from "./redux/actions/profile.actions";
+import { AddFluxes } from "./redux/actions/flux.actions";
+import { AddSources } from "./redux/actions/source.actions";
+import { selectSourceIds } from "./redux/reducers/source.reducer";
+import { selectProfileIds } from "./redux/reducers/profile.reducer";
 
 @Component({
   selector: 'app-root',
