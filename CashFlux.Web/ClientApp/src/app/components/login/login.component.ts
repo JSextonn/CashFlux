@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from "../../services/authentication.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   email: FormControl;
   password: FormControl;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     // Initialize form controls
@@ -24,8 +26,13 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
-    console.log(this.email.valid);
-    console.log(this.password.valid);
-    console.log(this.loginForm.value);
+    this.authService.login(this.email.value, this.password.value)
+      .then((loginStatus: boolean) => {
+        if (loginStatus) {
+          this.router.navigate(['/dashboard'])
+        } else {
+          // TODO: Login failed and error messages should be displayed
+        }
+      });
   }
 }

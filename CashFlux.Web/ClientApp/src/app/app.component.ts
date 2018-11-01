@@ -7,6 +7,9 @@ import { AddFluxes } from "./redux/actions/flux.actions";
 import { AddSources } from "./redux/actions/source.actions";
 import { selectSourceIds } from "./redux/reducers/source.reducer";
 import { selectProfileIds } from "./redux/reducers/profile.reducer";
+import { NavigationStart, Router } from "@angular/router";
+import { filter } from "rxjs/operators";
+import { AuthenticationService } from "./services/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +25,18 @@ export class AppComponent implements OnInit, OnDestroy {
   private sourceIdsSubscription: Subscription;
   private sourceIds: string[] = [];
 
-  constructor(private _store: Store<AppState>) {
+  constructor(private _store: Store<AppState>,
+              private router: Router,
+              private authService: AuthenticationService) {
+    router.events
+      .pipe(filter(event => event instanceof NavigationStart))
+      .pipe(filter((event: NavigationStart) => event.url === '/dashboard'))
+      .subscribe((event: NavigationStart) => {
+        // Redirect users to login if they're not logged in trying to access dashboard.
+        if (!this.authService.loggedIn.value) {
+          this.router.navigate(['/login']);
+        }
+      })
   }
 
   ngOnInit(): void {

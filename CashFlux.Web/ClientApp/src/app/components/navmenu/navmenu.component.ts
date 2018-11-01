@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
   selector: 'app-navmenu',
@@ -19,8 +20,9 @@ export class NavmenuComponent {
     map(result => result.matches)
   );
 
-  loggedIn = false;
+  loggedIn: Observable<boolean> = this.authService.loggedIn.asObservable();
 
-  constructor(private breakpointObserver: BreakpointObserver) {
-  }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthenticationService) { }
 }

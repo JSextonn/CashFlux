@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app-material.module';
@@ -22,6 +22,9 @@ import { selectedProfileReducer } from "./redux/reducers/selected-profile.reduce
 import { NavmenuComponent } from "./components/navmenu/navmenu.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { ProfileCreationComponent } from "./components/profile-creation/profile-creation.component";
+import { CashFluxHttpInterceptor } from "./http/cashflux.httpinterceptor";
+import { AuthenticationService } from "./services/authentication.service";
+import { UserService } from "./services/user.service";
 
 
 @NgModule({
@@ -55,7 +58,15 @@ import { ProfileCreationComponent } from "./components/profile-creation/profile-
       maxAge: 10
     })
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CashFluxHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     FluxCreationComponent,
