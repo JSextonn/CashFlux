@@ -74,6 +74,8 @@ namespace CashFlux.Web
 			services.Configure<IdentityOptions>(options =>
 			{
 				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireLowercase = true;
+				options.Password.RequireDigit = true;
 				options.Password.RequiredLength = 8;
 			});
 
