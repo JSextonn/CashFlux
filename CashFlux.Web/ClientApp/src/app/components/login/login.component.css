@@ -31,10 +31,8 @@ mat-card {
 }
 
 .form-inputs-container > * {
-  margin: 20px;
-  margin-left: 0px;
-  margin-right: 0px;
-  padding: 0px;
+  margin: 20px 0;
+  padding: 0;
 }
 
 button {
