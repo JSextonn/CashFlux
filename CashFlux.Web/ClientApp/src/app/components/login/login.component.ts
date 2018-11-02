@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   errorMessage: string | null;
 
-  constructor(private router: Router,
-              private store: Store<AppState>) { }
+  constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store.select(selectAuthentication)
@@ -38,7 +37,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  handleLogin() {
+  onSubmit() {
     const credentials: LoginCredentials = {
       username: this.email.value,
       password: this.password.value

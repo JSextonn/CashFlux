@@ -15,6 +15,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
@@ -49,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
     ReactiveFormsModule
   ],
   exports: [
@@ -73,6 +75,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
     ReactiveFormsModule
   ],
   declarations: []
