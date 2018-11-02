@@ -15,6 +15,7 @@
             <mat-form-field>
               <input matInput placeholder="Password" type="password" formControlName="password" required>
               <mat-error *ngIf="password.hasError('required')">Password required</mat-error>
+              <mat-error *ngIf="password.hasError('meetspolicy')">Does not meet password policy</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -25,34 +26,26 @@
               </mat-error>
             </mat-form-field>
 
-            <table class="example-full-width" cellspacing="0">
-              <tr>
-                <td>
-                  <mat-form-field>
-                    <input matInput placeholder="First Name" formControlName="first">
-                    <mat-error *ngIf="first.hasError('minLength')">First name must be at least 3
-                      characters
-                    </mat-error>
-                    <mat-error *ngIf="first.hasError('maxLength')">First name cant be longer than
-                      25 characters
-                    </mat-error>
-                  </mat-form-field>
-                </td>
+            <mat-form-field>
+              <input matInput placeholder="First Name" formControlName="first">
+              <mat-error *ngIf="first.hasError('minLength')">First name must be at least 3
+                characters
+              </mat-error>
+              <mat-error *ngIf="first.hasError('maxLength')">First name cant be longer than
+                25 characters
+              </mat-error>
+            </mat-form-field>
 
-                <td>
-                  <mat-form-field>
-                    <input matInput placeholder="Last Name" formControlName="last">
-                    <mat-error *ngIf="last.hasError('minLength')">Last name must be at least 3
-                      characters
-                    </mat-error>
-                    <mat-error *ngIf="last.hasError('maxLength')">Last name cant be longer
-                      than
-                      25 characters
-                    </mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
-            </table>
+            <mat-form-field>
+              <input matInput placeholder="Last Name" formControlName="last">
+              <mat-error *ngIf="last.hasError('minLength')">Last name must be at least 3
+                characters
+              </mat-error>
+              <mat-error *ngIf="last.hasError('maxLength')">Last name cant be longer
+                than
+                25 characters
+              </mat-error>
+            </mat-form-field>
 
             <button mat-stroked-button type="submit" [disabled]="!registerForm.valid" color="primary">Create Account
             </button>
