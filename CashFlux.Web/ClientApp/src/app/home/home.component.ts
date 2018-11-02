@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NguCarouselConfig } from '@ngu/carousel';
+
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  //Documentation for carousel at https://www.npmjs.com/package/@ngu/carousel
+  
+  
   constructor() { }
 
   ngOnInit() { }

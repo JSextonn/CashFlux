@@ -22,6 +22,7 @@ import { SourceManagementComponent } from './source-management/source-management
 import { WarningComponent } from './warning/warning.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
+import { NguCarouselModule } from '@ngu/carousel';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    NguCarouselModule,
     StoreModule.forRoot({
       profiles: profileReducer,
       fluxes: fluxReducer,
