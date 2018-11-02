@@ -5,38 +5,43 @@
   -o-background-size: cover;
   background-size: cover;
 } */
-.login-bg{
+.login-bg {
   width: 100%;
   height: 94%; /*should not be a permanant solution, likely need to fiddle with navmenu layout, nav tool-bar height is 55px */
   background-size: cover;
   background: url("../../../assets/login-register-bg.jpg") no-repeat center;
 }
 
-.page-body{
+.page-body {
   display: flex;
   align-items: center;
   justify-content: center;
   height: inherit;
 }
 
-mat-card{
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+mat-card {
   max-width: 400px;
   width: 30vw;
   min-width: 200px;
 }
 
-.form-inputs-container > *{
-  margin:20px;
+.form-inputs-container > * {
+  margin: 20px;
   margin-left: 0px;
   margin-right: 0px;
   padding: 0px;
 }
 
-button{
+button {
   margin-top: 25px;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
 }
