@@ -1,8 +1,9 @@
 <div class="login-bg">
   <div class="page-body">
     <div class="form-border-box">
+      <mat-progress-bar [ngStyle]="{'visibility': loading ? 'visible' : 'hidden'}"
+                        mode="indeterminate"></mat-progress-bar>
       <mat-card>
-        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
         <div class='form-inputs-container'>
           <form [formGroup]="loginForm">
             <h3 class='mat-typography'>Login</h3>
