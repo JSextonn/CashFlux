@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
 import { Authentication, selectAuthentication } from "../../redux/reducers/auth.reducer";
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-navmenu',
@@ -27,8 +29,13 @@ export class NavmenuComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private store: Store<AppState>) {
+    private store: Store<AppState>,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer) {
     this.authenticationState = this.store.select(selectAuthentication);
+
+    //Add account-box img
+    iconRegistry.addSvgIcon('account-box', sanitizer.bypassSecurityTrustResourceUrl('../../assets/account-box-icon.svg'));
   }
 
   ngOnInit() {
