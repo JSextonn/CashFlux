@@ -23,9 +23,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="filler"></span>
-      <mat-icon *ngIf="(loggedIn | async)" aria-label="Side nav toggle icon">account_box</mat-icon>
-      <a mat-button [routerLink]='["/login"]' *ngIf="!(loggedIn | async)">Login</a>
-      <a mat-button [routerLink]='["/register"]' *ngIf="!(loggedIn | async)">Register</a>
+      <mat-icon *ngIf="loggedIn" aria-label="Side nav toggle icon">account_box</mat-icon>
+      <a mat-button [routerLink]='["/login"]' *ngIf="!loggedIn">Login</a>
+      <a mat-button [routerLink]='["/register"]' *ngIf="!loggedIn">Register</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

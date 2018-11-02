@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthenticationService } from "../../services/authentication.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../redux/app.state";
+import { Authentication, selectAuthentication } from "../../redux/reducers/auth.reducer";
 
 @Component({
   selector: 'app-navmenu',
   templateUrl: './navmenu.component.html',
   styleUrls: ['./navmenu.component.css']
 })
-export class NavmenuComponent {
+export class NavmenuComponent implements OnInit {
 
   // Breakpoint observer, changes values depending on the size of the screen.
   // In this occasion, isHandset is true if the screen is detected to be small or xsmall.
@@ -20,9 +22,19 @@ export class NavmenuComponent {
     map(result => result.matches)
   );
 
-  loggedIn: Observable<boolean> = this.authService.loggedIn.asObservable();
+  private authenticationState: Observable<Authentication>;
+  loggedIn: boolean;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthenticationService) { }
+    private store: Store<AppState>) {
+    this.authenticationState = this.store.select(selectAuthentication);
+  }
+
+  ngOnInit() {
+    this.authenticationState.subscribe((data: Authentication) => {
+      this.loggedIn = data.loggedIn;
+      // TODO: Listen for username to display on navmenu
+    })
+  }
 }
