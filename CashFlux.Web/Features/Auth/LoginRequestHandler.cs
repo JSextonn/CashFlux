@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using CashFlux.Data;
 using CashFlux.Data.Models;
 using CashFlux.Web.Errors.Exceptions;
-using CashFlux.Web.Features.Shared;
 using CashFlux.Web.Features.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -73,7 +71,8 @@ namespace CashFlux.Web.Features.Auth
 			// Return successful login attempt with token
 			return new LoginResult
 			{
-				Token = new JwtSecurityTokenHandler().WriteToken(token)
+				Token = new JwtSecurityTokenHandler().WriteToken(token),
+				UserId = user.Id
 			};
 		}
 	}
