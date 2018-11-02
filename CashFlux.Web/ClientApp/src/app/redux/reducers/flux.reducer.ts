@@ -1,15 +1,29 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { CashFlux } from '../models/flux.model';
 import * as FluxActions from '../actions/flux.actions';
 import * as fromSource from './source.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { nextId } from '../../util/id-tools';
-import { FluxTableModel } from '../models/flux-table.model';
-import { FluxSource } from '../models/source.model';
+import { FluxSource } from "./source.reducer";
 
-export interface State extends EntityState<CashFlux> {}
+export interface State extends EntityState<Flux> {}
 
-export const adapter: EntityAdapter<CashFlux> = createEntityAdapter<CashFlux>({
+export interface FluxTableModel {
+  id: string;
+  amount: number;
+  source: string;
+  category: string;
+  timeCreated: Date;
+}
+
+export interface Flux {
+  id?: string;
+  amount: number;
+  profileId: string;
+  sourceId: string;
+  timeCreated: Date;
+}
+
+export const adapter: EntityAdapter<Flux> = createEntityAdapter<Flux>({
   sortComparer: (fluxOne, fluxTwo) => {
     if (fluxOne.timeCreated.getTime() > fluxTwo.timeCreated.getTime()) {
       return 1;

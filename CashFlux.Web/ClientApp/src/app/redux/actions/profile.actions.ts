@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { FluxProfile } from '../models/profile.model';
 import { Update } from "@ngrx/entity";
+import { FluxProfile } from "../reducers/profile.reducer";
 
 export const ADD = '[FluxProfile] Add flux profile';
 export const ADD_MANY = '[FluxProfile] Add many flux profiles';

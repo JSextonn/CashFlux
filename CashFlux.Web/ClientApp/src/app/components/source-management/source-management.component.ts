@@ -5,9 +5,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as SourceActions from '../../redux/actions/source.actions';
 import { WarningComponent } from '../warning/warning.component';
-import { FluxSource } from "../../redux/models/source.model";
-import { selectAllSources } from "../../redux/reducers/source.reducer";
-import { AppState } from "../../app.state";
+import { FluxSource, selectAllSources } from "../../redux/reducers/source.reducer";
+import { AppState } from "../../redux/app.state";
 
 @Component({
   selector: 'app-source-management',

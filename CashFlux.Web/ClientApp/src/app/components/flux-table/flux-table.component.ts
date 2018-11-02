@@ -5,9 +5,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as FluxActions from '../../redux/actions/flux.actions';
 import { WarningComponent } from '../warning/warning.component';
-import { FluxTableModel } from "../../redux/models/flux-table.model";
-import { AppState } from "../../app.state";
-import { selectFluxTableModels } from "../../redux/reducers/flux.reducer";
+import { FluxTableModel, selectFluxTableModels } from "../../redux/reducers/flux.reducer";
+import { AppState } from "../../redux/app.state";
 
 @Component({
   selector: 'app-flux-table',

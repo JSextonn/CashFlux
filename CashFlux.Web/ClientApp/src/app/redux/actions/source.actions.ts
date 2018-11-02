@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { FluxSource } from '../models/source.model';
+import { FluxSource } from "../reducers/source.reducer";
 
 export const ADD = '[FluxSource] Add flux source';
 export const ADD_MANY = '[FluxSource] Add many flux sources';

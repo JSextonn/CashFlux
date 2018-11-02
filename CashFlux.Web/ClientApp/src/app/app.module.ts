@@ -23,9 +23,9 @@ import { NavmenuComponent } from "./components/navmenu/navmenu.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { ProfileCreationComponent } from "./components/profile-creation/profile-creation.component";
 import { CashFluxHttpInterceptor } from "./http/cashflux.httpinterceptor";
-import { AuthenticationService } from "./services/authentication.service";
-import { UserService } from "./services/user.service";
-
+import { authReducer } from "./redux/reducers/auth.reducer";
+import { EffectsModule } from "@ngrx/effects";
+import { AuthEffects } from "./redux/effects/auth.effects";
 
 @NgModule({
   declarations: [
@@ -49,18 +49,18 @@ import { UserService } from "./services/user.service";
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({
+      authentication: authReducer,
       profiles: profileReducer,
       fluxes: fluxReducer,
       sources: sourceReducer,
       selectedProfile: selectedProfileReducer
     }),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
     })
   ],
   providers: [
-    AuthenticationService,
-    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Update } from "@ngrx/entity";
-import { FluxProfile } from "../../redux/models/profile.model";
+import { FluxProfile } from "../../redux/reducers/profile.reducer";
 
 @Component({
   selector: 'app-profile-creation',

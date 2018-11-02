@@ -1,10 +1,15 @@
-import { FluxProfile } from '../models/profile.model';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as ProfileActions from '../actions/profile.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { nextId } from "../../util/id-tools";
 
 export interface State extends EntityState<FluxProfile> {}
+
+export interface FluxProfile {
+  id?: string;
+  name: string;
+  timeCreated: Date;
+}
 
 export const adapter: EntityAdapter<FluxProfile> = createEntityAdapter<FluxProfile>();
 

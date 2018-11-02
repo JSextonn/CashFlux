@@ -4,25 +4,25 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 const initialState = '';
 
 export function selectedProfileReducer(state = initialState, action: SelectedProfileActions.Actions): string {
-    switch (action.type) {
-        case SelectedProfileActions.SELECT: {
-            return action.payload;
-        }
-
-        case SelectedProfileActions.CLEAR: {
-            return '';
-        }
-
-        default: {
-            return state;
-        }
+  switch (action.type) {
+    case SelectedProfileActions.SELECT: {
+      return action.payload;
     }
+
+    case SelectedProfileActions.CLEAR: {
+      return '';
+    }
+
+    default: {
+      return state;
+    }
+  }
 }
 
-export const selectSelctedProfileState = createFeatureSelector<string>('selectedProfile');
+export const selectSelectedProfileState = createFeatureSelector<string>('selectedProfile');
 
 // Default selectors
 export const selectSelectedProfile = createSelector(
-    selectSelctedProfileState,
-    (state) => state
+  selectSelectedProfileState,
+  (state) => state
 );

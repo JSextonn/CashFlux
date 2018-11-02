@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   last: FormControl;
   registerForm: FormGroup;
 
-  // TODO: Inject user service for account creation
   constructor() { }
 
   ngOnInit() {
@@ -32,10 +31,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submit() {
     if (!this.registerForm.valid) {
-      // TODO: Make sure the invalid control is in error state
+      // TODO: Display validation errors
+      return;
     }
 
-    // TODO: Submit form values with injected user service
+    // TODO: Dispatch new create account action
   }
 
   private matchesPasswordValidator(control: AbstractControl): { [key: string]: boolean } {

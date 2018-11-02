@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { CashFlux } from '../models/flux.model';
+import { Flux as CashFlux } from "../reducers/flux.reducer";
 
 export const ADD = '[CashFlux] Add flux';
 export const ADD_MANY = '[CashFlux] Add many fluxes';

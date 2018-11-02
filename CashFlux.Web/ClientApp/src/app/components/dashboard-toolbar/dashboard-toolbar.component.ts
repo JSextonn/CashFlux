@@ -9,14 +9,12 @@ import { ProfileCreationComponent } from '../profile-creation/profile-creation.c
 import { Update } from "@ngrx/entity";
 import { SelectProfile } from "../../redux/actions/selected-profile.actions";
 import { AddProfile, UpdateProfile } from "../../redux/actions/profile.actions";
-import { selectAllSources } from "../../redux/reducers/source.reducer";
+import { FluxSource, selectAllSources } from "../../redux/reducers/source.reducer";
 import { AddFlux } from "../../redux/actions/flux.actions";
 import { AddSource } from "../../redux/actions/source.actions";
-import { FluxSource } from "../../redux/models/source.model";
-import { AppState } from "../../app.state";
 import { selectSelectedProfile } from "../../redux/reducers/selected-profile.reducer";
-import { FluxProfile } from "../../redux/models/profile.model";
-import { selectAllProfiles } from "../../redux/reducers/profile.reducer";
+import { FluxProfile, selectAllProfiles } from "../../redux/reducers/profile.reducer";
+import { AppState } from "../../redux/app.state";
 
 @Component({
   selector: 'app-dashboard-toolbar',
