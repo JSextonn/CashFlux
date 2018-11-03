@@ -6,7 +6,7 @@ export const LOGIN = '[Authentication] Login process started';
 export const LOGIN_SUCCESS = '[Authentication] Login was a success';
 export const LOGIN_FAIL = '[Authentication] Login was a failure';
 export const LOAD_PREVIOUS_LOGIN = '[Authentication] Previous login info loaded';
-export const LOGOUT = '[Authentication] Logout initiated';
+export const LOGOUT = '[Authentication] Logged out';
 
 export class Login implements Action {
   readonly type = LOGIN;
@@ -34,8 +34,6 @@ export class LoadPreviousLogin implements Action {
 
 export class Logout implements Action {
   readonly type = LOGOUT;
-
-  constructor() { }
 }
 
 export type Actions = Login | LoginSuccess | LoginFail | LoadPreviousLogin | Logout;

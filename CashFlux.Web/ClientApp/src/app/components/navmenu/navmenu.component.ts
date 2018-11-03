@@ -7,6 +7,7 @@ import { AppState } from "../../redux/app.state";
 import { Authentication, selectAuthentication } from "../../redux/reducers/auth.reducer";
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
+import { Logout } from "../../redux/actions/auth.actions";
 
 @Component({
   selector: 'app-navmenu',
@@ -43,5 +44,9 @@ export class NavmenuComponent implements OnInit {
       this.loggedIn = data.loggedIn;
       // TODO: Listen for username to display on navmenu
     })
+  }
+
+  logout() {
+    this.store.dispatch(new Logout())
   }
 }

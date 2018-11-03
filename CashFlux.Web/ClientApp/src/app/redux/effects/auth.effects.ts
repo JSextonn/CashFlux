@@ -3,7 +3,6 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
 import { catchError, map, mergeMap, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
-import { Authentication } from "../reducers/auth.reducer";
 import { Router } from "@angular/router";
 
 import * as AuthActions from "../actions/auth.actions";
@@ -49,5 +48,14 @@ export class AuthEffects {
   @Effect({dispatch: false})
   loginFail: Observable<any> = this.actions.pipe(
     ofType(AuthActions.LOGIN_FAIL),
+  );
+
+  @Effect({dispatch: false})
+  logout: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(() => {
+      localStorage.removeItem('login');
+      this.router.navigateByUrl('/');
+    })
   );
 }
