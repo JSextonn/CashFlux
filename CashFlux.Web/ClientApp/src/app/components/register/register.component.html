@@ -7,19 +7,21 @@
             <h3 class='mat-typography'>Register</h3>
 
             <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email" required>
+              <input matInput placeholder="Email" formControlName="email" required autocomplete="on">
               <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
               <mat-error *ngIf="email.hasError('email')">Not a valid Email</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Password" type="password" formControlName="password" required>
+              <input matInput placeholder="Password" type="password" formControlName="password" required
+                     autocomplete="on">
               <mat-error *ngIf="password.hasError('required')">Password required</mat-error>
               <mat-error *ngIf="password.hasError('meetspolicy')">Does not meet password policy</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Confirm Password" type="password" formControlName="confirm" required>
+              <input matInput placeholder="Confirm Password" type="password" formControlName="confirm" required
+                     autocomplete="on">
               <mat-error *ngIf="confirm.hasError('required')">Confirm Password is required
               </mat-error>
               <mat-error *ngIf="confirm.hasError('mismatch') && !confirm.value.empty">Does not match password
@@ -27,7 +29,7 @@
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="First Name" formControlName="first">
+              <input matInput placeholder="First Name" formControlName="first" autocomplete="on">
               <mat-error *ngIf="first.hasError('minLength')">First name must be at least 3
                 characters
               </mat-error>
@@ -37,7 +39,7 @@
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Last Name" formControlName="last">
+              <input matInput placeholder="Last Name" formControlName="last" autocomplete="on">
               <mat-error *ngIf="last.hasError('minLength')">Last name must be at least 3
                 characters
               </mat-error>

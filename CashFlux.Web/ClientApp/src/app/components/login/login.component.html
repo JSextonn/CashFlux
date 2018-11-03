@@ -8,13 +8,13 @@
           <form [formGroup]="loginForm">
             <h3 class='mat-typography'>Login</h3>
             <mat-form-field>
-              <input matInput placeholder="Email" type="text" formControlName="email">
+              <input matInput placeholder="Email" type="text" formControlName="email" autocomplete="on">
               <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
               <mat-error *ngIf="email.hasError('email')">Email not correctly formatted</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Password" type="password" formControlName="password">
+              <input matInput placeholder="Password" type="password" formControlName="password" autocomplete="on">
               <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
             </mat-form-field>
 
