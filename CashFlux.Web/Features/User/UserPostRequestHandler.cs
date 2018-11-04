@@ -11,7 +11,7 @@ namespace CashFlux.Web.Features.User
 	public class UserPostRequestHandler
 		: CashFluxUserRequestHandler<
 			UserPostRequest,
-			UserRegisterRequestModel>
+			UserPostRequestResponseModel>
 	{
 		public UserPostRequestHandler(JwtTokenService tokenService, UserManager<CashFluxUser> userManager, SignInManager<CashFluxUser> signInManager,
 			IMapper mapper) : base(userManager, signInManager, mapper)
@@ -21,7 +21,7 @@ namespace CashFlux.Web.Features.User
 		
 		public JwtTokenService TokenService { get; }
 
-		public override async Task<UserRegisterRequestModel> Handle(
+		public override async Task<UserPostRequestResponseModel> Handle(
 			UserPostRequest request,
 			CancellationToken cancellationToken)
 		{
@@ -35,7 +35,7 @@ namespace CashFlux.Web.Features.User
 					result.Errors);
 			}
 
-			return new UserRegisterRequestModel
+			return new UserPostRequestResponseModel
 			{
 				Id = newUser.Id,
 				Token = TokenService.GetToken(newUser.UserName)
