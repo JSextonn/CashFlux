@@ -70,6 +70,8 @@ namespace CashFlux.Web
 					};
 				});
 
+			services.AddTransient<JwtTokenService>();
+
 			// Password policy configuration
 			services.Configure<IdentityOptions>(options =>
 			{

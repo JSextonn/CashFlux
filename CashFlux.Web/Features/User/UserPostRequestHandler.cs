@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CashFlux.Data.Models;
 using CashFlux.Web.Errors.Exceptions;
-using CashFlux.Web.Features.Shared;
+using CashFlux.Web.Validation;
 using Microsoft.AspNetCore.Identity;
 
 namespace CashFlux.Web.Features.User
@@ -11,12 +11,17 @@ namespace CashFlux.Web.Features.User
 	public class UserPostRequestHandler
 		: CashFluxUserRequestHandler<
 			UserPostRequest,
-			UserGetRequestModel>
+			UserRegisterRequestModel>
 	{
-		public UserPostRequestHandler(UserManager<CashFluxUser> userManager, SignInManager<CashFluxUser> signInManager,
-			IMapper mapper) : base(userManager, signInManager, mapper) { }
+		public UserPostRequestHandler(JwtTokenService tokenService, UserManager<CashFluxUser> userManager, SignInManager<CashFluxUser> signInManager,
+			IMapper mapper) : base(userManager, signInManager, mapper)
+		{
+			TokenService = tokenService;
+		}
+		
+		public JwtTokenService TokenService { get; }
 
-		public override async Task<UserGetRequestModel> Handle(
+		public override async Task<UserRegisterRequestModel> Handle(
 			UserPostRequest request,
 			CancellationToken cancellationToken)
 		{
@@ -29,7 +34,12 @@ namespace CashFlux.Web.Features.User
 					"Failed to create user with given credentials.",
 					result.Errors);
 			}
-			return Mapper.Map<UserGetRequestModel>(newUser);
+
+			return new UserRegisterRequestModel
+			{
+				Id = newUser.Id,
+				Token = TokenService.GetToken(newUser.UserName)
+			};
 		}
 	}
 }

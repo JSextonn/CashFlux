@@ -3,5 +3,5 @@ using CashFlux.Web.Features.Shared;
 
 namespace CashFlux.Web.Features.User
 {
-	public class UserPostRequest : EntityPostRequest<CashFluxUser, UserPostRequestModel, UserGetRequestModel> { }
+	public class UserPostRequest : EntityPostRequest<CashFluxUser, UserPostRequestModel, UserRegisterRequestModel> { }
 }
