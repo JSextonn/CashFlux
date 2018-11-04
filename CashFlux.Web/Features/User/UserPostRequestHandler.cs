@@ -37,7 +37,7 @@ namespace CashFlux.Web.Features.User
 
 			return new UserPostRequestResponseModel
 			{
-				Id = newUser.Id,
+				UserId = newUser.Id,
 				Token = TokenService.GetToken(newUser.UserName)
 			};
 		}
