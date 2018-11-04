@@ -1,6 +1,6 @@
+<app-dashboard-toolbar></app-dashboard-toolbar>
 <mat-tab-group dynamicHeight>
   <mat-tab label="Dashboard">
-    <app-dashboard-toolbar></app-dashboard-toolbar>
     <div [hidden]="!comparisonChart && !totalCashChart && !categoryChart" class="chart-container">
       <canvas id="comparisonCanvas">{{ comparisonChart }}</canvas>
       <canvas id="totalCashCanvas">{{ totalCashChart }}</canvas>
@@ -8,11 +8,9 @@
     </div>
   </mat-tab>
   <mat-tab label="Fluxes">
-    <app-dashboard-toolbar></app-dashboard-toolbar>
     <app-flux-table></app-flux-table>
   </mat-tab>
   <mat-tab label="Sources">
-    <app-dashboard-toolbar></app-dashboard-toolbar>
     <app-source-management></app-source-management>
   </mat-tab>
 </mat-tab-group>
