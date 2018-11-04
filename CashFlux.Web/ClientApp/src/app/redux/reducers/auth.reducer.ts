@@ -6,7 +6,26 @@ export interface LoginCredentials {
   password: string;
 }
 
-export interface Authentication {
+export interface AuthResponse {
+  success: boolean;
+  token: string;
+  userId: string;
+}
+
+export interface RegisterCredentials {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  firstName?: string;
+  lastName?: string
+}
+
+export interface RegisterResponse {
+  userId: string;
+  token: string;
+}
+
+export interface AuthenticationState {
   loggedIn: boolean;
   token: string;
   userId: string;
@@ -14,7 +33,7 @@ export interface Authentication {
   errorMessage: string;
 }
 
-export const initialState: Authentication = {
+export const initialState: AuthenticationState = {
   loggedIn: false,
   token: null,
   userId: null,
@@ -22,9 +41,10 @@ export const initialState: Authentication = {
   errorMessage: null
 };
 
-export const loginFailureMessage = 'Login failed with given credentials';
+const loginFailureMessage = 'Login failed with given credentials';
+const registerFailureMessage = 'That username appears to already be in use.';
 
-export function authReducer(state = initialState, action: AuthActions.Actions): Authentication {
+export function authReducer(state = initialState, action: AuthActions.Actions): AuthenticationState {
   switch (action.type) {
     case AuthActions.LOGIN: {
       return {...state, loading: true};
@@ -50,13 +70,32 @@ export function authReducer(state = initialState, action: AuthActions.Actions): 
       return initialState;
     }
 
+    case AuthActions.REGISTER: {
+      return {...state, loading: true};
+    }
+
+    case AuthActions.REGISTER_SUCCESS: {
+      return {
+        ...state,
+        loggedIn: true,
+        token: action.payload.token,
+        userId: action.payload.userId,
+        errorMessage: null,
+        loading: false
+      };
+    }
+
+    case AuthActions.REGISTER_FAIL: {
+      return {...state, errorMessage: registerFailureMessage, loading: false};
+    }
+
     default: {
       return state;
     }
   }
 }
 
-export const selectAuthenticationState = createFeatureSelector<Authentication>('authentication');
+export const selectAuthenticationState = createFeatureSelector<AuthenticationState>('authentication');
 
 // Default selectors
 export const selectAuthentication = createSelector(

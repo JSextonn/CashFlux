@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from "rxjs";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../redux/app.state";
+import { AuthenticationState, selectAuthentication } from "../../redux/reducers/auth.reducer";
+import { Register } from "../../redux/actions/auth.actions";
 
 @Component({
   selector: 'app-register',
@@ -8,19 +12,29 @@ import { Subject } from "rxjs";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
+  // Matches with strings containing at least one capital, lowercase, and digit and contains at least 8 characters.
   private readonly PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/g;
   private componentDestroyed: Subject<void> = new Subject();
 
-  email: FormControl;
+  username: FormControl;
   password: FormControl;
-  confirm: FormControl;
-  first: FormControl;
-  last: FormControl;
+  confirmPassword: FormControl;
+  firstName: FormControl;
+  lastName: FormControl;
   registerForm: FormGroup;
 
-  constructor() { }
+  loading: boolean;
+  errorMessage: string | null;
 
-  ngOnInit() {
+  constructor(private store: Store<AppState>) { }
+
+  ngOnInit(): void {
+    this.store.select(selectAuthentication)
+      .subscribe((state: AuthenticationState) => {
+        this.loading = state.loading;
+        this.errorMessage = state.errorMessage;
+      });
+
     this.buildFormControls();
     this.buildFromGroup();
   }
@@ -30,13 +44,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.componentDestroyed.unsubscribe();
   }
 
-  submit() {
-    if (!this.registerForm.valid) {
-      // TODO: Display validation errors
-      return;
-    }
-
-    // TODO: Dispatch new create account action
+  onSubmit(): void {
+    console.log(this.registerForm.value);
+    this.store.dispatch(new Register(this.registerForm.value));
   }
 
   private matchesPasswordValidator(control: AbstractControl): { [key: string]: boolean } {
@@ -50,26 +60,26 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   private buildFormControls(): void {
-    this.email = new FormControl('', [Validators.email, Validators.required]);
+    this.username = new FormControl('', [Validators.email, Validators.required]);
     this.password = new FormControl('', [Validators.required, this.meetsPasswordPolicy.bind(this)]);
-    this.confirm = new FormControl('', [Validators.required, this.matchesPasswordValidator.bind(this)]);
-    this.first = new FormControl('', [Validators.minLength(3), Validators.maxLength(25)]);
-    this.last = new FormControl('', [Validators.minLength(3), Validators.maxLength(25)]);
+    this.confirmPassword = new FormControl('', [Validators.required, this.matchesPasswordValidator.bind(this)]);
+    this.firstName = new FormControl('', [Validators.minLength(3), Validators.maxLength(25)]);
+    this.lastName = new FormControl('', [Validators.minLength(3), Validators.maxLength(25)]);
 
     // Make sure the confirmation field always updates with the password field.
     this.password.valueChanges
       .subscribe(() => {
-        this.confirm.updateValueAndValidity();
+        this.confirmPassword.updateValueAndValidity();
       });
   }
 
   private buildFromGroup(): void {
     this.registerForm = new FormGroup({
-      email: this.email,
+      username: this.username,
       password: this.password,
-      confirm: this.confirm,
-      first: this.first,
-      last: this.last
+      confirmPassword: this.confirmPassword,
+      firstName: this.firstName,
+      lastName: this.lastName
     });
   }
 }

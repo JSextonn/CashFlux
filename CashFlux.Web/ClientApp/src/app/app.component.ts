@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { NavigationStart, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { AppState } from "./redux/app.state";
-import { Authentication, selectAuthentication } from "./redux/reducers/auth.reducer";
+import { AuthenticationState as Authentication, selectAuthentication } from "./redux/reducers/auth.reducer";
 import { Observable } from "rxjs";
 import { LoadPreviousLogin } from "./redux/actions/auth.actions";
 

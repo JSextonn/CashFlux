@@ -1,55 +1,59 @@
 <div class='register-bg'>
   <div class='page-body'>
     <div class='form-border-box'>
+      <mat-progress-bar [ngStyle]="{'visibility': loading ? 'visible' : 'hidden'}"
+                        mode="indeterminate"></mat-progress-bar>
       <mat-card>
         <div class='form-inputs-container'>
           <form [formGroup]="registerForm">
             <h3 class='mat-typography'>Register</h3>
 
             <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email" required autocomplete="on">
-              <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="email.hasError('email')">Not a valid Email</mat-error>
+              <input matInput placeholder="Email" formControlName="username" required autocomplete="on">
+              <mat-error *ngIf="username.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="username.hasError('email')">Not a valid Email</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput placeholder="Password" type="password" formControlName="password" required
                      autocomplete="on">
               <mat-error *ngIf="password.hasError('required')">Password required</mat-error>
-              <mat-error *ngIf="password.hasError('meetspolicy')">Does not meet password policy</mat-error>
+              <mat-error *ngIf="password.hasError('meetspolicy') && !password.value.empty">Does not meet password policy</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Confirm Password" type="password" formControlName="confirm" required
+              <input matInput placeholder="Confirm Password" type="password" formControlName="confirmPassword" required
                      autocomplete="on">
-              <mat-error *ngIf="confirm.hasError('required')">Confirm Password is required
+              <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required
               </mat-error>
-              <mat-error *ngIf="confirm.hasError('mismatch') && !confirm.value.empty">Does not match password
+              <mat-error *ngIf="confirmPassword.hasError('mismatch') && !confirmPassword.value.empty">Does not match password
               </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="First Name" formControlName="first" autocomplete="on">
-              <mat-error *ngIf="first.hasError('minLength')">First name must be at least 3
+              <input matInput placeholder="First Name" formControlName="firstName" autocomplete="on">
+              <mat-error *ngIf="firstName.hasError('minlength')">First name must be at least 3
                 characters
               </mat-error>
-              <mat-error *ngIf="first.hasError('maxLength')">First name cant be longer than
+              <mat-error *ngIf="firstName.hasError('maxlength')">First name cant be longer than
                 25 characters
               </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Last Name" formControlName="last" autocomplete="on">
-              <mat-error *ngIf="last.hasError('minLength')">Last name must be at least 3
+              <input matInput placeholder="Last Name" formControlName="lastName" autocomplete="on">
+              <mat-error *ngIf="lastName.hasError('minlength')">Last name must be at least 3
                 characters
               </mat-error>
-              <mat-error *ngIf="last.hasError('maxLength')">Last name cant be longer
+              <mat-error *ngIf="lastName.hasError('maxlength')">Last name cant be longer
                 than
                 25 characters
               </mat-error>
             </mat-form-field>
 
-            <button mat-stroked-button type="submit" [disabled]="!registerForm.valid" color="primary">Create Account
+            <p class="error-message">{{errorMessage}}</p>
+
+            <button mat-stroked-button type="submit" (click)="onSubmit()" [disabled]="!registerForm.valid" color="primary">Create Account
             </button>
             <br>
           </form>

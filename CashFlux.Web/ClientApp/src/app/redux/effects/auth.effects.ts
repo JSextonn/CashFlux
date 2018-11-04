@@ -6,14 +6,9 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
 import * as AuthActions from "../actions/auth.actions";
+import { AuthResponse, RegisterResponse } from "../reducers/auth.reducer";
 
 export type Action = AuthActions.Actions;
-
-export interface AuthResponse {
-  success: boolean;
-  token: string;
-  userId: string;
-}
 
 @Injectable()
 export class AuthEffects {
@@ -57,5 +52,33 @@ export class AuthEffects {
       localStorage.removeItem('login');
       this.router.navigateByUrl('/');
     })
+  );
+
+  @Effect()
+  register: Observable<Action> = this.actions.pipe(
+    ofType(AuthActions.REGISTER),
+    mergeMap((action: AuthActions.Register) =>
+      this.httpClient.post<RegisterResponse>('api/user', action.payload).pipe(
+        map((data: RegisterResponse) => new AuthActions.RegisterSuccess(data)),
+        catchError(error => of(new AuthActions.RegisterFail({error: error.message})))
+      )
+    )
+  );
+
+  @Effect({dispatch: false})
+  registerSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.REGISTER_SUCCESS),
+    tap((action: AuthActions.RegisterSuccess) => {
+      localStorage.setItem('login', JSON.stringify({
+        token: action.payload.token,
+        userId: action.payload.userId
+      }));
+      this.router.navigateByUrl('/dashboard');
+    })
+  );
+
+  @Effect({dispatch: false})
+  registerFail: Observable<any> = this.actions.pipe(
+    ofType(AuthActions.REGISTER_FAIL),
   );
 }

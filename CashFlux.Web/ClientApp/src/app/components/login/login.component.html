@@ -8,9 +8,9 @@
           <form [formGroup]="loginForm">
             <h3 class='mat-typography'>Login</h3>
             <mat-form-field>
-              <input matInput placeholder="Email" type="text" formControlName="email" autocomplete="on">
-              <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="email.hasError('email')">Email not correctly formatted</mat-error>
+              <input matInput placeholder="Email" type="text" formControlName="username" autocomplete="on">
+              <mat-error *ngIf="username.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="username.hasError('email')">Email not correctly formatted</mat-error>
             </mat-form-field>
 
             <mat-form-field>

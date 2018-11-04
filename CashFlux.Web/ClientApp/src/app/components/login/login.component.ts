@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
 import { Login } from "../../redux/actions/auth.actions";
-import { Authentication, LoginCredentials, selectAuthentication } from "../../redux/reducers/auth.reducer";
+import { AuthenticationState, selectAuthentication } from "../../redux/reducers/auth.reducer";
 
 @Component({
   selector: 'app-login',
@@ -13,36 +13,31 @@ import { Authentication, LoginCredentials, selectAuthentication } from "../../re
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  email: FormControl;
+  username: FormControl;
   password: FormControl;
 
-  loading = false;
+  loading: boolean;
   errorMessage: string | null;
 
   constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store.select(selectAuthentication)
-      .subscribe((data: Authentication) => {
-        this.loading = data.loading;
-        this.errorMessage = data.errorMessage;
+      .subscribe((state: AuthenticationState) => {
+        this.loading = state.loading;
+        this.errorMessage = state.errorMessage;
       });
 
     // Initialize form controls
-    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.username = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', Validators.required);
     this.loginForm = new FormGroup({
-      email: this.email,
+      username: this.username,
       password: this.password
     });
   }
 
   onSubmit() {
-    const credentials: LoginCredentials = {
-      username: this.email.value,
-      password: this.password.value
-    };
-
-    this.store.dispatch(new Login(credentials))
+    this.store.dispatch(new Login(this.loginForm.value))
   }
 }

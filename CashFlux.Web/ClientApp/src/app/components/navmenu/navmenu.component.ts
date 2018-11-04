@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
-import { Authentication, selectAuthentication } from "../../redux/reducers/auth.reducer";
+import { AuthenticationState as Authentication, selectAuthentication } from "../../redux/reducers/auth.reducer";
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { Logout } from "../../redux/actions/auth.actions";

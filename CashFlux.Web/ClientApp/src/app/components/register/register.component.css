@@ -12,6 +12,11 @@
   height: inherit;
 }
 
+.error-message {
+  color: red;
+  text-align: center;
+}
+
 mat-card {
   max-width: 400px;
   width: 30vw;
