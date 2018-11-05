@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { FluxCreationComponent } from '../flux-creation/flux-creation.component';
-import { MatDialog, MatOption, MatIconRegistry } from '@angular/material';
+import { MatDialog, MatIconRegistry, MatOption } from '@angular/material';
 import { SourceCreationComponent } from '../source-creation/source-creation.component';
 import { ProfileCreationComponent } from '../profile-creation/profile-creation.component';
 import { Update } from "@ngrx/entity";
@@ -93,16 +93,13 @@ export class DashboardToolbarComponent implements OnInit {
   }
 
   openProfileCreationDialog(): void {
-    const profileDialogRef = this.dialog.open(ProfileCreationComponent, {
-      autoFocus: true,
-      data: {
-        profiles: this.profiles
-      }
-    });
+    const profileDialogRef = this.dialog.open(ProfileCreationComponent, {autoFocus: true});
 
     profileDialogRef.afterClosed().subscribe((result: FluxProfile) => {
       if (result !== undefined) {
         this._store.dispatch(new AddProfile(result));
+        // Select the profile after creating it
+        this._store.dispatch(new SelectProfile(result.id))
       }
     });
   }
@@ -111,7 +108,6 @@ export class DashboardToolbarComponent implements OnInit {
     const editDialogRef = this.dialog.open(ProfileCreationComponent, {
       autoFocus: true,
       data: {
-        profiles: this.profiles,
         profile: profile
       }
     });

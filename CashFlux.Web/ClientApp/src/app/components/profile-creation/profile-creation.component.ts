@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Update } from "@ngrx/entity";
 import { FluxProfile } from "../../redux/reducers/profile.reducer";
@@ -11,7 +11,7 @@ import { FluxProfile } from "../../redux/reducers/profile.reducer";
 })
 
 export class ProfileCreationComponent implements OnInit {
-  nameFormControl: FormControl;
+  name: FormControl;
   editMode = false;
 
   constructor(public profileDialogRef: MatDialogRef<ProfileCreationComponent>,
@@ -20,11 +20,11 @@ export class ProfileCreationComponent implements OnInit {
   ngOnInit(): void {
     // Configure component for edit mode if a profile name is passed.
     let nameValue = '';
-    if (this.data.profile) {
+    if (this.data) {
       nameValue = this.data.profile.name;
       this.editMode = true;
     }
-    this.nameFormControl = new FormControl(nameValue, [Validators.required, this._profileNameUnique.bind(this)]);
+    this.name = new FormControl(nameValue, Validators.required);
   }
 
   createProfile() {
@@ -33,12 +33,12 @@ export class ProfileCreationComponent implements OnInit {
       profile = {
         id: this.data.profile.id,
         changes: {
-          name: this.nameFormControl.value
+          name: this.name.value
         }
       }
     } else {
       profile = {
-        name: this.nameFormControl.value,
+        name: this.name.value,
         timeCreated: new Date()
       };
     }
@@ -47,16 +47,5 @@ export class ProfileCreationComponent implements OnInit {
 
   cancel() {
     this.profileDialogRef.close();
-  }
-
-  private _profileNameUnique(control: AbstractControl): { [key: string]: boolean } | null {
-    const length = this.data.profiles
-      .filter(profile => profile.name === control.value).length;
-
-    if (length !== 0) {
-      return {'notUnique': true};
-    }
-
-    return null;
   }
 }
