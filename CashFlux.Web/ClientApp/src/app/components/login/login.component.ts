@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
-import { Login } from "../../redux/actions/auth.actions";
-import { AuthenticationState, selectAuthentication } from "../../redux/reducers/auth.reducer";
+import { AuthenticationState, selectAuthentication } from "../../redux/reducers/authentication.reducer";
+import { Login } from "../../redux/actions/authentication.actions";
 
 @Component({
   selector: 'app-login',

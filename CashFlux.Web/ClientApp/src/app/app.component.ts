@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { NavigationStart, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { AppState } from "./redux/app.state";
-import { AuthenticationState as Authentication, selectAuthentication } from "./redux/reducers/auth.reducer";
 import { Observable } from "rxjs";
-import { LoadPreviousLogin } from "./redux/actions/auth.actions";
+import { LoadPreviousLogin } from "./redux/actions/authentication.actions";
+import { AuthenticationState, selectAuthentication } from "./redux/reducers/authentication.reducer";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import { LoadPreviousLogin } from "./redux/actions/auth.actions";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private authenticationState: Observable<Authentication>;
+  private authenticationState: Observable<AuthenticationState>;
   private loggedIn: boolean = false;
 
   constructor(private store: Store<AppState>,

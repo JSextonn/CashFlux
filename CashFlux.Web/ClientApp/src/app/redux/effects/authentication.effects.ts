@@ -4,13 +4,14 @@ import { Observable, of } from "rxjs";
 import { catchError, map, mergeMap, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 
-import * as AuthActions from "../actions/auth.actions";
-import { AuthenticationService, AuthResponse, RegisterResponse } from "../../services/auth.service";
+import * as RegisterActions from "../actions/register.actions";
+import * as AuthActions from "../actions/authentication.actions";
+import { AuthenticationResponse, AuthenticationService } from "../../services/authentication.service";
 
 export type Action = AuthActions.Actions;
 
 @Injectable()
-export class AuthEffects {
+export class AuthenticationEffects {
   constructor(
     private actions: Actions,
     private authService: AuthenticationService,
@@ -21,7 +22,7 @@ export class AuthEffects {
     ofType(AuthActions.LOGIN),
     mergeMap((action: AuthActions.Login) =>
       this.authService.login(action.payload).pipe(
-        map((data: AuthResponse) => new AuthActions.LoginSuccess(data)),
+        map((data: AuthenticationResponse) => new AuthActions.LoginSuccess(data)),
         catchError(error => of(new AuthActions.LoginFail({error: error.message})))
       )
     )
@@ -29,7 +30,7 @@ export class AuthEffects {
 
   @Effect({dispatch: false})
   loginSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActions.LOGIN_SUCCESS),
+    ofType(AuthActions.LOGIN_SUCCESS, RegisterActions.REGISTER_SUCCESS),
     tap((action: AuthActions.LoginSuccess) => {
       localStorage.setItem('login', JSON.stringify({
         token: action.payload.token,
@@ -51,33 +52,5 @@ export class AuthEffects {
       localStorage.removeItem('login');
       this.router.navigateByUrl('/');
     })
-  );
-
-  @Effect()
-  register: Observable<Action> = this.actions.pipe(
-    ofType(AuthActions.REGISTER),
-    mergeMap((action: AuthActions.Register) =>
-      this.authService.register(action.payload).pipe(
-        map((data: RegisterResponse) => new AuthActions.RegisterSuccess(data)),
-        catchError(error => of(new AuthActions.RegisterFail({error: error.message})))
-      )
-    )
-  );
-
-  @Effect({dispatch: false})
-  registerSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActions.REGISTER_SUCCESS),
-    tap((action: AuthActions.RegisterSuccess) => {
-      localStorage.setItem('login', JSON.stringify({
-        token: action.payload.token,
-        userId: action.payload.userId
-      }));
-      this.router.navigateByUrl('/dashboard');
-    })
-  );
-
-  @Effect({dispatch: false})
-  registerFail: Observable<any> = this.actions.pipe(
-    ofType(AuthActions.REGISTER_FAIL),
   );
 }

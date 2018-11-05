@@ -23,10 +23,13 @@ import { NavmenuComponent } from "./components/navmenu/navmenu.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { ProfileCreationComponent } from "./components/profile-creation/profile-creation.component";
 import { CashFluxHttpInterceptor } from "./http/cashflux.httpinterceptor";
-import { authReducer } from "./redux/reducers/auth.reducer";
 import { EffectsModule } from "@ngrx/effects";
-import { AuthEffects } from "./redux/effects/auth.effects";
-import { AuthenticationService } from "./services/auth.service";
+import { AuthenticationEffects } from "./redux/effects/authentication.effects";
+import { AuthenticationService } from "./services/authentication.service";
+import { authenticationReducer } from "./redux/reducers/authentication.reducer";
+import { RegisterService } from "./services/register.service";
+import { RegisterEffects } from "./redux/effects/register.effects";
+import { registerReducer } from "./redux/reducers/register.reducer";
 
 @NgModule({
   declarations: [
@@ -50,19 +53,21 @@ import { AuthenticationService } from "./services/auth.service";
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({
-      authentication: authReducer,
+      authentication: authenticationReducer,
+      register: registerReducer,
       profiles: profileReducer,
       fluxes: fluxReducer,
       sources: sourceReducer,
       selectedProfile: selectedProfileReducer
     }),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthenticationEffects, RegisterEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
     })
   ],
   providers: [
     AuthenticationService,
+    RegisterService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,

@@ -3,8 +3,8 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { Subject } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
-import { AuthenticationState, selectAuthentication } from "../../redux/reducers/auth.reducer";
-import { Register } from "../../redux/actions/auth.actions";
+import { RegisterState, selectRegister } from "../../redux/reducers/register.reducer";
+import { Register } from "../../redux/actions/register.actions";
 
 @Component({
   selector: 'app-register',
@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.store.select(selectAuthentication)
-      .subscribe((state: AuthenticationState) => {
+    this.store.select(selectRegister)
+      .subscribe((state: RegisterState) => {
         this.loading = state.loading;
         this.errorMessage = state.errorMessage;
       });

@@ -1,4 +1,4 @@
-import * as AuthActions from "../actions/auth.actions";
+import * as AuthActions from "../actions/authentication.actions";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
 export interface AuthenticationState {
@@ -18,14 +18,12 @@ export const initialState: AuthenticationState = {
 };
 
 const loginFailureMessage = 'Login failed with given credentials';
-const registerFailureMessage = 'That username appears to already be in use.';
 
-export function authReducer(state = initialState, action: AuthActions.Actions): AuthenticationState {
+export function authenticationReducer(state = initialState, action: AuthActions.Actions): AuthenticationState {
   switch (action.type) {
     case AuthActions.LOGIN: {
       return {...state, loading: true};
     }
-
     case AuthActions.LOAD_PREVIOUS_LOGIN:
     case AuthActions.LOGIN_SUCCESS: {
       return {
@@ -37,34 +35,12 @@ export function authReducer(state = initialState, action: AuthActions.Actions): 
         loading: false
       };
     }
-
     case AuthActions.LOGIN_FAIL: {
       return {...state, errorMessage: loginFailureMessage, loading: false};
     }
-
     case AuthActions.LOGOUT: {
       return initialState;
     }
-
-    case AuthActions.REGISTER: {
-      return {...state, loading: true};
-    }
-
-    case AuthActions.REGISTER_SUCCESS: {
-      return {
-        ...state,
-        loggedIn: true,
-        token: action.payload.token,
-        userId: action.payload.userId,
-        errorMessage: null,
-        loading: false
-      };
-    }
-
-    case AuthActions.REGISTER_FAIL: {
-      return {...state, errorMessage: registerFailureMessage, loading: false};
-    }
-
     default: {
       return state;
     }

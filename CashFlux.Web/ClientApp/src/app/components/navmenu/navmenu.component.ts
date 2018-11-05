@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
-import { AuthenticationState as Authentication, selectAuthentication } from "../../redux/reducers/auth.reducer";
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-import { Logout } from "../../redux/actions/auth.actions";
+import { selectAuthentication } from "../../redux/reducers/authentication.reducer";
+import { Logout } from "../../redux/actions/authentication.actions";
+
 
 @Component({
   selector: 'app-navmenu',
