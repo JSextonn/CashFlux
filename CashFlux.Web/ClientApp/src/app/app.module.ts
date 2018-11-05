@@ -26,6 +26,7 @@ import { CashFluxHttpInterceptor } from "./http/cashflux.httpinterceptor";
 import { authReducer } from "./redux/reducers/auth.reducer";
 import { EffectsModule } from "@ngrx/effects";
 import { AuthEffects } from "./redux/effects/auth.effects";
+import { AuthenticationService } from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AuthEffects } from "./redux/effects/auth.effects";
     })
   ],
   providers: [
+    AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,

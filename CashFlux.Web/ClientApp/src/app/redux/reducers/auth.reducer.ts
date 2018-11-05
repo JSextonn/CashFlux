@@ -1,30 +1,6 @@
 import * as AuthActions from "../actions/auth.actions";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
-export interface LoginCredentials {
-  username: string;
-  password: string;
-}
-
-export interface AuthResponse {
-  success: boolean;
-  token: string;
-  userId: string;
-}
-
-export interface RegisterCredentials {
-  username: string;
-  password: string;
-  confirmPassword: string;
-  firstName?: string;
-  lastName?: string
-}
-
-export interface RegisterResponse {
-  userId: string;
-  token: string;
-}
-
 export interface AuthenticationState {
   loggedIn: boolean;
   token: string;
