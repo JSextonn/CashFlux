@@ -24,7 +24,7 @@ export class ProfileCreationComponent implements OnInit {
       nameValue = this.data.profile.name;
       this.editMode = true;
     }
-    this.name = new FormControl(nameValue, Validators.required);
+    this.name = new FormControl(nameValue, [Validators.required, Validators.maxLength(30)]);
   }
 
   createProfile() {

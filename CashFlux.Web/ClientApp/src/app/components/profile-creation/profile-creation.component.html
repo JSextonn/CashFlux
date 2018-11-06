@@ -5,6 +5,7 @@
   <mat-form-field>
     <input matInput placeholder="Profile Name" [formControl]='name'>
     <mat-error *ngIf="name.hasError('required')">Profile Name is required</mat-error>
+    <mat-error *ngIf="name.hasError('maxlength')">Profile Name is limited to 30 characters</mat-error>
   </mat-form-field>
 </mat-dialog-content>
 

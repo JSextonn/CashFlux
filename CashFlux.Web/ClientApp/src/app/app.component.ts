@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
 
   private handleLoginStatus() {
     this.authenticationState
-      .subscribe((data: Authentication) => {
+      .subscribe((data: AuthenticationState) => {
         this.loggedIn = data.loggedIn;
       });
   }

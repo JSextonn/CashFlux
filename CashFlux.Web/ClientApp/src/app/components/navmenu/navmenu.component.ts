@@ -6,7 +6,7 @@ import { Store } from "@ngrx/store";
 import { AppState } from "../../redux/app.state";
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-import { selectAuthentication } from "../../redux/reducers/authentication.reducer";
+import { AuthenticationState, selectAuthentication } from "../../redux/reducers/authentication.reducer";
 import { Logout } from "../../redux/actions/authentication.actions";
 
 
@@ -26,7 +26,7 @@ export class NavmenuComponent implements OnInit {
     map(result => result.matches)
   );
 
-  private authenticationState: Observable<Authentication>;
+  private authenticationState: Observable<AuthenticationState>;
   loggedIn: boolean;
 
   constructor(
@@ -41,7 +41,7 @@ export class NavmenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationState.subscribe((data: Authentication) => {
+    this.authenticationState.subscribe((data: AuthenticationState) => {
       this.loggedIn = data.loggedIn;
       // TODO: Listen for username to display on navmenu
     })
