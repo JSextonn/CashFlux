@@ -12,7 +12,7 @@ namespace CashFlux.Web.Features.Profile
 		public ProfilePostRequestModelValidator(CashFluxDbContext context)
 			: base(context)
 		{
-			RuleFor(model => model.Name).NotEmpty().MaximumLength(30);
+			RuleFor(model => model.Name).NotEmpty().MaximumLength(20);
 			RuleFor(model => model.UserId).NotEmpty().MustAsync(HaveValidUserId)
 				.WithMessage(model => $"User Fk '{model.UserId}' does not exist.");
 		}
