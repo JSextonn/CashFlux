@@ -1,5 +1,15 @@
-<!-- Filter and delete -->
 <div class="component-container">
+
+  <!-- Table Dashboard -->
+  <mat-toolbar>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <span class="fill-space"></span>
+    <button mat-raised-button color="warn" [disabled]="selection.selected.length === 0" (click)="openWarningDialog()">
+      Delete
+    </button>
+  </mat-toolbar>
 
   <!-- Table -->
   <div class="table-container">
@@ -9,51 +19,45 @@
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
           </mat-checkbox>
         </td>
       </ng-container>
 
       <!-- Amount Column -->
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount</th>
         <td mat-cell *matCellDef="let element" [ngStyle]="{'color': element.amount >= 0 ? 'green' : 'red'}">
-          {{element.amount | currency}} </td>
+          {{element.amount | currency}}
+        </td>
       </ng-container>
 
       <!-- Source Column -->
       <ng-container matColumnDef="source">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Source </th>
-        <td mat-cell *matCellDef="let element"> {{element.source}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Source</th>
+        <td mat-cell *matCellDef="let element"> {{element.source}}</td>
       </ng-container>
 
       <!-- Category Column -->
       <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category</th>
+        <td mat-cell *matCellDef="let element"> {{element.category}}</td>
       </ng-container>
 
       <!-- Time Created Column -->
       <ng-container matColumnDef="timeCreated">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.timeCreated | date}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.timeCreated | date}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
       </tr>
     </table>
-  </div>
-
-  <!-- Table Dashboard -->
-  <div class="table-dashboard">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-    <button mat-raised-button color="warn" [disabled]="selection.selected.length === 0" (click)="openWarningDialog()">Delete</button>
   </div>
 </div>

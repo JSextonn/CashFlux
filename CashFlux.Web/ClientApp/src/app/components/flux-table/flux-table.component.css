@@ -3,30 +3,25 @@
   width: 100%;
 }
 
-table {
-  width: 100%;
+.fill-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
 }
 
 .table-container {
   overflow: auto;
-  height: 400px;
 }
 
-.table-dashboard {
-  background-color: lightgrey;
-  position: fixed;
-  bottom: 0%;
+table {
   width: 100%;
 }
 
-.table-dashboard>.mat-form-field {
-  margin-top: 5px;
-  margin-left: 10px;
-  width: 300px;
+mat-toolbar {
+  background-color: lightgrey;
 }
 
-.table-dashboard>button.mat-raised-button {
-  float: right;
-  margin-top: 15px;
-  margin-right: 15px;
+mat-form-field {
+  width: 300px;
+  height: 100%;
 }
