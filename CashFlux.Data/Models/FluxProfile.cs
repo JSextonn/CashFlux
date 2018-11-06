@@ -11,7 +11,7 @@ namespace CashFlux.Data.Models
 		public string Id { get; set; }
 
 		[Required]
-		[MaxLength(30)]
+		[MaxLength(20)]
 		public string Name { get; set; }
 
 		public virtual ICollection<Flux> Fluxes { get; set; }
