@@ -37,6 +37,7 @@ import { resourceReducer } from "./redux/reducers/resource.reducer";
 import { FluxService } from "./services/flux.service";
 import { SourceService } from "./services/source.service";
 import { personalUserInfoReducer } from "./redux/reducers/personal-user-info.reducer";
+import { LoginRouteGuard } from "./guards/login.guard";
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { personalUserInfoReducer } from "./redux/reducers/personal-user-info.red
     ProfileService,
     SourceService,
     FluxService,
+    LoginRouteGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,
