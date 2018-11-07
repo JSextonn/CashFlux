@@ -11,6 +11,7 @@ import { mapSourceResponseToClientSource } from "../../services/source.service";
 import { ClearProfileSelection } from "../actions/selected-profile.actions";
 import { ClearFluxes } from "../actions/flux.actions";
 import { LoadResourcesComplete } from "../actions/resource.actions";
+import { ClearPersonalUserInfo, LoadPersonalUserInfo } from "../actions/personal-user-info.actions";
 
 export type Action = ResourceActions.Actions;
 
@@ -23,6 +24,7 @@ export class ResourceEffects {
     ofType(ResourceActions.LOAD_RESOURCES),
     switchMap((action: ResourceActions.LoadResources) => [
       // TODO: Load rest of resources
+      new LoadPersonalUserInfo(action.payload),
       new AddProfiles(mapProfileResponseToClientProfile(action.payload.profiles)),
       new AddSources(mapSourceResponseToClientSource(action.payload.sources)),
       new LoadResourcesComplete()
@@ -39,6 +41,7 @@ export class ResourceEffects {
     ofType(ResourceActions.CLEAR_RESOURCES),
     switchMap((action: ResourceActions.ClearResources) => [
       // Make sure to clear all previous users data
+      new ClearPersonalUserInfo(),
       new ClearProfiles(),
       new ClearSources(),
       new ClearProfileSelection(),

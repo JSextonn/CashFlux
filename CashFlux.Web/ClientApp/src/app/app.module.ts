@@ -36,6 +36,7 @@ import { ResourceEffects } from "./redux/effects/resource.effects";
 import { resourceReducer } from "./redux/reducers/resource.reducer";
 import { FluxService } from "./services/flux.service";
 import { SourceService } from "./services/source.service";
+import { personalUserInfoReducer } from "./redux/reducers/personal-user-info.reducer";
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { SourceService } from "./services/source.service";
       authentication: authenticationReducer,
       resources: resourceReducer,
       register: registerReducer,
+      personalUserInfo: personalUserInfoReducer,
       profiles: profileReducer,
       fluxes: fluxReducer,
       sources: sourceReducer,
