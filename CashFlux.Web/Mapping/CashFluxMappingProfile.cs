@@ -27,10 +27,17 @@ namespace CashFlux.Web.Mapping
 			// Source mapping models
 			CreateMap<FluxSource, SourceGetRequestModel>();
 			CreateMap<SourcePostRequestModel, FluxSource>();
-			
+
 			// Source mapping models
 			CreateMap<UserSources, UserSourceGetRequestModel>();
 			CreateMap<UserSourcePostRequestModel, UserSources>();
+
+			CreateMap<UserSources, SourceGetRequestModel>()
+				.ForMember(source => source.Id, conf => conf.MapFrom(userSource => userSource.Source.Id))
+				.ForMember(source => source.Name, conf => conf.MapFrom(userSource => userSource.Source.Name))
+				.ForMember(source => source.Category, conf => conf.MapFrom(userSource => userSource.Source.Category))
+				.ForMember(source => source.TimeCreated,
+					conf => conf.MapFrom(userSource => userSource.Source.TimeCreated));
 		}
 	}
 }

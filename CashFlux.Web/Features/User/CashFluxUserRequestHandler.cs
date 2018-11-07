@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CashFlux.Data.Models;
 using CashFlux.Web.Errors.Exceptions;
 using MediatR;
@@ -70,7 +71,8 @@ namespace CashFlux.Web.Features.User
 				.Include(user => user.Profiles)
 				.ThenInclude(profile => profile.Fluxes)
 				.ThenInclude(flux => flux.Source)
-				.Include(user => user.Sources);
+				.Include(user => user.Sources)
+				.ThenInclude(sources => sources.Source);
 		}
 	}
 }
