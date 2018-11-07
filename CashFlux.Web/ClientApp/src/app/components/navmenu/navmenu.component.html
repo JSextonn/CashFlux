@@ -26,8 +26,8 @@
       <span class="filler"></span>
 
       <div *ngIf="(loggedIn | async)" class="loggedIn-View">
-        <span class="welcome-message"><strong>Welcome</strong> {{(username | async)}}</span>
         <button mat-button [matMenuTriggerFor]="menu">
+          <span class="welcome-message"><strong>Welcome</strong> {{(username | async)}}</span>
           <mat-icon svgIcon="account-box"></mat-icon>
         </button>
         <mat-menu #menu="matMenu">

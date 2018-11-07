@@ -28,4 +28,5 @@
 
 strong > .welcome-message {
   font-weight: bold;
+  margin-right: 10px;
 }
