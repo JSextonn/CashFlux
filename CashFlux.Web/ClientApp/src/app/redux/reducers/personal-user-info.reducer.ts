@@ -42,7 +42,7 @@ export function personalUserInfoReducer(state = initialState, action: PersonalUs
 export const selectPersonalUserInfoState = createFeatureSelector<PersonalUserInfoState>('personalUserInfo');
 
 // Default selectors
-export const selectPersoanlUserInfo = createSelector(
+export const selectPersonalUserInfo = createSelector(
   selectPersonalUserInfoState,
   (state) => state
 );

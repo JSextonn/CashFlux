@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { AuthenticationState, selectAuthentication } from "../../redux/reducers/authentication.reducer";
 import { Logout } from "../../redux/actions/authentication.actions";
-
+import { PersonalUserInfoState, selectPersonalUserInfo } from "../../redux/reducers/personal-user-info.reducer";
 
 @Component({
   selector: 'app-navmenu',
@@ -26,26 +26,26 @@ export class NavmenuComponent implements OnInit {
     map(result => result.matches)
   );
 
-  private authenticationState: Observable<AuthenticationState>;
-  loggedIn: boolean;
+  loggedIn: Observable<boolean> = this.store.select(selectAuthentication)
+    .pipe(
+      map((data: AuthenticationState) => data.loggedIn)
+    );
+
+  username: Observable<string> = this.store.select(selectPersonalUserInfo)
+    .pipe(
+      map((data: PersonalUserInfoState) => data.username)
+    );
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
-    this.authenticationState = this.store.select(selectAuthentication);
-
     //Add account-box img
     iconRegistry.addSvgIcon('account-box', sanitizer.bypassSecurityTrustResourceUrl('../../assets/account-box-icon.svg'));
   }
 
-  ngOnInit() {
-    this.authenticationState.subscribe((data: AuthenticationState) => {
-      this.loggedIn = data.loggedIn;
-      // TODO: Listen for username to display on navmenu
-    })
-  }
+  ngOnInit() { }
 
   logout() {
     this.store.dispatch(new Logout())

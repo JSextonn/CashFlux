@@ -22,22 +22,28 @@
               *ngIf="beyondBreakpoint | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+
       <span class="filler"></span>
-      <div *ngIf="loggedIn" class="loggedIn-View">
+
+      <div *ngIf="(loggedIn | async)" class="loggedIn-View">
+        <span class="welcome-message"><strong>Welcome</strong> {{(username | async)}}</span>
         <button mat-button [matMenuTriggerFor]="menu">
           <mat-icon svgIcon="account-box"></mat-icon>
         </button>
-
         <mat-menu #menu="matMenu">
           <ng-template matMenuContent>
             <button (click)="logout()" mat-menu-item>Logout</button>
           </ng-template>
         </mat-menu>
       </div>
-      <div *ngIf="!loggedIn">
-        <a mat-button [routerLink]='["/login"]' *ngIf="!loggedIn">Login</a>
-        <a mat-button [routerLink]='["/register"]' *ngIf="!loggedIn">Register</a>
+
+      <!--Displayed when not logged in-->
+      <!--Login and register options-->
+      <div *ngIf="!(loggedIn | async)">
+        <a mat-button [routerLink]='["/login"]'>Login</a>
+        <a mat-button [routerLink]='["/register"]'>Register</a>
       </div>
+
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

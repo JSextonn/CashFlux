@@ -21,3 +21,11 @@
 .filler {
   flex: 1 1 auto;
 }
+
+.welcome-message {
+  font-size: 14px;
+}
+
+strong > .welcome-message {
+  font-weight: bold;
+}
