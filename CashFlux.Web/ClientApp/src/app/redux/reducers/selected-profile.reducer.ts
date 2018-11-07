@@ -10,7 +10,7 @@ export function selectedProfileReducer(state = initialState, action: SelectedPro
     }
 
     case SelectedProfileActions.CLEAR: {
-      return '';
+      return initialState;
     }
 
     default: {

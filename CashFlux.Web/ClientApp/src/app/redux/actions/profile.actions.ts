@@ -11,6 +11,7 @@ export const UPDATE_PROFILE = '[FluxProfile] Update flux profile';
 export const REMOVE_PROFILE = '[FluxProfile] Remove flux profile';
 export const REMOVE_PROFILE_SUCCESS = '[FluxProfile] Removing flux profile from the cloud was a success';
 export const REMOVE_PROFILE_FAIL = '[FluxProfile] Removing flux profile from the cloud failed';
+export const CLEAR_PROFILES = '[FluxProfile] All profiles were cleared';
 
 export class AddProfile implements Action {
   readonly type = ADD_PROFILE;
@@ -60,6 +61,10 @@ export class RemoveProfileFail implements Action {
   constructor(public payload?: any) { }
 }
 
+export class ClearProfiles implements Action {
+  readonly type = CLEAR_PROFILES;
+}
+
 export type Actions =
   AddProfile
   | AddProfileSuccess
@@ -68,4 +73,5 @@ export type Actions =
   | UpdateProfile
   | RemoveProfile
   | RemoveProfileSuccess
-  | RemoveProfileFail;
+  | RemoveProfileFail
+  | ClearProfiles;

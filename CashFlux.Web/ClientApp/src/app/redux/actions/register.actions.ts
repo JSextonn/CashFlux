@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { RegisterCredentials, RegisterResponse } from "../../services/register.service";
+import { UserCreateModel, UserPostModel } from "../../services/user.service";
 
 export const REGISTER = '[Register] Registration process has started';
 export const REGISTER_SUCCESS = '[Register] Registration was a success';
@@ -8,13 +8,13 @@ export const REGISTER_FAIL = '[Register] Registration failed';
 export class Register implements Action {
   readonly type = REGISTER;
 
-  constructor(public payload: RegisterCredentials) { }
+  constructor(public payload: UserPostModel) { }
 }
 
 export class RegisterSuccess implements Action {
   readonly type = REGISTER_SUCCESS;
 
-  constructor(public payload: RegisterResponse) { }
+  constructor(public payload: UserCreateModel) { }
 }
 
 export class RegisterFail implements Action {

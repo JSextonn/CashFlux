@@ -19,6 +19,7 @@ export interface CloudFluxProfile {
   userId: string;
 }
 
+// Used to update a profile in state once a response is obtained.
 export interface ClientProfileGetModel {
   responseModel: ProfileGetModel;
   reduxId: string;
@@ -45,6 +46,10 @@ export function profileReducer(state = initialState, action: ProfileActions.Acti
       return adapter.removeOne(action.payload, state);
     }
     // TODO: Currently remove success and fail are being triggered but not being handled.
+
+    case ProfileActions.CLEAR_PROFILES: {
+      return initialState;
+    }
 
     default: {
       return state;

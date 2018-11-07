@@ -1,4 +1,3 @@
-
 import * as RegisterActions from "../actions/register.actions";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
@@ -19,7 +18,6 @@ export function registerReducer(state = initialState, action: RegisterActions.Ac
     case RegisterActions.REGISTER: {
       return {...state, loading: true};
     }
-
     case RegisterActions.REGISTER_SUCCESS: {
       return {
         ...state,
@@ -27,11 +25,9 @@ export function registerReducer(state = initialState, action: RegisterActions.Ac
         loading: false
       };
     }
-
     case RegisterActions.REGISTER_FAIL: {
       return {...state, errorMessage: registerFailureMessage, loading: false};
     }
-
     default: {
       return state;
     }

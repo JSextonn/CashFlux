@@ -1,5 +1,12 @@
 import * as AuthActions from "../actions/authentication.actions";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { UserGetModel } from "../../services/user.service";
+
+export interface AuthenticationSuccessInfo {
+  token: string;
+  userId: string;
+  userDetails: UserGetModel;
+}
 
 export interface AuthenticationState {
   loggedIn: boolean;
@@ -24,7 +31,6 @@ export function authenticationReducer(state = initialState, action: AuthActions.
     case AuthActions.LOGIN: {
       return {...state, loading: true};
     }
-    case AuthActions.LOAD_PREVIOUS_LOGIN:
     case AuthActions.LOGIN_SUCCESS: {
       return {
         ...state,

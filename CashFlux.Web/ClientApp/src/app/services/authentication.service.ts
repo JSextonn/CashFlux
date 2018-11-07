@@ -1,23 +1,26 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
+import { UserGetModel } from "./user.service";
 
-export interface AuthenticationCredentials {
+export interface AuthenticationRequest {
   username: string;
   password: string;
+  includeUserDetails: boolean;
 }
 
 export interface AuthenticationResponse {
   success: boolean;
   token: string;
   userId: string;
+  userDetails: UserGetModel
 }
 
 @Injectable()
 export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
 
-  login(credentials: AuthenticationCredentials): Observable<AuthenticationResponse> {
-    return this.httpClient.post<AuthenticationResponse>('api/auth', credentials);
+  login(request: AuthenticationRequest): Observable<AuthenticationResponse> {
+    return this.httpClient.post<AuthenticationResponse>('api/auth', request);
   }
 }

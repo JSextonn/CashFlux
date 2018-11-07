@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.dispatch(new Login(this.loginForm.value))
+    this.store.dispatch(new Login({
+      ...this.loginForm.value,
+      includeUserDetails: true
+    }))
   }
 }

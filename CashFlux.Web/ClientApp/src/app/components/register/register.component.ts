@@ -45,7 +45,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.store.dispatch(new Register(this.registerForm.value));
+    this.store.dispatch(new Register({
+      ...this.registerForm.value,
+      includeUserDetails: true
+    }));
   }
 
   private matchesPasswordValidator(control: AbstractControl): { [key: string]: boolean } {

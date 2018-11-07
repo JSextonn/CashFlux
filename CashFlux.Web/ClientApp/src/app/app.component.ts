@@ -3,9 +3,8 @@ import { Store } from '@ngrx/store';
 import { NavigationStart, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { AppState } from "./redux/app.state";
-import { Observable } from "rxjs";
-import { LoadPreviousLogin } from "./redux/actions/authentication.actions";
 import { AuthenticationState, selectAuthentication } from "./redux/reducers/authentication.reducer";
+import { LoginWithLocalStorage } from "./redux/actions/authentication.actions";
 
 @Component({
   selector: 'app-root',
@@ -13,13 +12,9 @@ import { AuthenticationState, selectAuthentication } from "./redux/reducers/auth
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private authenticationState: Observable<AuthenticationState>;
   private loggedIn: boolean = false;
 
-  constructor(private store: Store<AppState>,
-              private router: Router) {
-    this.authenticationState = this.store.select(selectAuthentication);
-  }
+  constructor(private store: Store<AppState>, private router: Router) { }
 
   ngOnInit() {
     this.loadLocalLoginInfo();
@@ -28,7 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   private handleLoginStatus() {
-    this.authenticationState
+    this.store.select(selectAuthentication)
       .subscribe((data: AuthenticationState) => {
         this.loggedIn = data.loggedIn;
       });
@@ -38,10 +33,12 @@ export class AppComponent implements OnInit {
     const loginInfo = localStorage.getItem('login');
 
     if (loginInfo) {
-      this.store.dispatch(new LoadPreviousLogin(JSON.parse(loginInfo)));
+      this.store.dispatch(new LoginWithLocalStorage(JSON.parse(loginInfo)));
     }
   }
 
+  // BUG: Redirects users to login during initialization phase. Users immediately get redirected back to dashboard once login process is complete
+  // Redirect users to login when trying to reach dashboard when not logged in.
   private redirectToLogin() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationStart))

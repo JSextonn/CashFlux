@@ -1,24 +1,29 @@
 import { Action } from "@ngrx/store";
-import { AuthenticationState, } from "../reducers/authentication.reducer";
-import { AuthenticationCredentials, AuthenticationResponse } from "../../services/authentication.service";
-import { RegisterResponse } from "../../services/register.service";
+import { AuthenticationRequest } from "../../services/authentication.service";
+import { AuthenticationSuccessInfo } from "../reducers/authentication.reducer";
 
 export const LOGIN = '[Authentication] Login process started';
+export const LOGIN_WITH_LOCAL_STORAGE = '[Authentication] Login process started with local storage data';
 export const LOGIN_SUCCESS = '[Authentication] Login was a success';
 export const LOGIN_FAIL = '[Authentication] Login was a failure';
-export const LOAD_PREVIOUS_LOGIN = '[Authentication] Previous login info loaded';
 export const LOGOUT = '[Authentication] Logged out';
 
 export class Login implements Action {
   readonly type = LOGIN;
 
-  constructor(public payload: AuthenticationCredentials) { }
+  constructor(public payload: AuthenticationRequest) { }
+}
+
+export class LoginWithLocalStorage implements Action {
+  readonly type = LOGIN_WITH_LOCAL_STORAGE;
+
+  constructor(public payload: { token: string, userId: string }) { }
 }
 
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
 
-  constructor(public payload: AuthenticationResponse | RegisterResponse) { }
+  constructor(public payload: AuthenticationSuccessInfo) { }
 }
 
 export class LoginFail implements Action {
@@ -27,14 +32,12 @@ export class LoginFail implements Action {
   constructor(public payload?: any) { }
 }
 
-export class LoadPreviousLogin implements Action {
-  readonly type = LOAD_PREVIOUS_LOGIN;
-
-  constructor(public payload: AuthenticationState) { }
-}
-
 export class Logout implements Action {
   readonly type = LOGOUT;
 }
 
-export type Actions = Login | LoginSuccess | LoginFail | LoadPreviousLogin | Logout;
+export type Actions =
+  Login
+  | LoginSuccess
+  | LoginFail
+  | Logout;

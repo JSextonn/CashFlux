@@ -7,6 +7,7 @@ export interface State extends EntityState<FluxSource> {}
 
 export interface FluxSource {
   id?: string;
+  cloudId?: string;
   name: string;
   category: string;
   timeCreated: Date;
@@ -18,22 +19,26 @@ export const initialState: State = adapter.getInitialState();
 
 export function sourceReducer(state = initialState, action: SourceActions.Actions): State {
   switch (action.type) {
-    case SourceActions.ADD: {
+    case SourceActions.ADD_SOURCE: {
       action.payload.id = currentIdOrNext(action.payload.id, state.ids as string[]);
       return adapter.addOne(action.payload, state);
     }
 
-    case SourceActions.ADD_MANY: {
+    case SourceActions.ADD_SOURCES: {
       action.payload.map(source => source.id = currentIdOrNext(source.id, state.ids as string[]));
       return adapter.addMany(action.payload, state);
     }
 
-    case SourceActions.REMOVE: {
+    case SourceActions.REMOVE_SOURCE: {
       return adapter.removeOne(action.payload, state);
     }
 
-    case SourceActions.REMOVE_MANY: {
+    case SourceActions.REMOVE_SOURCES: {
       return adapter.removeMany(action.payload, state);
+    }
+
+    case SourceActions.CLEAR_SOURCES: {
+      return initialState;
     }
 
     default: {

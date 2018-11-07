@@ -4,6 +4,7 @@ import * as fromSource from './source.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { FluxSource } from "./source.reducer";
 import { currentIdOrNext } from "../id.tools";
+import ADD_FLUX = FluxActions.ADD_FLUX;
 
 export interface State extends EntityState<Flux> {}
 
@@ -39,19 +40,22 @@ export const initialState: State = adapter.getInitialState();
 
 export function fluxReducer(state = initialState, action: FluxActions.Actions): State {
   switch (action.type) {
-    case FluxActions.ADD: {
+    case ADD_FLUX: {
       action.payload.id = currentIdOrNext(action.payload.id, state.ids as string[]);
       return adapter.addOne(action.payload, state);
     }
-    case FluxActions.ADD_MANY: {
+    case FluxActions.ADD_FLUXES: {
       action.payload.map(flux => flux.id = currentIdOrNext(flux.id, state.ids as string[]));
       return adapter.addMany(action.payload, state);
     }
-    case FluxActions.REMOVE: {
+    case FluxActions.REMOVE_FLUX: {
       return adapter.removeOne(action.payload, state);
     }
-    case FluxActions.REMOVE_MANY: {
+    case FluxActions.REMOVE_FLUXES: {
       return adapter.removeMany(action.payload, state);
+    }
+    case FluxActions.CLEAR_FLUXES: {
+      return initialState;
     }
     default: {
       return state;

@@ -3,10 +3,12 @@ import * as fromFlux from '../redux/reducers/flux.reducer';
 import * as fromSource from '../redux/reducers/source.reducer';
 import { AuthenticationState } from "./reducers/authentication.reducer";
 import { RegisterState } from "./reducers/register.reducer";
+import { LoadResourcesState } from "./reducers/resource.reducer";
 
 export interface AppState {
   authorization: AuthenticationState;
   register: RegisterState;
+  resources: LoadResourcesState;
   profiles: fromProfile.State;
   fluxes: fromFlux.State;
   sources: fromSource.State;

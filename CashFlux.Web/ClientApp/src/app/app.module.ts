@@ -27,11 +27,15 @@ import { EffectsModule } from "@ngrx/effects";
 import { AuthenticationEffects } from "./redux/effects/authentication.effects";
 import { AuthenticationService } from "./services/authentication.service";
 import { authenticationReducer } from "./redux/reducers/authentication.reducer";
-import { RegisterService } from "./services/register.service";
 import { RegisterEffects } from "./redux/effects/register.effects";
 import { registerReducer } from "./redux/reducers/register.reducer";
 import { ProfileService } from "./services/profile.service";
 import { ProfileEffects } from "./redux/effects/profile.effects";
+import { UserService } from "./services/user.service";
+import { ResourceEffects } from "./redux/effects/resource.effects";
+import { resourceReducer } from "./redux/reducers/resource.reducer";
+import { FluxService } from "./services/flux.service";
+import { SourceService } from "./services/source.service";
 
 @NgModule({
   declarations: [
@@ -56,21 +60,29 @@ import { ProfileEffects } from "./redux/effects/profile.effects";
     HttpClientModule,
     StoreModule.forRoot({
       authentication: authenticationReducer,
+      resources: resourceReducer,
       register: registerReducer,
       profiles: profileReducer,
       fluxes: fluxReducer,
       sources: sourceReducer,
       selectedProfile: selectedProfileReducer
     }),
-    EffectsModule.forRoot([AuthenticationEffects, RegisterEffects, ProfileEffects]),
+    EffectsModule.forRoot([
+      AuthenticationEffects,
+      RegisterEffects,
+      ProfileEffects,
+      ResourceEffects
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
     })
   ],
   providers: [
     AuthenticationService,
-    RegisterService,
+    UserService,
     ProfileService,
+    SourceService,
+    FluxService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,
