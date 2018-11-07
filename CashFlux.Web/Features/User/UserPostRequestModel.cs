@@ -8,5 +8,6 @@ namespace CashFlux.Web.Features.User
 		public string ConfirmPassword { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public bool IncludeUserDetails { get; set; } = false;
 	}
 }
