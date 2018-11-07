@@ -42,10 +42,11 @@ namespace CashFlux.Web.Features.Auth
 			}
 
 			// Return successful login attempt with token
-			return new LoginResult
+			return new LoginResultWithUserDetails
 			{
 				Token = TokenService.GetToken(request.Model.Username),
-				UserId = user.Id
+				UserId = user.Id,
+				UserDetails = request.Model.IncludeUserDetails ? Mapper.Map<UserGetRequestModel>(user) : null
 			};
 		}
 	}

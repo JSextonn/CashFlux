@@ -4,5 +4,6 @@ namespace CashFlux.Web.Features.Auth
 	{
 		public string Username { get; set; }
 		public string Password { get; set; }
+		public bool IncludeUserDetails { get; set; } = false;
 	}
 }
