@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as SourceActions from '../actions/source.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { nextId } from '../../util/id-tools';
+import { currentIdOrNext } from "../id.tools";
 
 export interface State extends EntityState<FluxSource> {}
 
@@ -19,12 +19,12 @@ export const initialState: State = adapter.getInitialState();
 export function sourceReducer(state = initialState, action: SourceActions.Actions): State {
   switch (action.type) {
     case SourceActions.ADD: {
-      action.payload.id = nextId(state.ids as string[]);
+      action.payload.id = currentIdOrNext(action.payload.id, state.ids as string[]);
       return adapter.addOne(action.payload, state);
     }
 
     case SourceActions.ADD_MANY: {
-      action.payload.map(flux => flux.id = nextId(state.ids as string[]));
+      action.payload.map(source => source.id = currentIdOrNext(source.id, state.ids as string[]));
       return adapter.addMany(action.payload, state);
     }
 

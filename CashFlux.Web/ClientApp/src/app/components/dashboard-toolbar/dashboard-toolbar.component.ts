@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -15,13 +15,14 @@ import { AddSource } from "../../redux/actions/source.actions";
 import { selectSelectedProfile } from "../../redux/reducers/selected-profile.reducer";
 import { FluxProfile, selectAllProfiles } from "../../redux/reducers/profile.reducer";
 import { AppState } from "../../redux/app.state";
+import { selectAuthentication } from "../../redux/reducers/authentication.reducer";
 
 @Component({
   selector: 'app-dashboard-toolbar',
   templateUrl: './dashboard-toolbar.component.html',
   styleUrls: ['./dashboard-toolbar.component.css']
 })
-export class DashboardToolbarComponent implements OnInit {
+export class DashboardToolbarComponent implements OnInit, OnDestroy {
 
   // Profile resources
   profiles: FluxProfile[] = [];
@@ -34,36 +35,51 @@ export class DashboardToolbarComponent implements OnInit {
   selectedProfile = '';
   selectedProfileSubscription: Subscription;
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  userId: string;
+  authenticationSubscription: Subscription;
+
+  constructor(private store: Store<AppState>, public dialog: MatDialog, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     //Add pencil icon for edit profile button
     iconRegistry.addSvgIcon('edit', sanitizer.bypassSecurityTrustResourceUrl('../../assets/edit-icon.svg'));
   }
 
   ngOnInit(): void {
     // Profile state
-    this.profilesSubscription = this._store.select(selectAllProfiles)
+    this.profilesSubscription = this.store.select(selectAllProfiles)
       .subscribe(data => {
         this.profiles = data;
       });
 
     // Selected Profile state
-    this.selectedProfileSubscription = this._store.select(selectSelectedProfile)
+    this.selectedProfileSubscription = this.store.select(selectSelectedProfile)
       .subscribe(data => {
         this.selectedProfile = data;
       });
 
     // Sources state
-    this.sourcesSubscription = this._store.select(selectAllSources)
+    this.sourcesSubscription = this.store.select(selectAllSources)
       .subscribe(data => {
         this.sources = data;
+      });
+
+    this.authenticationSubscription = this.store.select(selectAuthentication)
+      .subscribe(data => {
+        this.userId = data.userId;
       });
 
     // Select first profile if it exists
     if (!this.selectedProfile && this.profiles.length > 0) {
       const profileId = this.profiles[0].id;
       this.selectedProfile = profileId;
-      this._store.dispatch(new SelectProfile(profileId));
+      this.store.dispatch(new SelectProfile(profileId));
     }
+  }
+
+  ngOnDestroy(): void {
+    this.profilesSubscription.unsubscribe();
+    this.sourcesSubscription.unsubscribe();
+    this.selectedProfileSubscription.unsubscribe();
+    this.authenticationSubscription.unsubscribe();
   }
 
   openFluxCreationDialog(): void {
@@ -87,19 +103,24 @@ export class DashboardToolbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this._store.dispatch(new AddFlux(result));
+        this.store.dispatch(new AddFlux(result));
       }
     });
   }
 
   openProfileCreationDialog(): void {
-    const profileDialogRef = this.dialog.open(ProfileCreationComponent, {autoFocus: true});
+    const profileDialogRef = this.dialog.open(ProfileCreationComponent, {
+      autoFocus: true
+    });
 
     profileDialogRef.afterClosed().subscribe((result: FluxProfile) => {
       if (result !== undefined) {
-        this._store.dispatch(new AddProfile(result));
+        this.store.dispatch(new AddProfile({
+          fluxProfile: result,
+          userId: this.userId
+        }));
         // Select the profile after creating it
-        this._store.dispatch(new SelectProfile(result.id))
+        this.store.dispatch(new SelectProfile(result.id))
       }
     });
   }
@@ -114,7 +135,7 @@ export class DashboardToolbarComponent implements OnInit {
 
     editDialogRef.afterClosed().subscribe((result: Update<FluxProfile>) => {
       if (result !== undefined) {
-        this._store.dispatch(new UpdateProfile(result));
+        this.store.dispatch(new UpdateProfile(result));
       }
     });
   }
@@ -130,12 +151,12 @@ export class DashboardToolbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: FluxSource) => {
       if (result !== undefined) {
-        this._store.dispatch(new AddSource(result));
+        this.store.dispatch(new AddSource(result));
       }
     });
   }
 
-  updateSelectedProfile(event: MatOption) {
-    this._store.dispatch(new SelectProfile(event.value));
+  updateSelectedProfile(event: MatOption): void {
+    this.store.dispatch(new SelectProfile(event.value));
   }
 }

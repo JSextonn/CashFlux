@@ -27,7 +27,7 @@ export class ProfileCreationComponent implements OnInit {
     this.name = new FormControl(nameValue, [Validators.required, Validators.maxLength(20)]);
   }
 
-  createProfile() {
+  createProfile(): void {
     let profile: FluxProfile | Update<FluxProfile>;
     if (this.editMode) {
       profile = {
@@ -45,7 +45,7 @@ export class ProfileCreationComponent implements OnInit {
     this.profileDialogRef.close(profile);
   }
 
-  cancel() {
+  cancel(): void {
     this.profileDialogRef.close();
   }
 }

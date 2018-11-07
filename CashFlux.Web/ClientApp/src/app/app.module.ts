@@ -30,6 +30,8 @@ import { authenticationReducer } from "./redux/reducers/authentication.reducer";
 import { RegisterService } from "./services/register.service";
 import { RegisterEffects } from "./redux/effects/register.effects";
 import { registerReducer } from "./redux/reducers/register.reducer";
+import { ProfileService } from "./services/profile.service";
+import { ProfileEffects } from "./redux/effects/profile.effects";
 
 @NgModule({
   declarations: [
@@ -60,7 +62,7 @@ import { registerReducer } from "./redux/reducers/register.reducer";
       sources: sourceReducer,
       selectedProfile: selectedProfileReducer
     }),
-    EffectsModule.forRoot([AuthenticationEffects, RegisterEffects]),
+    EffectsModule.forRoot([AuthenticationEffects, RegisterEffects, ProfileEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
     })
@@ -68,6 +70,7 @@ import { registerReducer } from "./redux/reducers/register.reducer";
   providers: [
     AuthenticationService,
     RegisterService,
+    ProfileService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,
