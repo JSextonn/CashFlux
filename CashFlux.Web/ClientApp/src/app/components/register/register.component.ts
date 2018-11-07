@@ -45,7 +45,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    console.log(this.registerForm.value);
     this.store.dispatch(new Register(this.registerForm.value));
   }
 
