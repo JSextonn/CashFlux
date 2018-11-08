@@ -5,20 +5,19 @@ import { Store } from "@ngrx/store";
 import { AuthenticationState, selectAuthentication } from "../redux/reducers/authentication.reducer";
 
 @Injectable()
-export class LoginRouteGuard implements CanActivate {
-  private loggedIn: boolean;
+export class DashboardRouteGuard implements CanActivate {
+  private authenticationState: AuthenticationState;
 
   constructor(private store: Store<AppState>, private router: Router) {
     this.store.select(selectAuthentication).subscribe((state: AuthenticationState) => {
-      this.loggedIn = state.loggedIn;
+      this.authenticationState = state;
     });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.loggedIn) {
+    if (this.authenticationState.loggedIn) {
       return true;
-    }
-    else {
+    } else {
       this.router.navigateByUrl('/login');
       return false;
     }
