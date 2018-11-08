@@ -4,6 +4,7 @@ using AutoMapper;
 using CashFlux.Data;
 using CashFlux.Data.Models;
 using CashFlux.Web.Features.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace CashFlux.Web.Features.Source
 {
@@ -20,7 +21,13 @@ namespace CashFlux.Web.Features.Source
 			SourcePostRequest request,
 			CancellationToken cancellationToken)
 		{
-			return await PostAsync(request.Model, cancellationToken);
+			var existingSource = await Context.Sources.SingleOrDefaultAsync(
+				source => source.Name == request.Model.Name && source.Category == request.Model.Category,
+				cancellationToken);
+
+			return existingSource == null
+				? await PostAsync(request.Model, cancellationToken)
+				: Mapper.Map<SourceGetRequestModel>(existingSource);
 		}
 	}
 }
