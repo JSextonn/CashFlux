@@ -19,6 +19,7 @@ namespace CashFlux.Web.Features.UserSource
 			var userSources = Mapper.Map<UserSources>(request.Model);
 			await Context.UserSources.AddAsync(userSources, cancellationToken);
 			await Context.SaveChangesAsync(cancellationToken);
+			await Context.Entry(userSources).Reference(uSource => uSource.Source).LoadAsync(cancellationToken);
 			return Mapper.Map<UserSourceGetRequestModel>(userSources);
 		}
 	}

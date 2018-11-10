@@ -5,6 +5,7 @@ using CashFlux.Data;
 using CashFlux.Data.Models;
 using CashFlux.Web.Errors.Exceptions;
 using CashFlux.Web.Features.Shared;
+using CashFlux.Web.Features.Source;
 
 namespace CashFlux.Web.Features.UserSource
 {
@@ -27,13 +28,17 @@ namespace CashFlux.Web.Features.UserSource
 					request.Model.UserId + request.Model.SourceId);
 			}
 
+			// This loads the source referenced by the user source
+			// This ensures we do not return null as a source in the delete result.
+			await Context.Entry(userSource).Reference(uSource => uSource.Source).LoadAsync(cancellationToken);
+
 			Context.UserSources.Remove(userSource);
 			await Context.SaveChangesAsync(cancellationToken);
 
 			return new UserSourceDeleteResult
 			{
 				UserDeleteFrom = request.Model.UserId,
-				SourceDeletedFromUser = request.Model.SourceId
+				SourceDeletedFromUser = Mapper.Map<SourceGetRequestModel>(userSource.Source)
 			};
 		}
 	}

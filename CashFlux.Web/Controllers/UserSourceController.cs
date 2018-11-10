@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CashFlux.Web.Features.Associates;
 using CashFlux.Web.Features.UserSource;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,12 @@ namespace CashFlux.Web.Controllers
 		public async Task<IActionResult> Post([FromBody] UserSourcePostRequestModel model)
 		{
 			return await HandleRequestAsync(new UserSourcePostRequest {Model = model});
+		}
+		
+		[HttpPost("withsource")]
+		public async Task<IActionResult> Post([FromBody] UserSourceAndSourcePostRequestModel model)
+		{
+			return await HandleRequestAsync(new UserSourceAndSourcePostRequest {Model = model});
 		}
 
 		[HttpDelete]
