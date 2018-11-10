@@ -21,7 +21,7 @@ mat-toolbar {
   background-color: lightgrey;
 }
 
-mat-form-field {
+mat-toolbar > mat-form-field {
   width: 300px;
   height: 100%;
 }
