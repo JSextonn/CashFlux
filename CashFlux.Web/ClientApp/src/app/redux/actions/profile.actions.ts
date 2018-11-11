@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 import { Update } from "@ngrx/entity";
 import { ProfileDeleteModel, ProfileGetModel } from "../../services/profile.service";
 import { FluxProfile } from "../reducers/profile.reducer";
-import { ClientGetModel } from "../client-get.model";
 import { CloudTransferModel } from "../cloud-transfer.model";
 
 export const ADD_PROFILE = '[FluxProfile] Added flux profile';
@@ -24,7 +23,7 @@ export class AddProfile implements Action {
 export class AddProfileSuccess implements Action {
   readonly type = ADD_PROFILE_SUCCESS;
 
-  constructor(public payload: ClientGetModel<ProfileGetModel>) { }
+  constructor(public payload: ProfileGetModel) { }
 }
 
 export class AddProfileFail implements Action {

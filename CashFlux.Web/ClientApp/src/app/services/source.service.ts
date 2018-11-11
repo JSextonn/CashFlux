@@ -2,6 +2,7 @@ import { EntityService } from "./entity.service";
 import { HttpClient } from "@angular/common/http";
 import { FluxSource } from "../redux/reducers/source.reducer";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 export interface SourceGetModel {
   id: string;
@@ -16,15 +17,42 @@ export interface SourcePostModel {
   category: string;
 }
 
-export interface SourceDeleteModel {
-  userDeletedFrom: string;
-  sourceDeleted: string;
+export interface SourceCloudDeleteMultipleModel {
+  userId: string;
+  sourceIds: string[];
+}
+
+export interface SourceMainDeleteMultipleModel {
+  cloudModel: SourceCloudDeleteMultipleModel;
+  reduxIds: string[];
+}
+
+export interface SourceDeleteResult {
+  userId: string;
+  sourceDeletedFromUser: SourceGetModel;
+}
+
+export interface SourceDeleteMultipleResult {
+  userId: string;
+  sourcesDeletedFromUser: SourceGetModel[];
 }
 
 @Injectable()
-export class SourceService extends EntityService<SourceGetModel, SourceGetModel, SourcePostModel, SourceDeleteModel> {
+export class SourceService extends EntityService<SourceGetModel, SourceGetModel, SourcePostModel, SourceDeleteResult> {
   constructor(protected httpClient: HttpClient) {
-    super(httpClient, 'api/source');
+    super(httpClient, 'api/usersource');
+  }
+
+  add(postModel: SourcePostModel): Observable<SourceGetModel> {
+    return this.httpClient.post<SourceGetModel>(`${this.endpoint}/withsource`, postModel);
+  }
+
+  deleteMultiple(model: SourceCloudDeleteMultipleModel): Observable<SourceDeleteMultipleResult> {
+    return this.httpClient.request<SourceDeleteMultipleResult>(
+      'delete',
+      `${this.endpoint}/multiple`, {
+        body: model
+      });
   }
 }
 

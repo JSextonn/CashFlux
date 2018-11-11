@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
-import { catchError, map, mergeMap, withLatestFrom } from "rxjs/operators";
+import { catchError, map, mergeMap } from "rxjs/operators";
 
 import * as ProfileActions from "../actions/profile.actions";
 import { ProfileDeleteModel, ProfileGetModel, ProfileService } from "../../services/profile.service";
-import { FluxProfile, selectProfileEntities } from "../reducers/profile.reducer";
+import { FluxProfile, selectProfileIds } from "../reducers/profile.reducer";
 import { UpdateStr } from "@ngrx/entity/src/models";
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
@@ -14,7 +14,14 @@ export type Action = ProfileActions.Actions;
 
 @Injectable()
 export class ProfileEffects {
-  constructor(private store: Store<AppState>, private actions: Actions, private profileService: ProfileService) { }
+  private profileIds: string[];
+
+  constructor(private store: Store<AppState>, private actions: Actions, private profileService: ProfileService) {
+    this.store.select(selectProfileIds)
+      .subscribe(data => {
+        this.profileIds = data as string[];
+      })
+  }
 
   @Effect()
   addProfile: Observable<Action> = this.actions.pipe(
@@ -24,10 +31,7 @@ export class ProfileEffects {
         userId: action.payload.userId,
         name: action.payload.model.name
       }).pipe(
-        map((data: ProfileGetModel) => new ProfileActions.AddProfileSuccess({
-          model: data,
-          reduxId: action.payload.userId
-        })),
+        map((data: ProfileGetModel) => new ProfileActions.AddProfileSuccess(data)),
         catchError(error => of(new ProfileActions.AddProfileFail({error: error.message})))
       )
     )
@@ -38,10 +42,11 @@ export class ProfileEffects {
     ofType(ProfileActions.ADD_PROFILE_SUCCESS),
     map((action: ProfileActions.AddProfileSuccess) => {
       const update: UpdateStr<FluxProfile> = {
-        id: action.payload.reduxId,
+        // TODO: May become a bug if two sources are created before the first gets a response back.
+        id: this.profileIds[this.profileIds.length - 1],
         changes: {
-          cloudId: action.payload.model.id,
-          timeCreated: action.payload.model.timeCreated
+          cloudId: action.payload.id,
+          timeCreated: action.payload.timeCreated
         }
       };
       return new ProfileActions.UpdateProfile(update)
@@ -53,18 +58,31 @@ export class ProfileEffects {
     ofType(ProfileActions.ADD_PROFILE_FAIL),
   );
 
+  // TODO: Needs to be tested.
+  //  @Effect()
+  //  removeProfile: Observable<any> = this.actions.pipe(
+  //    ofType(ProfileActions.REMOVE_PROFILE),
+  //    withLatestFrom(this.store.select(selectProfileEntities),
+  //      (action: ProfileActions.RemoveProfile, profiles) => {
+  //        return profiles[action.payload];
+  //      }),
+  //    map((profile: FluxProfile) => {
+  //      this.profileService.delete(profile.cloudId).pipe(
+  //        map((data: ProfileDeleteModel) => new ProfileActions.RemoveProfileSuccess(data)),
+  //        catchError(error => of(new ProfileActions.RemoveProfileFail({error: error.message})))
+  //      )
+  //    })
+  //  );
+
+  // TODO: Needs to be tested
   @Effect()
   removeProfile: Observable<any> = this.actions.pipe(
     ofType(ProfileActions.REMOVE_PROFILE),
-    withLatestFrom(this.store.select(selectProfileEntities),
-      (action: ProfileActions.RemoveProfile, profiles) => {
-        return profiles[action.payload];
-      }),
-    map((profile: FluxProfile) => {
-      this.profileService.delete(profile.cloudId).pipe(
+    mergeMap((action: ProfileActions.RemoveProfile) =>
+      this.profileService.delete(action.payload).pipe(
         map((data: ProfileDeleteModel) => new ProfileActions.RemoveProfileSuccess(data)),
         catchError(error => of(new ProfileActions.RemoveProfileFail({error: error.message})))
       )
-    })
+    )
   );
 }

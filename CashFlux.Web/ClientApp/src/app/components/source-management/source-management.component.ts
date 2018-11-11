@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import * as SourceActions from '../../redux/actions/source.actions';
 import { WarningComponent } from '../warning/warning.component';
 import { FluxSource, selectAllSources } from "../../redux/reducers/source.reducer";
 import { AppState } from "../../redux/app.state";
+import { selectAuthentication } from "../../redux/reducers/authentication.reducer";
 
 @Component({
   selector: 'app-source-management',
@@ -22,14 +23,24 @@ export class SourceManagementComponent implements OnInit, OnDestroy {
   selection = new SelectionModel<FluxSource>(true, []);
   sourcesSubscription: Subscription;
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog) { }
+  userId: string;
+  authenticationSubscription: Subscription;
+
+  constructor(private store: Store<AppState>, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // Fluxes state
     // Selects fluxes within selected profile and returns them as FluxTableModel.
-    this.sourcesSubscription = this._store.select(selectAllSources)
+    this.sourcesSubscription = this.store.select(selectAllSources)
       .subscribe(data => {
         this.dataSource.data = data;
+      });
+
+    // Authentication state
+    // Needed in order to access the user id to send source delete requests.
+    this.authenticationSubscription = this.store.select(selectAuthentication)
+      .subscribe(data => {
+        this.userId = data.userId;
       });
 
     this.dataSource.sort = this.sort;
@@ -68,8 +79,14 @@ export class SourceManagementComponent implements OnInit, OnDestroy {
    * Clears selection model.
    */
   removeSelectedRows(): void {
-    const sourcesToDelete = this.selection.selected.map(source => source.id);
-    this._store.dispatch(new SourceActions.RemoveSources(sourcesToDelete));
+    const sourcesToDelete = this.selection.selected;
+    this.store.dispatch(new SourceActions.RemoveSources({
+      cloudModel: {
+        userId: this.userId,
+        sourceIds: sourcesToDelete.map(source => source.cloudId)
+      },
+      reduxIds: sourcesToDelete.map(source => source.id)
+    }));
 
     // Reset selection model
     this.selection = new SelectionModel<FluxSource>(true, []);
@@ -77,7 +94,7 @@ export class SourceManagementComponent implements OnInit, OnDestroy {
 
   openWarningDialog(): void {
     const dialogRef = this.dialog.open(WarningComponent, {
-      height: '200px',
+      height: '210px',
       autoFocus: true,
       data: {
         message: 'Are you sure you want to do this?'

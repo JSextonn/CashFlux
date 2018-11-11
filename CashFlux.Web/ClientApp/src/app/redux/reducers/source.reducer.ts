@@ -29,12 +29,12 @@ export function sourceReducer(state = initialState, action: SourceActions.Action
       return adapter.addMany(action.payload, state);
     }
 
-    case SourceActions.REMOVE_SOURCE: {
-      return adapter.removeOne(action.payload, state);
+    case SourceActions.UPDATE_SOURCE: {
+      return adapter.updateOne(action.payload, state);
     }
 
     case SourceActions.REMOVE_SOURCES: {
-      return adapter.removeMany(action.payload, state);
+      return adapter.removeMany(action.payload.reduxIds, state);
     }
 
     case SourceActions.CLEAR_SOURCES: {
