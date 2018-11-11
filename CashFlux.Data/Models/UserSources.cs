@@ -6,7 +6,7 @@ namespace CashFlux.Data.Models
 	/// <summary>
 	/// Represents a junction table between users and sources.
 	/// </summary>
-	public class UserSources
+	public class UserSources : ICompositeCashFluxEntity
 	{
 		[Key, ForeignKey(nameof(User))]
 		public string UserId { get; set; }
@@ -17,5 +17,8 @@ namespace CashFlux.Data.Models
 		public string SourceId { get; set; }
 
 		public FluxSource Source { get; set; }
+
+		[NotMapped]
+		public object[] Id => new object[] {UserId, SourceId};
 	}
 }

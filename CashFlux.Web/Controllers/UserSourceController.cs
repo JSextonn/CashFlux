@@ -31,10 +31,20 @@ namespace CashFlux.Web.Controllers
 			return await HandleRequestAsync(new UserSourceAndSourcePostRequest {Model = model});
 		}
 
-		[HttpDelete]
+		[HttpDelete("single")]
 		public async Task<IActionResult> Delete([FromBody] UserSourceDeleteModel model)
 		{
 			return await HandleRequestAsync(new UserSourceDeleteRequest {Model = model});
+		}
+
+		[HttpDelete("multiple")]
+		public async Task<IActionResult> DeleteMultipleFromOneUser(
+			[FromBody] UserSourceDeleteMultipleFromOneUserRequestModel model)
+		{
+			return await HandleRequestAsync(new UserSourceDeleteMultipleFromOneUserRequest
+			{
+				Model = model
+			});
 		}
 	}
 }
