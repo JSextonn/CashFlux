@@ -38,6 +38,7 @@ import { FluxService } from "./services/flux.service";
 import { SourceService } from "./services/source.service";
 import { personalUserInfoReducer } from "./redux/reducers/personal-user-info.reducer";
 import { DashboardRouteGuard } from "./guards/dashboard.guard";
+import { SourceEffects } from "./redux/effects/source.effects";
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { DashboardRouteGuard } from "./guards/dashboard.guard";
       AuthenticationEffects,
       RegisterEffects,
       ProfileEffects,
-      ResourceEffects
+      ResourceEffects,
+      SourceEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
@@ -86,6 +88,7 @@ import { DashboardRouteGuard } from "./guards/dashboard.guard";
     ProfileService,
     SourceService,
     FluxService,
+    SourceService,
     DashboardRouteGuard,
     {
       provide: HTTP_INTERCEPTORS,

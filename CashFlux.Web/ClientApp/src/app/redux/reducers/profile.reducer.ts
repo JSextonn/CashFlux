@@ -14,17 +14,6 @@ export interface FluxProfile {
   timeCreated: Date;
 }
 
-export interface CloudFluxProfile {
-  fluxProfile: FluxProfile;
-  userId: string;
-}
-
-// Used to update a profile in state once a response is obtained.
-export interface ClientProfileGetModel {
-  responseModel: ProfileGetModel;
-  reduxId: string;
-}
-
 export const adapter: EntityAdapter<FluxProfile> = createEntityAdapter<FluxProfile>();
 
 export const initialState: State = adapter.getInitialState();
@@ -32,8 +21,8 @@ export const initialState: State = adapter.getInitialState();
 export function profileReducer(state = initialState, action: ProfileActions.Actions): State {
   switch (action.type) {
     case ProfileActions.ADD_PROFILE: {
-      action.payload.fluxProfile.id = currentIdOrNext(action.payload.fluxProfile.id, state.ids as string[]);
-      return adapter.addOne(action.payload.fluxProfile, state);
+      action.payload.model.id = currentIdOrNext(action.payload.model.id, state.ids as string[]);
+      return adapter.addOne(action.payload.model, state);
     }
     case ProfileActions.ADD_MANY_PROFILES: {
       action.payload.map(profile => profile.id = currentIdOrNext(profile.id, state.ids as string[]));

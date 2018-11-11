@@ -116,7 +116,7 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
     profileDialogRef.afterClosed().subscribe((result: FluxProfile) => {
       if (result !== undefined) {
         this.store.dispatch(new AddProfile({
-          fluxProfile: result,
+          model: result,
           userId: this.userId
         }));
         // Select the profile after creating it
@@ -151,7 +151,10 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result: FluxSource) => {
       if (result !== undefined) {
-        this.store.dispatch(new AddSource(result));
+        this.store.dispatch(new AddSource({
+          model: result,
+          userId: this.userId
+        }));
       }
     });
   }

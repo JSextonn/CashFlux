@@ -20,8 +20,8 @@ export const initialState: State = adapter.getInitialState();
 export function sourceReducer(state = initialState, action: SourceActions.Actions): State {
   switch (action.type) {
     case SourceActions.ADD_SOURCE: {
-      action.payload.id = currentIdOrNext(action.payload.id, state.ids as string[]);
-      return adapter.addOne(action.payload, state);
+      action.payload.model.id = currentIdOrNext(action.payload.model.id, state.ids as string[]);
+      return adapter.addOne(action.payload.model, state);
     }
 
     case SourceActions.ADD_SOURCES: {

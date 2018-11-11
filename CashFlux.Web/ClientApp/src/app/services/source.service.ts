@@ -11,6 +11,7 @@ export interface SourceGetModel {
 }
 
 export interface SourcePostModel {
+  userId: string;
   name: string;
   category: string;
 }

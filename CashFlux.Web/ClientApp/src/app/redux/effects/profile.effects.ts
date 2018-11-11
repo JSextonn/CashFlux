@@ -22,10 +22,10 @@ export class ProfileEffects {
     mergeMap((action: ProfileActions.AddProfile) =>
       this.profileService.add({
         userId: action.payload.userId,
-        name: action.payload.fluxProfile.name
+        name: action.payload.model.name
       }).pipe(
         map((data: ProfileGetModel) => new ProfileActions.AddProfileSuccess({
-          responseModel: data,
+          model: data,
           reduxId: action.payload.userId
         })),
         catchError(error => of(new ProfileActions.AddProfileFail({error: error.message})))
@@ -40,8 +40,8 @@ export class ProfileEffects {
       const update: UpdateStr<FluxProfile> = {
         id: action.payload.reduxId,
         changes: {
-          cloudId: action.payload.responseModel.id,
-          timeCreated: action.payload.responseModel.timeCreated
+          cloudId: action.payload.model.id,
+          timeCreated: action.payload.model.timeCreated
         }
       };
       return new ProfileActions.UpdateProfile(update)

@@ -1,7 +1,9 @@
 import { Action } from '@ngrx/store';
 import { Update } from "@ngrx/entity";
-import { ClientProfileGetModel, CloudFluxProfile, FluxProfile } from "../reducers/profile.reducer";
-import { ProfileDeleteModel } from "../../services/profile.service";
+import { ProfileDeleteModel, ProfileGetModel } from "../../services/profile.service";
+import { FluxProfile } from "../reducers/profile.reducer";
+import { ClientGetModel } from "../client-get.model";
+import { CloudTransferModel } from "../cloud-transfer.model";
 
 export const ADD_PROFILE = '[FluxProfile] Added flux profile';
 export const ADD_PROFILE_SUCCESS = '[FluxProfile] Adding flux profile was a success on the cloud';
@@ -16,13 +18,13 @@ export const CLEAR_PROFILES = '[FluxProfile] All profiles were cleared';
 export class AddProfile implements Action {
   readonly type = ADD_PROFILE;
 
-  constructor(public payload: CloudFluxProfile) { }
+  constructor(public payload: CloudTransferModel<FluxProfile>) { }
 }
 
 export class AddProfileSuccess implements Action {
   readonly type = ADD_PROFILE_SUCCESS;
 
-  constructor(public payload: ClientProfileGetModel) { }
+  constructor(public payload: ClientGetModel<ProfileGetModel>) { }
 }
 
 export class AddProfileFail implements Action {
