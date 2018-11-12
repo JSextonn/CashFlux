@@ -55,18 +55,19 @@
 
 .cards-container {
     /*CSS container for*/
-    
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-mat-card{
-    /*CSS for Angular cards*/
-    height: 470px;
-    width: 99%;
+.infoScreen{
+    width: inherit;
+    height: 580px;
+    margin: 50px;
+
     text-align: center;
-}
-
-mat-card img{
-    height: 85%;
 }
 
 .page-break { 
@@ -82,16 +83,18 @@ mat-card img{
 
     /* The image used */
     background-image: url("../../assets/parallax_bg.jpg");
-
+    background-position: center;
+    
     /* Set a specific height */
     height: 150px;
-    height: 10vh;
+    height: 12vh;
 
-    /* Create the parallax scrolling effect */
+    /* Create the parallax scrolling effect
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    */
 }
 
 .api-container{

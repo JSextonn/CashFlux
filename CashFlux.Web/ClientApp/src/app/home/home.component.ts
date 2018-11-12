@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NguCarouselConfig } from '@ngu/carousel';
+import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 
 
 @Component({
@@ -9,7 +9,6 @@ import { NguCarouselConfig } from '@ngu/carousel';
 })
 export class HomeComponent implements OnInit {
   //Documentation for carousel at https://www.npmjs.com/package/@ngu/carousel
-  
   
   constructor() { }
 
