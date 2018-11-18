@@ -11,6 +11,6 @@ namespace CashFlux.Web.Features.Shared
 			Context = context ?? throw new ArgumentNullException(nameof(context));
 		}
 
-		public CashFluxDbContext Context { get; }
+		protected CashFluxDbContext Context { get; }
 	}
 }

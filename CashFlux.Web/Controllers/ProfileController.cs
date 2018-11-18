@@ -20,7 +20,7 @@ namespace CashFlux.Web.Controllers
 		{
 			return await HandleRequestAsync(new ProfileGetMultipleByUserIdRequest
 			{
-				Model = new ProfileGetMultipleByUserIdRequestModel { UserId = id}
+				Model = new ProfileGetMultipleByUserIdRequestModel {UserId = id}
 			});
 		}
 
@@ -37,6 +37,16 @@ namespace CashFlux.Web.Controllers
 		public async Task<IActionResult> Post([FromBody] ProfilePostRequestModel model)
 		{
 			return await HandleRequestAsync(new ProfilePostRequest {Model = model});
+		}
+
+		[HttpPut("{id}")]
+		public async Task<IActionResult> Put(string id, [FromBody] ProfilePutRequestModel model)
+		{
+			return await HandleRequestAsync(new ProfilePutRequest
+			{
+				Id = id,
+				Model = model
+			});
 		}
 
 		[HttpDelete("{id}")]
