@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store';
 import { FluxSource } from "../reducers/source.reducer";
-import { CloudTransferModel } from "../cloud-transfer.model";
 import {
   SourceDeleteMultipleResult,
   SourceGetModel,
   SourceMainDeleteMultipleModel
 } from "../../services/source.service";
 import { Update } from "@ngrx/entity";
+import { UserAdditionModel } from "../user-additionmodel";
 
 export const ADD_SOURCE = '[FluxSource] Add flux source';
 export const ADD_SOURCE_SUCCESS = '[FluxSource] Flux source was successfully added';
@@ -19,7 +19,7 @@ export const CLEAR_SOURCES = '[FluxSource] All flux sources have been cleared';
 export class AddSource implements Action {
   readonly type = ADD_SOURCE;
 
-  constructor(public payload: CloudTransferModel<FluxSource>) { }
+  constructor(public payload: UserAdditionModel<FluxSource>) { }
 }
 
 export class AddSourceSuccess implements Action {
