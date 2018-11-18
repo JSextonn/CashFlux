@@ -10,12 +10,17 @@ export interface FluxPostModel {
 
 }
 
+export interface FluxPutModel {
+
+}
+
 export interface FluxDeleteModel {
 
 }
 
 @Injectable()
-export class FluxService extends EntityService<FluxGetModel, FluxGetModel, FluxPostModel, FluxDeleteModel> {
+export class FluxService
+  extends EntityService<FluxGetModel, FluxGetModel, FluxPostModel, FluxPutModel, FluxDeleteModel> {
   constructor(protected httpClient: HttpClient) {
     super(httpClient, 'api/flux');
   }

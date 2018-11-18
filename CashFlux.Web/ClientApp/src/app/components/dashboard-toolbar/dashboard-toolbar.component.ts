@@ -16,6 +16,7 @@ import { selectSelectedProfile } from "../../redux/reducers/selected-profile.red
 import { FluxProfile, selectAllProfiles } from "../../redux/reducers/profile.reducer";
 import { AppState } from "../../redux/app.state";
 import { selectAuthentication } from "../../redux/reducers/authentication.reducer";
+import { EntityUpdate } from "../../services/entity.service";
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -135,7 +136,11 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
 
     editDialogRef.afterClosed().subscribe((result: Update<FluxProfile>) => {
       if (result !== undefined) {
-        this.store.dispatch(new UpdateProfile(result));
+        const entityUpdate: EntityUpdate<FluxProfile> = {
+          cloudId: profile.cloudId,
+          update: result
+        };
+        this.store.dispatch(new UpdateProfile(entityUpdate));
       }
     });
   }

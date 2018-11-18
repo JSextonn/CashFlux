@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
-import { catchError, map, mergeMap } from "rxjs/operators";
+import { catchError, map, mergeMap, tap } from "rxjs/operators";
 
 import * as ProfileActions from "../actions/profile.actions";
-import { ProfileDeleteModel, ProfileGetModel, ProfileService } from "../../services/profile.service";
+import { UpdateProfileLocal } from "../actions/profile.actions";
+import { ProfileDeleteModel, ProfileGetModel, ProfilePutModel, ProfileService } from "../../services/profile.service";
 import { FluxProfile, selectProfileIds } from "../reducers/profile.reducer";
 import { UpdateStr } from "@ngrx/entity/src/models";
 import { Store } from "@ngrx/store";
@@ -49,7 +50,7 @@ export class ProfileEffects {
           timeCreated: action.payload.timeCreated
         }
       };
-      return new ProfileActions.UpdateProfile(update)
+      return new ProfileActions.UpdateProfileLocal(update)
     })
   );
 
@@ -58,21 +59,16 @@ export class ProfileEffects {
     ofType(ProfileActions.ADD_PROFILE_FAIL),
   );
 
-  // TODO: Needs to be tested.
-  //  @Effect()
-  //  removeProfile: Observable<any> = this.actions.pipe(
-  //    ofType(ProfileActions.REMOVE_PROFILE),
-  //    withLatestFrom(this.store.select(selectProfileEntities),
-  //      (action: ProfileActions.RemoveProfile, profiles) => {
-  //        return profiles[action.payload];
-  //      }),
-  //    map((profile: FluxProfile) => {
-  //      this.profileService.delete(profile.cloudId).pipe(
-  //        map((data: ProfileDeleteModel) => new ProfileActions.RemoveProfileSuccess(data)),
-  //        catchError(error => of(new ProfileActions.RemoveProfileFail({error: error.message})))
-  //      )
-  //    })
-  //  );
+  @Effect()
+  updateProfile: Observable<any> = this.actions.pipe(
+    ofType(ProfileActions.UPDATE_PROFILE),
+    tap((action: ProfileActions.UpdateProfile) => new UpdateProfileLocal(action.payload.update)),
+    mergeMap((action: ProfileActions.UpdateProfile) =>
+      this.profileService.update(action.payload.cloudId, action.payload.update.changes as ProfilePutModel).pipe(
+        map(() => new ProfileActions.UpdateProfileSuccess())
+      )
+    )
+  );
 
   // TODO: Needs to be tested
   @Effect()

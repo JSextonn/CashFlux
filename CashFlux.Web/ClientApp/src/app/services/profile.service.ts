@@ -16,19 +16,24 @@ export interface ProfilePostModel {
   name: string;
 }
 
+export interface ProfilePutModel {
+  name: string;
+}
+
 export interface ProfileDeleteModel {
   deletedProfile: string;
   deletedFluxIds: string[];
 }
 
 @Injectable()
-export class ProfileService extends EntityService<ProfileGetModel, ProfileGetModel, ProfilePostModel, ProfileDeleteModel> {
+export class ProfileService
+  extends EntityService<ProfileGetModel, ProfileGetModel, ProfilePostModel, ProfilePutModel, ProfileDeleteModel> {
   constructor(protected httpClient: HttpClient) {
     super(httpClient, 'api/profile');
   }
 }
 
-export function mapProfileResponseToClientProfile(profiles: ProfileGetModel[]) : FluxProfile[] {
+export function mapProfileResponseToClientProfile(profiles: ProfileGetModel[]): FluxProfile[] {
   return profiles.map(profile => {
     return {
       cloudId: profile.id,

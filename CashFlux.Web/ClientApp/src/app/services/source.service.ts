@@ -32,13 +32,18 @@ export interface SourceDeleteResult {
   sourceDeletedFromUser: SourceGetModel;
 }
 
+export interface SourcePutModel {
+
+}
+
 export interface SourceDeleteMultipleResult {
   userId: string;
   sourcesDeletedFromUser: SourceGetModel[];
 }
 
 @Injectable()
-export class SourceService extends EntityService<SourceGetModel, SourceGetModel, SourcePostModel, SourceDeleteResult> {
+export class SourceService
+  extends EntityService<SourceGetModel, SourceGetModel, SourcePostModel, SourcePutModel, SourceDeleteResult> {
   constructor(protected httpClient: HttpClient) {
     super(httpClient, 'api/usersource');
   }

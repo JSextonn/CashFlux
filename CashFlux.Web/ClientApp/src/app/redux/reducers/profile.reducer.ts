@@ -30,7 +30,7 @@ export function profileReducer(state = initialState, action: ProfileActions.Acti
     }
 
     case ProfileActions.UPDATE_PROFILE: {
-      return adapter.updateOne(action.payload, state);
+      return adapter.updateOne(action.payload.update, state);
     }
 
     case ProfileActions.REMOVE_PROFILE: {

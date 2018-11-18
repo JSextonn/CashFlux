@@ -1,14 +1,17 @@
 import { Action } from '@ngrx/store';
-import { Update } from "@ngrx/entity";
 import { ProfileDeleteModel, ProfileGetModel } from "../../services/profile.service";
 import { FluxProfile } from "../reducers/profile.reducer";
 import { CloudTransferModel } from "../cloud-transfer.model";
+import { Update } from "@ngrx/entity";
+import { EntityUpdate } from "../../services/entity.service";
 
 export const ADD_PROFILE = '[FluxProfile] Added flux profile';
 export const ADD_PROFILE_SUCCESS = '[FluxProfile] Adding flux profile was a success on the cloud';
 export const ADD_PROFILE_FAIL = '[FluxProfile] Adding flux profile was a failure on the cloud';
 export const ADD_MANY_PROFILES = '[FluxProfile] Add many flux profiles';
-export const UPDATE_PROFILE = '[FluxProfile] Update flux profile';
+export const UPDATE_PROFILE = '[FluxProfile] Updating flux profile';
+export const UPDATE_PROFILE_SUCCESS = '[FluxProfile] Flux profile was successfully updated on the cloud.';
+export const UPDATE_PROFILE_LOCAL = '[FluxProfile] Flux profile was updated locally';
 export const REMOVE_PROFILE = '[FluxProfile] Remove flux profile';
 export const REMOVE_PROFILE_SUCCESS = '[FluxProfile] Removing flux profile from the cloud was a success';
 export const REMOVE_PROFILE_FAIL = '[FluxProfile] Removing flux profile from the cloud failed';
@@ -41,6 +44,16 @@ export class AddProfiles implements Action {
 export class UpdateProfile implements Action {
   readonly type = UPDATE_PROFILE;
 
+  constructor(public payload: EntityUpdate<FluxProfile>) { }
+}
+
+export class UpdateProfileSuccess implements Action {
+  readonly type = UPDATE_PROFILE_SUCCESS;
+}
+
+export class UpdateProfileLocal implements Action {
+  readonly type = UPDATE_PROFILE_LOCAL;
+
   constructor(public payload: Update<FluxProfile>) { }
 }
 
@@ -72,6 +85,8 @@ export type Actions =
   | AddProfileFail
   | AddProfiles
   | UpdateProfile
+  | UpdateProfileSuccess
+  | UpdateProfileLocal
   | RemoveProfile
   | RemoveProfileSuccess
   | RemoveProfileFail

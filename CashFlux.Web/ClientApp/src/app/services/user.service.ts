@@ -31,6 +31,10 @@ export interface UserPostModel {
   includeUserDetails: boolean;
 }
 
+export interface UserPutModel {
+
+}
+
 export interface UserDeleteModel {
   deletedUser: string;
   deletedFluxes: string[];
@@ -38,7 +42,8 @@ export interface UserDeleteModel {
 }
 
 @Injectable()
-export class UserService extends EntityService<UserGetModel, UserCreateModel, UserPostModel, UserDeleteModel> {
+export class UserService
+  extends EntityService<UserGetModel, UserCreateModel, UserPostModel, UserPutModel, UserDeleteModel> {
   constructor(protected httpClient: HttpClient) {
     super(httpClient, 'api/user');
   }
