@@ -2,6 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as ProfileActions from '../actions/profile.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { currentIdOrNext } from "../id.tools";
+import { ProfileGetModel } from "../../services/profile.service";
 
 export interface State extends EntityState<FluxProfile> {}
 
@@ -31,6 +32,10 @@ export function profileReducer(state = initialState, action: ProfileActions.Acti
 
     case ProfileActions.UPDATE_PROFILE: {
       return adapter.updateOne(action.payload.update, state);
+    }
+
+    case ProfileActions.UPDATE_PROFILE_LOCAL: {
+      return adapter.updateOne(action.payload, state);
     }
 
     case ProfileActions.REMOVE_PROFILE: {
@@ -73,3 +78,13 @@ export const selectProfileCloudIds = createSelector(
   selectAllProfiles,
   (profiles) => profiles.map(profile => profile.cloudId)
 );
+
+export function mapProfileResponseToClientProfile(profiles: ProfileGetModel[]): FluxProfile[] {
+  return profiles.map(profile => {
+    return {
+      cloudId: profile.id,
+      name: profile.name,
+      timeCreated: profile.timeCreated
+    };
+  });
+}

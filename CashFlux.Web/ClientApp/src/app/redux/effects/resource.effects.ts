@@ -4,14 +4,16 @@ import { Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
 import * as ResourceActions from "../actions/resource.actions";
+import { LoadResourcesComplete } from "../actions/resource.actions";
 import { AddProfiles, ClearProfiles } from "../actions/profile.actions";
 import { AddSources, ClearSources } from "../actions/source.actions";
-import { mapProfileResponseToClientProfile } from "../../services/profile.service";
-import { mapSourceResponseToClientSource } from "../../services/source.service";
+
 import { ClearProfileSelection } from "../actions/selected-profile.actions";
-import { ClearFluxes } from "../actions/flux.actions";
-import { LoadResourcesComplete } from "../actions/resource.actions";
+import { AddFluxes, ClearFluxes } from "../actions/flux.actions";
 import { ClearPersonalUserInfo, LoadPersonalUserInfo } from "../actions/personal-user-info.actions";
+import { mapProfileResponseToClientProfile } from "../reducers/profile.reducer";
+import { mapSourceResponseToClientSource } from "../reducers/source.reducer";
+import { mapProfileResponseToClientFluxes } from "../reducers/flux.reducer";
 
 export type Action = ResourceActions.Actions;
 
@@ -26,6 +28,7 @@ export class ResourceEffects {
       // TODO: Load rest of resources
       new LoadPersonalUserInfo(action.payload),
       new AddProfiles(mapProfileResponseToClientProfile(action.payload.profiles)),
+      new AddFluxes(mapProfileResponseToClientFluxes(action.payload.profiles)),
       new AddSources(mapSourceResponseToClientSource(action.payload.sources)),
       new LoadResourcesComplete()
     ])

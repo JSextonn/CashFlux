@@ -39,6 +39,7 @@ import { SourceService } from "./services/source.service";
 import { personalUserInfoReducer } from "./redux/reducers/personal-user-info.reducer";
 import { DashboardRouteGuard } from "./guards/dashboard.guard";
 import { SourceEffects } from "./redux/effects/source.effects";
+import { FluxEffects } from "./redux/effects/flux.effects";
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { SourceEffects } from "./redux/effects/source.effects";
       RegisterEffects,
       ProfileEffects,
       ResourceEffects,
-      SourceEffects
+      SourceEffects,
+      FluxEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 10

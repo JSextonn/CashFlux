@@ -60,14 +60,3 @@ export class SourceService
       });
   }
 }
-
-export function mapSourceResponseToClientSource(sources: SourceGetModel[]): FluxSource[] {
-  return sources.map(source => {
-    return {
-      cloudId: source.id,
-      name: source.name,
-      category: source.category,
-      timeCreated: source.timeCreated
-    };
-  });
-}

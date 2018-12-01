@@ -3,11 +3,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 export interface FluxGetModel {
-
+  id: string;
+  amount: number;
+  timeCreated: Date;
 }
 
 export interface FluxPostModel {
-
+  amount: number;
+  profileId: string;
+  sourceId: string;
 }
 
 export interface FluxPutModel {
@@ -15,7 +19,7 @@ export interface FluxPutModel {
 }
 
 export interface FluxDeleteModel {
-
+  id: string;
 }
 
 @Injectable()

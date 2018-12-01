@@ -1,15 +1,27 @@
 import * as SelectedProfileActions from '../actions/selected-profile.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectProfileEntities } from "./profile.reducer";
 
-const initialState = '';
+export interface SelectedProfileState {
+  localId: string;
+  cloudId: string
+}
 
-export function selectedProfileReducer(state = initialState, action: SelectedProfileActions.Actions): string {
+export const initialState: SelectedProfileState = {
+  localId: null,
+  cloudId: null
+};
+
+export function selectedProfileReducer(state = initialState, action: SelectedProfileActions.Actions): SelectedProfileState {
   switch (action.type) {
-    case SelectedProfileActions.SELECT: {
-      return action.payload;
+    case SelectedProfileActions.SELECT_PROFILE: {
+      return {
+        localId: action.payload.id,
+        cloudId: action.payload.cloudId
+      }
     }
 
-    case SelectedProfileActions.CLEAR: {
+    case SelectedProfileActions.CLEAR_SELECTED_PROFILE: {
       return initialState;
     }
 
@@ -19,10 +31,10 @@ export function selectedProfileReducer(state = initialState, action: SelectedPro
   }
 }
 
-export const selectSelectedProfileState = createFeatureSelector<string>('selectedProfile');
+export const selectSelectedProfileState = createFeatureSelector<SelectedProfileState>('selectedProfile');
 
-// Default selectors
 export const selectSelectedProfile = createSelector(
+  selectProfileEntities,
   selectSelectedProfileState,
-  (state) => state
+  (profileEntity, selectedProfileState) => profileEntity[selectedProfileState.localId]
 );

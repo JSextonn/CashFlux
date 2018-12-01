@@ -12,11 +12,12 @@ import { AddProfile, UpdateProfile } from "../../redux/actions/profile.actions";
 import { FluxSource, selectAllSources } from "../../redux/reducers/source.reducer";
 import { AddFlux } from "../../redux/actions/flux.actions";
 import { AddSource } from "../../redux/actions/source.actions";
-import { selectSelectedProfile } from "../../redux/reducers/selected-profile.reducer";
+import { selectSelectedProfile, } from "../../redux/reducers/selected-profile.reducer";
 import { FluxProfile, selectAllProfiles } from "../../redux/reducers/profile.reducer";
 import { AppState } from "../../redux/app.state";
 import { selectAuthentication } from "../../redux/reducers/authentication.reducer";
 import { EntityUpdate } from "../../services/entity.service";
+import { CreatedFlux } from "../../redux/reducers/flux.reducer";
 
 @Component({
   selector: 'app-dashboard-toolbar',
@@ -33,7 +34,7 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
   sources: FluxSource[] = [];
   sourcesSubscription: Subscription;
 
-  selectedProfile = '';
+  selectedProfile: FluxProfile;
   selectedProfileSubscription: Subscription;
 
   userId: string;
@@ -70,9 +71,8 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
 
     // Select first profile if it exists
     if (!this.selectedProfile && this.profiles.length > 0) {
-      const profileId = this.profiles[0].id;
-      this.selectedProfile = profileId;
-      this.store.dispatch(new SelectProfile(profileId));
+      const profile = this.profiles[0];
+      this.store.dispatch(new SelectProfile(profile));
     }
   }
 
@@ -102,7 +102,7 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: CreatedFlux) => {
       if (result !== undefined) {
         this.store.dispatch(new AddFlux(result));
       }
@@ -121,7 +121,7 @@ export class DashboardToolbarComponent implements OnInit, OnDestroy {
           userId: this.userId
         }));
         // Select the profile after creating it
-        this.store.dispatch(new SelectProfile(result.id))
+        this.store.dispatch(new SelectProfile(result))
       }
     });
   }
