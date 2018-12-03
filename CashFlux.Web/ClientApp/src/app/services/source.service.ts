@@ -1,6 +1,5 @@
 import { EntityService } from "./entity.service";
 import { HttpClient } from "@angular/common/http";
-import { FluxSource } from "../redux/reducers/source.reducer";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 

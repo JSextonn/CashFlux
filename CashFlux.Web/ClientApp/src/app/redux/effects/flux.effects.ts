@@ -58,5 +58,7 @@ export class FluxEffects {
   addFluxFail: Observable<any> = this.actions.pipe(
     ofType(FluxActions.ADD_FLUX_FAIL),
   );
+
+  // TODO: Add remove multiple functionality.
 }
 

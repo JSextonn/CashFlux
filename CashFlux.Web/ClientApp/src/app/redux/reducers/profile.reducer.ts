@@ -44,6 +44,10 @@ export function profileReducer(state = initialState, action: ProfileActions.Acti
 
     // TODO: Currently remove success and fail are being triggered but not being handled.
 
+    case ProfileActions.LOAD_PROFILES: {
+      return adapter.addMany(action.payload, state);
+    }
+
     case ProfileActions.CLEAR_PROFILES: {
       return initialState;
     }
@@ -77,6 +81,11 @@ export const selectProfileEntities = createSelector(
 export const selectProfileCloudIds = createSelector(
   selectAllProfiles,
   (profiles) => profiles.map(profile => profile.cloudId)
+);
+
+export const selectProfileByCloudId = createSelector(
+  selectAllProfiles,
+  (profiles, cloudId) => profiles.filter((profile: FluxProfile) => profile.cloudId === cloudId)[0]
 );
 
 export function mapProfileResponseToClientProfile(profiles: ProfileGetModel[]): FluxProfile[] {

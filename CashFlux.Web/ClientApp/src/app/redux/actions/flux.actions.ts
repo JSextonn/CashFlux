@@ -12,6 +12,7 @@ export const UPDATE_FLUX = '[CashFlux] Flux was updated';
 export const UPDATE_FLUX_LOCAL = '[CashFlux] Flux was updated locally';
 export const REMOVE_FLUX = '[CashFlux] Remove flux';
 export const REMOVE_FLUXES = '[CashFlux] Remove many fluxes';
+export const LOAD_FLUXES = '[CashFlux] Fluxes successfully loaded';
 export const CLEAR_FLUXES = '[CashFlux] All fluxes were cleared from store';
 
 export class AddFlux implements Action {
@@ -62,6 +63,12 @@ export class RemoveFluxes implements Action {
   constructor(public payload: string[]) { }
 }
 
+export class LoadFluxes implements Action {
+  readonly type = LOAD_FLUXES;
+
+  constructor(public payload: Flux[]) { }
+}
+
 export class ClearFluxes implements Action {
   readonly type = CLEAR_FLUXES;
 }
@@ -75,4 +82,5 @@ export type Actions =
   | UpdateFluxLocal
   | RemoveFlux
   | RemoveFluxes
+  | LoadFluxes
   | ClearFluxes;

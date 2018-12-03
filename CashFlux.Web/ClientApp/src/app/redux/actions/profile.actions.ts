@@ -3,7 +3,7 @@ import { ProfileDeleteModel, ProfileGetModel } from "../../services/profile.serv
 import { FluxProfile } from "../reducers/profile.reducer";
 import { Update } from "@ngrx/entity";
 import { EntityUpdate } from "../../services/entity.service";
-import { UserAdditionModel } from "../user-additionmodel";
+import { UserAdditionModel } from "../user-addition.model";
 
 export const ADD_PROFILE = '[FluxProfile] Added flux profile';
 export const ADD_PROFILE_SUCCESS = '[FluxProfile] Adding flux profile was a success on the cloud';
@@ -15,6 +15,7 @@ export const UPDATE_PROFILE_LOCAL = '[FluxProfile] Flux profile was updated loca
 export const REMOVE_PROFILE = '[FluxProfile] Remove flux profile';
 export const REMOVE_PROFILE_SUCCESS = '[FluxProfile] Removing flux profile from the cloud was a success';
 export const REMOVE_PROFILE_FAIL = '[FluxProfile] Removing flux profile from the cloud failed';
+export const LOAD_PROFILES = '[FluxProfile] Profiles successfully loaded';
 export const CLEAR_PROFILES = '[FluxProfile] All profiles were cleared';
 
 export class AddProfile implements Action {
@@ -75,6 +76,12 @@ export class RemoveProfileFail implements Action {
   constructor(public payload?: any) { }
 }
 
+export class LoadProfiles implements Action {
+  readonly type = LOAD_PROFILES;
+
+  constructor(public payload: FluxProfile[]) { }
+}
+
 export class ClearProfiles implements Action {
   readonly type = CLEAR_PROFILES;
 }
@@ -90,4 +97,5 @@ export type Actions =
   | RemoveProfile
   | RemoveProfileSuccess
   | RemoveProfileFail
+  | LoadProfiles
   | ClearProfiles;

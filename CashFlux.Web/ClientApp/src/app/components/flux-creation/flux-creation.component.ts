@@ -65,7 +65,6 @@ export class FluxCreationComponent implements OnInit {
         sourceId: this.selection.selected[0].cloudId
       }
     };
-    console.log(flux);
 
     this.dialogRef.close(flux);
   }

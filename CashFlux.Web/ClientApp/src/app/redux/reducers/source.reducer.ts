@@ -2,9 +2,6 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as SourceActions from '../actions/source.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { currentIdOrNext } from "../id.tools";
-import { SourceGetModel } from "../../services/source.service";
-
-export interface State extends EntityState<FluxSource> {}
 
 export interface FluxSource {
   id?: string;
@@ -14,7 +11,19 @@ export interface FluxSource {
   timeCreated: Date;
 }
 
-export const adapter: EntityAdapter<FluxSource> = createEntityAdapter<FluxSource>();
+export interface State extends EntityState<FluxSource> {}
+
+export const adapter: EntityAdapter<FluxSource> = createEntityAdapter<FluxSource>({
+  sortComparer: (sourceOne: FluxSource, sourceTwo: FluxSource) => {
+    if (sourceOne.timeCreated.getTime() > sourceTwo.timeCreated.getTime()) {
+      return 1;
+    } else if (sourceOne.timeCreated.getTime() < sourceTwo.timeCreated.getTime()) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+});
 
 export const initialState: State = adapter.getInitialState();
 
@@ -36,6 +45,10 @@ export function sourceReducer(state = initialState, action: SourceActions.Action
 
     case SourceActions.REMOVE_SOURCES: {
       return adapter.removeMany(action.payload.reduxIds, state);
+    }
+
+    case SourceActions.LOAD_SOURCES: {
+      return adapter.addMany(action.payload, state);
     }
 
     case SourceActions.CLEAR_SOURCES: {
@@ -67,14 +80,3 @@ export const selectSourceEntities = createSelector(
   selectSourceState,
   selectEntities
 );
-
-export function mapSourceResponseToClientSource(sources: SourceGetModel[]): FluxSource[] {
-  return sources.map(source => {
-    return {
-      cloudId: source.id,
-      name: source.name,
-      category: source.category,
-      timeCreated: source.timeCreated
-    };
-  });
-}

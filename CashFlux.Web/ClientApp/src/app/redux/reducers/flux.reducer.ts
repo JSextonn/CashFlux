@@ -1,14 +1,9 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as FluxActions from '../actions/flux.actions';
-import * as fromSource from './source.reducer';
-import { FluxSource } from './source.reducer';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { currentIdOrNext } from "../id.tools";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { selectSelectedProfile } from "./selected-profile.reducer";
-import { ProfileGetModel } from "../../services/profile.service";
-import ADD_FLUX = FluxActions.ADD_FLUX;
-
-export interface State extends EntityState<Flux> {}
+import { FluxSource, selectSourceEntities } from "./source.reducer";
 
 export interface FluxTableModel {
   id: string;
@@ -36,8 +31,10 @@ export interface CreatedFlux {
   }
 }
 
+export interface State extends EntityState<Flux> {}
+
 export const adapter: EntityAdapter<Flux> = createEntityAdapter<Flux>({
-  sortComparer: (fluxOne, fluxTwo) => {
+  sortComparer: (fluxOne: Flux, fluxTwo: Flux) => {
     if (fluxOne.timeCreated.getTime() > fluxTwo.timeCreated.getTime()) {
       return 1;
     } else if (fluxOne.timeCreated.getTime() < fluxTwo.timeCreated.getTime()) {
@@ -52,7 +49,7 @@ export const initialState: State = adapter.getInitialState();
 
 export function fluxReducer(state = initialState, action: FluxActions.Actions): State {
   switch (action.type) {
-    case ADD_FLUX: {
+    case FluxActions.ADD_FLUX: {
       action.payload.flux.id = currentIdOrNext(action.payload.flux.id, state.ids as string[]);
       return adapter.addOne(action.payload.flux, state);
     }
@@ -78,6 +75,10 @@ export function fluxReducer(state = initialState, action: FluxActions.Actions): 
       return adapter.removeMany(action.payload, state);
     }
 
+    case FluxActions.LOAD_FLUXES: {
+      return adapter.addMany(action.payload, state);
+    }
+
     case FluxActions.CLEAR_FLUXES: {
       return initialState;
     }
@@ -89,7 +90,6 @@ export function fluxReducer(state = initialState, action: FluxActions.Actions): 
 }
 
 export const selectFluxState = createFeatureSelector<State>('fluxes');
-export const selectSourceState = createFeatureSelector<fromSource.State>('sources');
 
 // Default selectors
 const {selectIds, selectEntities, selectAll} = adapter.getSelectors();
@@ -117,7 +117,7 @@ export const selectFluxesInSelectedProfile = createSelector(
 
 export const selectFluxTableModels = createSelector(
   selectFluxesInSelectedProfile,
-  fromSource.selectSourceEntities,
+  selectSourceEntities,
   (fluxes, sources) => {
     const models: FluxTableModel[] = [];
 
@@ -137,7 +137,3 @@ export const selectFluxTableModels = createSelector(
     return models;
   }
 );
-
-export function mapProfileResponseToClientFluxes(profiles: ProfileGetModel[]): Flux[] {
-  return [];
-}

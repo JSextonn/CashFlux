@@ -40,6 +40,7 @@ import { personalUserInfoReducer } from "./redux/reducers/personal-user-info.red
 import { DashboardRouteGuard } from "./guards/dashboard.guard";
 import { SourceEffects } from "./redux/effects/source.effects";
 import { FluxEffects } from "./redux/effects/flux.effects";
+import { ResourceMapper } from "./redux/resource-mapper";
 
 @NgModule({
   declarations: [
@@ -90,8 +91,8 @@ import { FluxEffects } from "./redux/effects/flux.effects";
     ProfileService,
     SourceService,
     FluxService,
-    SourceService,
     DashboardRouteGuard,
+    ResourceMapper,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CashFluxHttpInterceptor,

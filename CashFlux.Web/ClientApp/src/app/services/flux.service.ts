@@ -1,10 +1,12 @@
 import { EntityService } from "./entity.service";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { SourceGetModel } from "./source.service";
 
 export interface FluxGetModel {
   id: string;
   amount: number;
+  source: SourceGetModel;
   timeCreated: Date;
 }
 

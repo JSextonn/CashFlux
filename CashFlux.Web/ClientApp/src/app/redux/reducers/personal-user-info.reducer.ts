@@ -6,6 +6,7 @@ export interface PersonalUserInfoState {
   email: string;
   firstName: string;
   lastName: string;
+  fullName: string;
   timeCreated: Date;
 }
 
@@ -14,6 +15,7 @@ export const initialState: PersonalUserInfoState = {
   email: '',
   firstName: '',
   lastName: '',
+  fullName: '',
   timeCreated: null
 };
 
@@ -25,6 +27,7 @@ export function personalUserInfoReducer(state = initialState, action: PersonalUs
         email: action.payload.email,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
+        fullName: action.payload.fullName,
         timeCreated: action.payload.timeCreated
       }
     }

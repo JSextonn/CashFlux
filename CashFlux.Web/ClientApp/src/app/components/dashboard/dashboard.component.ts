@@ -26,7 +26,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     this.buildCategoryChart();
 
     // Populate charts with data and rerender on data change.
-    this.fluxesSubscription = this._store.select(selectFluxTableModels).subscribe(fluxes => {
+    this.fluxesSubscription = this._store.select(selectFluxTableModels).subscribe((fluxes: FluxTableModel[]) => {
       // Flux comparison and total cash charts
       const fluxGroupByDate = this.groupFluxesByDate(fluxes);
 
@@ -111,7 +111,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     this.comparisonChart.data.labels = Array.from(fluxGroupByDate.keys());
 
     // Cash total dataset
-    this.comparisonChart.data.datasets[0].data = this.getRollingCashTotal(Array.from(fluxGroupByDate.values()));
+    this.comparisonChart.data.datasets[0].data = DashboardComponent.getRollingCashTotal(Array.from(fluxGroupByDate.values()));
 
     // Influx dataset
     this.comparisonChart.data.datasets[1].data =
@@ -177,7 +177,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   private updateTotalCashChart(fluxGroupByDate: Map<string, FluxAmountGroup>): void {
     this.totalCashChart.data.labels = Array.from(fluxGroupByDate.keys());
-    this.totalCashChart.data.datasets[0].data = this.getRollingCashTotal(Array.from(fluxGroupByDate.values()));
+    this.totalCashChart.data.datasets[0].data = DashboardComponent.getRollingCashTotal(Array.from(fluxGroupByDate.values()));
     this.totalCashChart.update();
   }
 
@@ -243,7 +243,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
   private groupFluxesByDate(fluxes: FluxTableModel[]): Map<string, FluxAmountGroup> {
     const group = new Map<string, FluxAmountGroup>();
 
-    fluxes.forEach(flux => {
+    fluxes.forEach((flux: FluxTableModel) => {
       const localDateString = flux.timeCreated.toLocaleDateString('en', {
         year: 'numeric', month: 'short', day: 'numeric'
       });
@@ -258,7 +258,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     return group;
   }
 
-  private getRollingCashTotal(groups: FluxAmountGroup[]): number[] {
+  private static getRollingCashTotal(groups: FluxAmountGroup[]): number[] {
     const rollingTotals = [];
 
     if (groups.length === 0) {

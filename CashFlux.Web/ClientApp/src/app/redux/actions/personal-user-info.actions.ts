@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { UserGetModel } from "../../services/user.service";
+import { PersonalInfo } from "../resource-mapper";
 
 export const LOAD_USER_INFO = '[PersonalUserInfo] Loaded personal user info into state';
 export const CLEAR_USER_INFO = '[PersonalUserInfo] Cleared personal user info from state';
@@ -7,7 +7,7 @@ export const CLEAR_USER_INFO = '[PersonalUserInfo] Cleared personal user info fr
 export class LoadPersonalUserInfo implements Action {
   readonly type = LOAD_USER_INFO;
 
-  constructor(public payload: UserGetModel) { }
+  constructor(public payload: PersonalInfo) { }
 }
 
 export class ClearPersonalUserInfo implements Action {
