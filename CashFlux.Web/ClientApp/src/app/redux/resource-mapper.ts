@@ -113,7 +113,7 @@ export class ResourceMapper {
           amount: flux.amount,
           sourceId: this.findSourceByCloudId(flux.source.id).id,
           profileId: profileId,
-          timeCreated: new Date(flux.timeCreated)
+          timeCreated: flux.timeCreated
         });
       }
     });

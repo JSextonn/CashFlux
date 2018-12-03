@@ -35,9 +35,11 @@ export interface State extends EntityState<Flux> {}
 
 export const adapter: EntityAdapter<Flux> = createEntityAdapter<Flux>({
   sortComparer: (fluxOne: Flux, fluxTwo: Flux) => {
-    if (fluxOne.timeCreated.getTime() > fluxTwo.timeCreated.getTime()) {
+    const fluxOneDate = new Date(fluxOne.timeCreated);
+    const fluxTwoDate = new Date(fluxTwo.timeCreated);
+    if (fluxOneDate.getTime() > fluxTwoDate.getTime()) {
       return 1;
-    } else if (fluxOne.timeCreated.getTime() < fluxTwo.timeCreated.getTime()) {
+    } else if (fluxOneDate.getTime() < fluxTwoDate.getTime()) {
       return -1;
     } else {
       return 0;

@@ -244,7 +244,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     const group = new Map<string, FluxAmountGroup>();
 
     fluxes.forEach((flux: FluxTableModel) => {
-      const localDateString = flux.timeCreated.toLocaleDateString('en', {
+      const localDateString = new Date(flux.timeCreated).toLocaleDateString('en', {
         year: 'numeric', month: 'short', day: 'numeric'
       });
 
