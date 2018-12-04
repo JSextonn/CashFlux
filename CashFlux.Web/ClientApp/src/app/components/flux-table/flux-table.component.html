@@ -50,9 +50,9 @@
       </ng-container>
 
       <!-- Time Created Column -->
-      <ng-container matColumnDef="timeCreated">
+      <ng-container matColumnDef="timeOccurred">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
-        <td mat-cell *matCellDef="let element"> {{element.timeCreated | date}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.timeOccurred | date}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

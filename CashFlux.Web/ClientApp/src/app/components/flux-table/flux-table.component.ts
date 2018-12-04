@@ -17,7 +17,7 @@ export class FluxTableComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   // Table resources
-  readonly displayedColumns = ['select', 'amount', 'source', 'category', 'timeCreated'];
+  readonly displayedColumns = ['select', 'amount', 'source', 'category', 'timeOccurred'];
   dataSource = new MatTableDataSource<FluxTableModel>();
   selection = new SelectionModel<FluxTableModel>(true, []);
   fluxesSubscription: Subscription;

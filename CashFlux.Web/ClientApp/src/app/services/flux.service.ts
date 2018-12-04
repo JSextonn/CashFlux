@@ -7,6 +7,7 @@ export interface FluxGetModel {
   id: string;
   amount: number;
   source: SourceGetModel;
+  timeOccurred: Date;
   timeCreated: Date;
 }
 
@@ -14,6 +15,7 @@ export interface FluxPostModel {
   amount: number;
   profileId: string;
   sourceId: string;
+  timeOccurred: Date;
 }
 
 export interface FluxPutModel {

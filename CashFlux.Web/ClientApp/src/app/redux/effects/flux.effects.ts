@@ -29,7 +29,8 @@ export class FluxEffects {
       this.fluxService.add({
         amount: action.payload.flux.amount,
         profileId: action.payload.cloudIds.profileId,
-        sourceId: action.payload.cloudIds.sourceId
+        sourceId: action.payload.cloudIds.sourceId,
+        timeOccurred: action.payload.flux.timeOccurred
       }).pipe(
         map((data: FluxGetModel) => new FluxActions.AddFluxSuccess(data)),
         catchError(error => of(new FluxActions.AddFluxFail({error: error.message})))

@@ -58,7 +58,7 @@ export class FluxCreationComponent implements OnInit {
         amount: Number(this.amount.value),
         sourceId: this.selection.selected[0].id,
         profileId: this.data.profile.id,
-        timeCreated: this.date.value
+        timeOccurred: this.date.value
       },
       cloudIds: {
         profileId: this.data.profile.cloudId,

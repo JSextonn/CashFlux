@@ -11,6 +11,7 @@ export interface FluxTableModel {
   amount: number;
   source: string;
   category: string;
+  timeOccurred: Date;
   timeCreated: Date;
 }
 
@@ -20,7 +21,8 @@ export interface Flux {
   amount: number;
   profileId: string;
   sourceId: string;
-  timeCreated: Date;
+  timeOccurred: Date;
+  timeCreated?: Date;
 }
 
 export interface CreatedFlux {
@@ -35,8 +37,8 @@ export interface State extends EntityState<Flux> {}
 
 export const adapter: EntityAdapter<Flux> = createEntityAdapter<Flux>({
   sortComparer: (fluxOne: Flux, fluxTwo: Flux) => {
-    const fluxOneDate = new Date(fluxOne.timeCreated);
-    const fluxTwoDate = new Date(fluxTwo.timeCreated);
+    const fluxOneDate = new Date(fluxOne.timeOccurred);
+    const fluxTwoDate = new Date(fluxTwo.timeOccurred);
     if (fluxOneDate.getTime() > fluxTwoDate.getTime()) {
       return 1;
     } else if (fluxOneDate.getTime() < fluxTwoDate.getTime()) {
@@ -133,6 +135,7 @@ export const selectFluxTableModels = createSelector(
         amount: flux.amount,
         source: source.name,
         category: source.category,
+        timeOccurred: flux.timeOccurred,
         timeCreated: flux.timeCreated
       });
     });
