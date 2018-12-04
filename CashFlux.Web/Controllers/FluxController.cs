@@ -28,7 +28,7 @@ namespace CashFlux.Web.Controllers
 			return await HandleRequestAsync(new FluxDeleteRequest{Id = id});
 		}
 		
-		[HttpDelete]
+		[HttpDelete("multiple")]
 		public async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<string> ids)
 		{
 			return await HandleRequestAsync(new FluxDeleteMultipleRequest{Ids = ids});

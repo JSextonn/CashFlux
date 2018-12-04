@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
-import { FluxGetModel, FluxService } from "../../services/flux.service";
+import { FluxDeleteMultipleResult, FluxGetModel, FluxService } from "../../services/flux.service";
 import { Flux, selectFluxIds } from "../reducers/flux.reducer";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
@@ -60,6 +60,16 @@ export class FluxEffects {
     ofType(FluxActions.ADD_FLUX_FAIL),
   );
 
-  // TODO: Add remove multiple functionality.
+  @Effect()
+  removeCloudFluxes: Observable<any> = this.actions.pipe(
+    ofType(FluxActions.REMOVE_CLOUD_FLUXES),
+    mergeMap((action: FluxActions.RemoveCloudFluxes) => this.fluxService.deleteMultiple({
+        ids: action.payload
+      }).pipe(
+      map((data: FluxDeleteMultipleResult) => new FluxActions.RemoveCloudFluxesSuccess(data.ids)),
+      catchError(error => of(new FluxActions.RemoveCloudFluxesFail({error: error.message})))
+      )
+    )
+  );
 }
 

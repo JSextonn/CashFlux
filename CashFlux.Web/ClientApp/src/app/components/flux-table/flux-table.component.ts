@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -68,8 +68,13 @@ export class FluxTableComponent implements OnInit, OnDestroy {
    * Clears selection model.
    */
   removeSelectedRows(): void {
-    const fluxesToDelete = this.selection.selected.map(flux => flux.id);
-    this._store.dispatch(new FluxActions.RemoveFluxes(fluxesToDelete));
+    // Delete local fluxes
+    const localFluxIdsToDelete = this.selection.selected.map(flux => flux.id);
+    this._store.dispatch(new FluxActions.RemoveLocalFluxes(localFluxIdsToDelete));
+
+    // Delete cloud fluxes
+    const cloudFluxIdsToDelete = this.selection.selected.map(flux => flux.cloudId);
+    this._store.dispatch(new FluxActions.RemoveCloudFluxes(cloudFluxIdsToDelete));
 
     // Reset selection model
     this.selection = new SelectionModel<FluxTableModel>(true, []);

@@ -75,7 +75,7 @@ export function fluxReducer(state = initialState, action: FluxActions.Actions): 
       return adapter.removeOne(action.payload, state);
     }
 
-    case FluxActions.REMOVE_FLUXES: {
+    case FluxActions.REMOVE_LOCAL_FLUXES: {
       return adapter.removeMany(action.payload, state);
     }
 

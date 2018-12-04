@@ -11,7 +11,10 @@ export const ADD_FLUXES = '[CashFlux] Add many fluxes';
 export const UPDATE_FLUX = '[CashFlux] Flux was updated';
 export const UPDATE_FLUX_LOCAL = '[CashFlux] Flux was updated locally';
 export const REMOVE_FLUX = '[CashFlux] Remove flux';
-export const REMOVE_FLUXES = '[CashFlux] Remove many fluxes';
+export const REMOVE_LOCAL_FLUXES = '[CashFlux] Fluxes were removed locally';
+export const REMOVE_CLOUD_FLUXES = '[CashFlux] Attempting to delete fluxes on the cloud';
+export const REMOVE_CLOUD_FLUXES_SUCCESS = '[CashFlux] Fluxes successfully deleted from cloud';
+export const REMOVE_CLOUD_FLUXES_FAIL = '[CashFlux] Fluxes failed to delete from cloud';
 export const LOAD_FLUXES = '[CashFlux] Fluxes successfully loaded';
 export const CLEAR_FLUXES = '[CashFlux] All fluxes were cleared from store';
 
@@ -57,10 +60,28 @@ export class RemoveFlux implements Action {
   constructor(public payload: string) { }
 }
 
-export class RemoveFluxes implements Action {
-  readonly type = REMOVE_FLUXES;
+export class RemoveLocalFluxes implements Action {
+  readonly type = REMOVE_LOCAL_FLUXES;
 
   constructor(public payload: string[]) { }
+}
+
+export class RemoveCloudFluxes implements Action {
+  readonly type = REMOVE_CLOUD_FLUXES;
+
+  constructor(public payload: string[]) { }
+}
+
+export class RemoveCloudFluxesSuccess implements Action {
+  readonly type = REMOVE_CLOUD_FLUXES_SUCCESS;
+
+  constructor(public payload: string[]) { }
+}
+
+export class RemoveCloudFluxesFail implements Action {
+  readonly type = REMOVE_CLOUD_FLUXES_FAIL;
+
+  constructor(public payload?: any) { }
 }
 
 export class LoadFluxes implements Action {
@@ -81,6 +102,7 @@ export type Actions =
   | UpdateFlux
   | UpdateFluxLocal
   | RemoveFlux
-  | RemoveFluxes
+  | RemoveLocalFluxes
+  | RemoveCloudFluxes
   | LoadFluxes
   | ClearFluxes;

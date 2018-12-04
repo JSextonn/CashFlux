@@ -25,9 +25,9 @@ export interface PersonalInfo {
 
 @Injectable()
 export class ResourceMapper {
-  private profileIds: string[] = [];
-  private sourceIds: string[] = [];
-  private fluxIds: string[] = [];
+  private profileIds: string[];
+  private sourceIds: string[];
+  private fluxIds: string[];
 
   // Kept global to the entire class so that the fluxes are able to be normalized
   private resources: NormalizedResources;
@@ -48,6 +48,10 @@ export class ResourceMapper {
   }
 
   private initializeResources() {
+    this.profileIds = [];
+    this.sourceIds = [];
+    this.fluxIds = [];
+
     this.resources = {
       personalInfo: undefined,
       profiles: undefined,
