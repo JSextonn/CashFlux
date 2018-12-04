@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,6 +18,15 @@ namespace CashFlux.Data.Models
 		public string SourceId { get; set; }
 
 		public FluxSource Source { get; set; }
+
+		[DataType(DataType.Date)]
+		public DateTime TimeCreated
+		{
+			get => _timeCreated ?? DateTime.Now;
+			set => _timeCreated = value;
+		}
+
+		private DateTime? _timeCreated;
 
 		[NotMapped]
 		public object[] Id => new object[] {UserId, SourceId};

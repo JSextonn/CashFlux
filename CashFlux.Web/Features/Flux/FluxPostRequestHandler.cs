@@ -20,5 +20,10 @@ namespace CashFlux.Web.Features.Flux
 		{
 			return await PostAsync(request.Model, cancellationToken);
 		}
+
+		protected override async Task LoadReferencesAsync(Data.Models.Flux newFlux)
+		{
+			await Context.Entry(newFlux).Reference(flux => flux.Source).LoadAsync();
+		}
 	}
 }

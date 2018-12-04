@@ -37,7 +37,7 @@ namespace CashFlux.Web.Mapping
 				.ForMember(source => source.Name, conf => conf.MapFrom(userSource => userSource.Source.Name))
 				.ForMember(source => source.Category, conf => conf.MapFrom(userSource => userSource.Source.Category))
 				.ForMember(source => source.TimeCreated,
-					conf => conf.MapFrom(userSource => userSource.Source.TimeCreated));
+					conf => conf.MapFrom(userSource => userSource.TimeCreated));
 		}
 	}
 }

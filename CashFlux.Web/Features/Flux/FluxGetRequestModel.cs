@@ -8,6 +8,7 @@ namespace CashFlux.Web.Features.Flux
 		public string Id { get; set; }
 		public decimal Amount { get; set; }
 		public SourceGetRequestModel Source { get; set; }
+		public DateTime TimeOccurred { get; set; }
 		public DateTime TimeCreated { get; set; }
 	}
 }

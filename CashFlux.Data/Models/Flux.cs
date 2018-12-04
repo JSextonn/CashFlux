@@ -25,6 +25,10 @@ namespace CashFlux.Data.Models
 		public string ProfileId { get; set; }
 
 		public virtual FluxProfile Profile { get; set; }
+		
+		[Required]
+		[DataType(DataType.Date)]
+		public DateTime TimeOccurred { get; set; }
 
 		[DataType(DataType.Date)]
 		public DateTime TimeCreated

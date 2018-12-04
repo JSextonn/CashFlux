@@ -18,7 +18,14 @@ namespace CashFlux.Web.Features.Shared
 			var newEntity = Mapper.Map<TEntity>(model);
 			await Context.Set<TEntity>().AddAsync(newEntity, cancellationToken);
 			await Context.SaveChangesAsync(cancellationToken);
+			await LoadReferencesAsync(newEntity);
 			return Mapper.Map<TGetModel>(newEntity);
 		}
+
+		/// <summary>
+		/// Override when the created entity should load virtual references.
+		/// </summary>
+		/// <param name="newEntity">The new entity that needs lazily loaded objects</param>
+		protected virtual Task LoadReferencesAsync(TEntity newEntity) => Task.CompletedTask;
 	}
 }
